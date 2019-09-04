@@ -87,20 +87,20 @@ Speichere statt dem Property *age* das Property *dateOfBirth*. Es soll vom Typ *
 [MDN](https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/Date) gibt es
 Informationen über das Anlegen von Datumsobjekten. Achte auf den Monatsindex (beginnend mit 0)!
 
-Filtere nun aller Personen, die 18 Jahre als sind, aus. Deklariere dafür deine Filterfunktion explizit und
+Liefere alle Personen, die mindestens 18 Jahre alt sind, zurück. Deklariere dafür deine Filterfunktion explizit und
 mit folgenden Überlegungen: Die Funktion soll *pure* sein, d. h. sie darf nicht den aktuellen Tag
 innerhalb der Funktion ermitteln. Dieser muss übergeben werden. Folgendes Snippet zeigt eine Funktion,
 die eine variable Altersfilterung für unser Personenobjekt ermöglicht:
 
 ```javascript
 function age_filter(minAge) {
-	return function(item) {
-    	return item.age >= minAge;
+  return function(item) {
+    return item.age >= minAge;
   }
 }
 
 let over18 = persons
-	.filter(age_filter(18))
+  .filter(age_filter(18))
   
 console.log(over18);
 ```
