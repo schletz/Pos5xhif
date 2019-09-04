@@ -25,7 +25,7 @@ Komplexe, plattformübergreifende Softwaresysteme für den Produktivbetrieb erst
 | ECMAScript 6 | Collections funktional bearbeiten (*filter*, *map*, *reduce*, ...), Klassen, Funktionen |
 | Views erstellen | Viewmodels, Bindings mit Knockout.js |
 | Visualisierungen | Darstellen von JSON Daten in Highcharts, Darstellen von JSON Daten in Leaflet |
-| React | Komponentenbasierende Entwicklung |
+| React | Komponentenbasierende Entwicklung, Serverseitiges JavaScript |
 
 
 ## Beurteilungskriterien
