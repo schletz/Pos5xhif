@@ -105,4 +105,6 @@ let over18 = persons
 console.log(over18);
 ```
 
+Nach der Filterung füge das Datum des 18. Geburtstages im Property *birthday18* hinzu.
+
 Link: [Functional Programming in JavaScript](https://www.freecodecamp.org/news/functional-programming-principles-in-javascript-1b8fc6c3563f/)
