@@ -1,4 +1,4 @@
-# Funktionales Programmieren in ECMAScript 6
+# Funktionales Bearbeiten von Arrays in ECMAScript 6
 Alle Beispiele basieren auf einem Array mit 4 Personen:
 ```javascript
 const persons = [
