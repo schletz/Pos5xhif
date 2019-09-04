@@ -30,7 +30,7 @@ Komplexe, plattformübergreifende Softwaresysteme für den Produktivbetrieb erst
 
 ## Beurteilungskriterien
 Im Web- und im Javateil wird jeweils eine Note vergeben, die gemittelt wird. Es müssen beide Teile 
-positiv sein. Als Basis der Beurteilung des Webteils
+positiv sein. Als Basis der Beurteilung des Webteils gilt
 - Wintersemester: 1 Praktische LF im Wintersemester, 1 Abgabe im Wintersemester. 
 - 1 vorbereitende Arbeit zur RDP im Sommersemester
 
