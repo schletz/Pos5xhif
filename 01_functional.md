@@ -39,7 +39,7 @@ Natürlich ist diese Methode recht mühsam, doch dafür gibt es in ECMAScript 6 
 Damit lässt sich der Ausdruck drastisch verkürzen:
 
 ```javascript
-console.log(persons.filter(item=>item.sex == "f"));
+console.log(persons.filter(item => item.sex == "f"));
 ```
 
 ## Map (Select in LINQ)
@@ -48,7 +48,7 @@ Originalwert der jeweilige Rückgabewert steht:
 
 ```javascript
 let ages = persons
-  .map(item=>item.age);
+  .map(item => item.age);
   
 console.log(ages); // Liefert  [15, 17, 19, 21]
 ```
@@ -58,7 +58,7 @@ der Arrow Function das *return* explizit setzen:
 
 ```javascript
 let ages = persons
-  .map(item=> { item.is18 = item.age >= 18; return item; } );
+  .map(item => { item.is18 = item.age >= 18; return item; } );
   
 console.log(ages);
 ```
