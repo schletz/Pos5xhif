@@ -1,4 +1,4 @@
-# Einführung ECMAScript 6 
+# Einführung in ECMAScript 6 
 
 ## Unterlagen
 - [Understanding ECMAScript 6 - R-5](http://www.r-5.org/files/books/computers/languages/escss/fp/Nicholas_C_Zakas-Understanding_ECMAScript_6-EN.pdf)
@@ -22,8 +22,12 @@ jshint muss für ECMAScript 6 noch konfiguriert werden. Dafür wird in jeder js 
 ein Kommentar erstellt. Dadurch kann jshint gesteuert werden:
 ```c#
 /* jshint esversion: 6, strict:global */
+/* globals console */
 "use strict";   
 
 let x = 1;
 let y = a + 1;
 ```
+
+Mit *F5* kann nun das Script im Debugmodus ausgeführt werden. Vorher können Haltepunkte links von den
+Zeilennummern gesetzt werden.
