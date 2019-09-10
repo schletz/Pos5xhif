@@ -25,7 +25,7 @@ Wir möchten nun aus dem Stundenplan für die Anzeige einzelne Klassen filtern. 
 wäre eine Methode, die aus dem Array die Klassen filtert:
 ```javascript
 function getLessons(klasse) {
-    return stdplan_data.filter(s=>s.klasse == klasse);    
+    return stdplan_data.filter(s => s.klasse == klasse);
 }
 ```
 
