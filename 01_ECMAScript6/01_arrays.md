@@ -1,4 +1,4 @@
-# Funktionales Programmieren in ECMAScript 6
+# Funktionales Bearbeiten von Arrays in ECMAScript 6
 Alle Beispiele basieren auf einem Array mit 4 Personen:
 ```javascript
 const persons = [
@@ -28,7 +28,7 @@ beinhaltet.
 
 ```javascript
 function female_filter(item) {
-    return item.sex == "f";
+	return item.sex == "f";
 }
 
 console.log(persons.filter(female_filter));
@@ -39,7 +39,7 @@ Natürlich ist diese Methode recht mühsam, doch dafür gibt es in ECMAScript 6 
 Damit lässt sich der Ausdruck drastisch verkürzen:
 
 ```javascript
-console.log(persons.filter(item => item.sex == "f"));
+console.log(persons.filter(item=>item.sex == "f"));
 ```
 
 ## Map (Select in LINQ)
@@ -48,7 +48,7 @@ Originalwert der jeweilige Rückgabewert steht:
 
 ```javascript
 let ages = persons
-  .map(item => item.age);
+  .map(item=>item.age);
   
 console.log(ages); // Liefert  [15, 17, 19, 21]
 ```
@@ -58,7 +58,7 @@ der Arrow Function das *return* explizit setzen:
 
 ```javascript
 let ages = persons
-  .map(item => { item.is18 = item.age >= 18; return item; } );
+  .map(item=> { item.is18 = item.age >= 18; return item; } );
   
 console.log(ages);
 ```
@@ -87,24 +87,22 @@ Speichere statt dem Property *age* das Property *dateOfBirth*. Es soll vom Typ *
 [MDN](https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/Date) gibt es
 Informationen über das Anlegen von Datumsobjekten. Achte auf den Monatsindex (beginnend mit 0)!
 
-Filtere nun aller Personen, die 18 Jahre als sind, aus. Deklariere dafür deine Filterfunktion explizit und
+Liefere alle Personen, die mindestens 18 Jahre alt sind, zurück. Deklariere dafür deine Filterfunktion explizit und
 mit folgenden Überlegungen: Die Funktion soll *pure* sein, d. h. sie darf nicht den aktuellen Tag
 innerhalb der Funktion ermitteln. Dieser muss übergeben werden. Folgendes Snippet zeigt eine Funktion,
 die eine variable Altersfilterung für unser Personenobjekt ermöglicht:
 
 ```javascript
 function age_filter(minAge) {
-	return function(item) {
-    	return item.age >= minAge;
+  return function(item) {
+    return item.age >= minAge;
   }
 }
 
 let over18 = persons
-	.filter(age_filter(18))
+  .filter(age_filter(18))
   
 console.log(over18);
 ```
-
-Nach der Filterung füge das Datum des 18. Geburtstages im Property *birthday18* hinzu.
 
 Link: [Functional Programming in JavaScript](https://www.freecodecamp.org/news/functional-programming-principles-in-javascript-1b8fc6c3563f/)
