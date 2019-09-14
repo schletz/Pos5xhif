@@ -1,5 +1,9 @@
 # POS Unterricht in den 5. HIF Klassen
 
+## Wichtiges zum Start
+1. [Javascript mit Node.js und VS Code](01_ECMAScript6/README.md)
+1. [Markdown Editing mit VS Code](markdown.md)
+
 ## Lehrplan
 Lehrplan des 5. Jahrganges in POS gem. [BGBl. II Nr. 262/2015](https://www.ris.bka.gv.at/GeltendeFassung.wxe?Abfrage=Bundesnormen&Gesetzesnummer=20009288) 
 mit schulautonomen Änderungen. Die wesentlichen Kompetenzen sind fett gedruckt.
@@ -20,12 +24,12 @@ Komplexe, plattformübergreifende Softwaresysteme für den Produktivbetrieb erst
 **Anwendung aktueller Softwaretechnologien**, Erstellung von Frameworks, Softwarequalität, Performance-Tests.
 
 ## Stoffgebiete
-| Thema | Inhalte |
-| ----- | ------- |
-| ECMAScript 6 | Collections funktional bearbeiten (*filter*, *map*, *reduce*, ...), Klassen, Funktionen |
-| Views erstellen | Viewmodels, Bindings mit Knockout.js |
+| Thema            | Inhalte |
+| ---------------- | ------- |
+| ECMAScript 6     | Collections funktional bearbeiten (*filter*, *map*, *reduce*, ...), Klassen, Funktionen |
+| Views erstellen  | Viewmodels, Bindings mit Knockout.js |
 | Visualisierungen | Darstellen von JSON Daten in Highcharts, Darstellen von JSON Daten in Leaflet |
-| React | Komponentenbasierende Entwicklung, Serverseitiges JavaScript |
+| React            | Komponentenbasierende Entwicklung, Serverseitiges JavaScript |
 
 
 ## Beurteilungskriterien
