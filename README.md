@@ -51,7 +51,7 @@ Komplexe, plattformübergreifende Softwaresysteme für den Produktivbetrieb erst
 ## Stoffgebiete
 | Thema            | Inhalte |
 | ---------------- | ------- |
-| ECMAScript 6     | Collections funktional bearbeiten (*filter*, *map*, *reduce*, ...), Klassen, Funktionen |
+| ECMAScript 6     | Collections funktional bearbeiten (*filter*, *map*, *reduce*, ...), Funktionale Programmierung (Closures, Currying), Klassen, Funktionen |
 | Views erstellen  | Viewmodels, Bindings mit Knockout.js |
 | Visualisierungen | Darstellen von JSON Daten in Highcharts, Darstellen von JSON Daten in Leaflet |
 | React            | Komponentenbasierende Entwicklung, Serverseitiges JavaScript |
