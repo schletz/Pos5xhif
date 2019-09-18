@@ -103,10 +103,10 @@ Warum ist so etwas wichtig? Die MDN gibt einen Hinweis über die Hauptverwendung
 Definiere die aufgerufenen Funktionen so, dass die nachfolgenden Codezeilen ausgeführt werden können und
 das korrekte Ergebnis liefern:
 ```javascript
-getWeekday(1).getClasses()                  // Liefert alle Klassen als string Array, die am Montag Unterricht haben.
-getWeekday().getClasses()                   // Liefert alle Klassen als string Array, die im Stundenplan vorkommen.
-getWeekday(1).getClass("5AHIF").getCount()  // Liefert die Anzahl der Stunden der 5AHIF am Montag.
-getWeekday(1).getClass("5BHIF").count;      // count ist ein normales Property, keine Funktion.
+getWeekday(1).getClasses();                  // Liefert alle Klassen als string Array, die am Montag Unterricht haben.
+getWeekday().getClasses();                   // Liefert alle Klassen als string Array, die im Stundenplan vorkommen.
+getWeekday(1).getClass("5AHIF").getCount();  // Liefert die Anzahl der Stunden der 5AHIF am Montag.
+getWeekday(1).getClass("5BHIF").count;       // count ist ein normales Property, keine Funktion.
 ```
 
 Hinweise: 
