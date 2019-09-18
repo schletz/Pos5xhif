@@ -111,6 +111,6 @@ getWeekday(1).getClass("5BHIF").count;       // count ist ein normales Property,
 
 Hinweise: 
 - Um ein Array mit eindeutigen Werten zu erstellen, kann der Umweg über das in ECMAScript 6
-  enthaltene *Set* gemacht wenrden: `const unique = Array.from(new Set([1, 2, 3, 4, 5, 1]));`
-- Defaultparameter könenn mit ECMAScript 6 so wie in C# definiert werden: `function getWeekday(day = 0)`
+  enthaltene *Set* gemacht werden: `const unique = Array.from(new Set([1, 2, 3, 4, 5, 1]));`
+- Defaultparameter können mit ECMAScript 6 so wie in C# definiert werden: `function getWeekday(day = 0)`
   schreibt den Wert 0 in *day*, wenn die Funktion ohne Parameter aufgerufen wurde.
