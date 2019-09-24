@@ -9,7 +9,15 @@ Gem. § 21. (1) Prüfungsordnung BMHS wurden für POS folgende Themen für Juni 
 1. Entwicklung für mobile Endgeräte
 1. Entwicklung für Desktopclients
 
-## Unterthemen der Bereiche 4 - 6
+Die Ziehung erfolgt gem. § 21 (2) Prüfungsordnung BMHS:
+> Die Vorlage aller Themenbereiche zur Ziehung von zwei Themenbereichen durch die Prüfungskandidatin 
+> oder den Prüfungskandidaten hat durch die Vorsitzende oder den Vorsitzenden der Prüfungskommission 
+> so zu erfolgen, dass der Prüfungskandidatin oder dem Prüfungskandidaten bei der Ziehung nicht bekannt 
+> ist, welche beiden Themenbereiche sie oder er zieht. Einer der beiden gezogenen Themenbereiche ist 
+> von der Prüfungskandidatin > oder vom Prüfungskandidaten für die mündliche Teilprüfung zu wählen.
+> ([RIS](https://www.ris.bka.gv.at/GeltendeFassung.wxe?Abfrage=Bundesnormen&Gesetzesnummer=20007846))
+
+## Unterpunkte der Themen 4 - 6
 ### Thema 4: Entwicklung für Webclients
 1. UI Design Patterns
 1. Eingabeüberprüfungen (Server- und Clientseitig)
