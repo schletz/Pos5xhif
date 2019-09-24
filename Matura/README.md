@@ -14,7 +14,7 @@ Die Ziehung erfolgt gem. § 21 (2) Prüfungsordnung BMHS:
 > oder den Prüfungskandidaten hat durch die Vorsitzende oder den Vorsitzenden der Prüfungskommission 
 > so zu erfolgen, dass der Prüfungskandidatin oder dem Prüfungskandidaten bei der Ziehung nicht bekannt 
 > ist, welche beiden Themenbereiche sie oder er zieht. Einer der beiden gezogenen Themenbereiche ist 
-> von der Prüfungskandidatin > oder vom Prüfungskandidaten für die mündliche Teilprüfung zu wählen.
+> von der Prüfungskandidatin oder vom Prüfungskandidaten für die mündliche Teilprüfung zu wählen.
 > ([RIS](https://www.ris.bka.gv.at/GeltendeFassung.wxe?Abfrage=Bundesnormen&Gesetzesnummer=20007846))
 
 ## Unterpunkte der Themen 4 - 6
