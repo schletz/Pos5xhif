@@ -3,8 +3,8 @@
 Lehrinhalte gem. Lehrplan BGBl. II Nr. 262/2015 für den 5. Jahrgang. Die kursiv gedruckten Teile in der 
 Spalte Lehrplaninhalt kennzeichnen die wesentlichen Punkte im Sinne der LBVO.
 
-Die Punkte unter Umsetzung betreffen einen zweistündigen Teil des POS Unterrichtes. Der Rest wird im anderen 
-zweistündigen Teil unterrichtet.
+Die Punkte unter Umsetzung betreffen einen zweistündigen Teil des POS Unterrichtes. Der Rest bzw. Ergänzungen 
+werden im anderen zweistündigen Teil unterrichtet.
 
 | Lehrplaninhalt                                                                                                                                                                                	| Umsetzung                                                                                                                                                                     	| 
 | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------	| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------	| 
