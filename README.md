@@ -1,6 +1,6 @@
 # POS Unterricht in den 5. HIF Klassen
 
-Lehrinhalte gem. Lehrplan BGBl. II Nr. 262/2015 für den 4. Jahrgang. Die kursiv gedruckten Teile in der 
+Lehrinhalte gem. Lehrplan BGBl. II Nr. 262/2015 für den 5. Jahrgang. Die kursiv gedruckten Teile in der 
 Spalte Lehrplaninhalt kennzeichnen die wesentlichen Punkte im Sinne der LBVO.
 
 Die Punkte unter Umsetzung betreffen einen zweistündigen Teil des POS Unterrichtes. Der Rest wird im anderen 
