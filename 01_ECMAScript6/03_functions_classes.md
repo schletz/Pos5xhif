@@ -129,7 +129,7 @@ class Person {
         this.vorname = vorname;
         this._geburtstag = new Date();
 
-        // Unsinnig, aber ist die Entsprechung der Methode aus dem vorigen Beispiel.
+        // Unsinnig, ist aber die Entsprechung der Methode aus dem vorigen Beispiel.
         this.getName1 = function () {
             // Template Literals
             return `1: ${this.zuname} ${this.vorname}`;
@@ -154,7 +154,7 @@ class Person {
     }
 }
 
-// Auch nicht sehr sinnvoll, ist aber möglich und die Entsprechung von getName3 aus dem vorigen Beispiel.
+// Auch nicht sehr sinnvoll, ist aber möglich und die Entsprechung von getName3() aus dem vorigen Beispiel.
 Person.getName3 = function () {
     return `3: ${this.zuname} ${this.vorname}`;
 };
@@ -162,7 +162,7 @@ Person.getName3 = function () {
 const p1 = new Person("ZN1", "VN1");
 const p2 = new Person("ZN2", "VN2");
 
-// getName1 ist 2x angelegt.
+// getName1() ist 2x angelegt.
 console.log(p1, p2);
 console.log(p1.getName1());
 p1.geburtstag = new Date(2000, 0, 1);
