@@ -55,7 +55,7 @@ console.log(Person.getName3());   // 3: undefined undefined
 ## get und set
 Wir können seit ECMAScript 5.1 auch Methoden als setter und getter verwenden, ähnlich den Properties
 in C#. Beachte, dass in diesem Beispiel der Prototype der Funktion ersetzt wird, das bedeutet dass die
-vorige Funktion getName2() ebenfalls im JSON Objekt enthalten sein muss. Die Instanzierung der Personenobjekte
+vorige Funktion *getName2()* ebenfalls im JSON Objekt enthalten sein muss. Die Instanzierung der Personenobjekte
 darf erst nach diesen Anweisungen erfolgen:
 ```js
 Person.prototype = {
@@ -86,7 +86,7 @@ console.log(p1.geburtstag, p1.alter);   // Sat Jan 01 2000 00:00:00   19.75
 
 Weitere Informationen zu get und set Methoden sind auf der [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get).
 
-## Praktisches Beispiel: erweitern des Date Objektes
+## Praktisches Beispiel: Erweitern des Date Objektes
 Folgendes Beispiel erweitert das integrierte *Date* Objekt um die statische Methode *fromToday()* und
 die Methode *getDaystring()*.
 
