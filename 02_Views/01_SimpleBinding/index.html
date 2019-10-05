@@ -1,0 +1,39 @@
+<!-- In startup.cs ist app.UseStaticFiles(); in der Methode Configure() einzufügen. -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Simple Binding</title>
+    <meta charset="utf-8" />
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="myFirstApp" class="container">
+        <h1>Beispiel 1: Binding mit Vue.js</h1>
+        <div class="form-group row">
+                <label class="col-sm-2  col-form-label" for="nameInput">Add your Name:</label>
+            <div class="col-sm-8">
+                <input class="form-control" type="text" id="nameInput" v-model="newName">
+            </div>
+            <div class="col-sm-2">
+                <button type="submit" class="btn btn-primary" v-on:click="addName">Add</button>
+            </div>
+        </div>
+        <p v-if="hasName">Hello {{ newName }}</p>
+        <div v-if="names.length > 0">
+            <p>Your Names:</p>
+            <ul>
+                <li v-for="name in names">
+                    {{ name }}
+                </li>
+            </ul>
+        </div>
+    </div>
+    <script src="index.vm.js"></script>
+</body>
+
+</html>
