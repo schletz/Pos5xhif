@@ -23,7 +23,7 @@ erreichbar. Die Konsole darf natürlich nicht geschlossen werden, solange der We
 *STRG* + *C* beendet den Webserver, wenn er nicht mehr benötigt wird.
 
 Die HTML Dateien, die wir in den Übungen bearbeiten, sind im Unterordner *wwwroot*. Hinweis:
-der Port kann in der Datei *launchSettings.json* im Ordner *Properties* geändert werden. Natürlich muss
+Der Port kann in der Datei *launchSettings.json* im Ordner *Properties* geändert werden. Natürlich muss
 dann die Datei *launch.json* für den VS Code Debugger ebenfalls angepasst werden.
 
 ### Aktivieren des Debuggers: *launch.json*
@@ -34,7 +34,8 @@ konfigurieren muss die Datei *launch.json* erstellt werden. Wähle dafür in der
 ![](vscode_debugsettings.png)
 
 Damit das Remote Debugging mit ASP.NET Core funktioniert, muss der Eintrag *webRoot* auf den Wert
-*${workspaceFolder}/wwwroot* gesetzt und in der URL die Datei *index.html* ergänzt werden:
+*${workspaceFolder}/wwwroot* gesetzt und in der URL die Datei *index.html* ergänzt werden. Dies ist wichtig,
+damit das Zuordnen der Dateinamen, die VS Code sieht, zu der URL, die Chrome liefert, möglich ist.
 
 ```js
 {
