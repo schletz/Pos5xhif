@@ -9,7 +9,8 @@ Um bequem arbeiten zu können, werden 2 Dinge benötigt:
 Da wir in den Beispielen auch Daten von einem Webservice laden wollen, wird dieses immer in den Übungen
 in Form einer ASP.NET Core Applikation mitgeliefert. Diese App muss kompiliert und gestartet werden.
 Lade dafür von der [.NET Downloadseite](https://dotnet.microsoft.com/download) die neueste Version von .NET Core.
-Verwende den Punkt *Download .NET Core SDK*, um die Apps kompilieren zu können.
+Verwende den Punkt *Download .NET Core SDK*, um die Apps kompilieren zu können. Die Übungsbeispiele basieren
+auf .NET Core 3.0, daher muss mindestens diese Version vorhanden sein.
 
 Um die Installation zu testen, synchronisiere dein Repository und gehe in der Konsole in das Verzeichnis
 der ersten Übung (*01_SimpleBinding*). Gib in diesem Verzeichnis folgenden Befehl ein:
