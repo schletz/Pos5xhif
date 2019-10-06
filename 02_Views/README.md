@@ -1,4 +1,4 @@
-# HTML Views
+# HTML Views mit Vue.js
 
 ## Visual Studio Code Extensions
 Um bequem arbeiten zu können, werden 2 Dinge benötigt:
@@ -6,7 +6,7 @@ Um bequem arbeiten zu können, werden 2 Dinge benötigt:
 - Die VS Code Extension *Debugger for Chrome von Microsoft* benötigt.
 
 ### Ausführen des Webservers
-Da wir bei den Viewbeispielen auch Daten von einem Webservice laden wollen, wird dieses immer in den Übungen
+Da wir in den Beispielen auch Daten von einem Webservice laden wollen, wird dieses immer in den Übungen
 in Form einer ASP.NET Core Applikation mitgeliefert. Diese App muss kompiliert und gestartet werden.
 Lade dafür von der [.NET Downloadseite](https://dotnet.microsoft.com/download) die neueste Version von .NET Core.
 Verwende den Punkt *Download .NET Core SDK*, um die Apps kompilieren zu können.
@@ -17,7 +17,7 @@ der ersten Übung (*01_SimpleBinding*). Gib in diesem Verzeichnis folgenden Befe
 dotnet run
 ```
 
-Der Server kompiliert nun das ASP.NET Core Programm in diesem Ordner und der Server ist unter *http://localhost:8080*
+.NET Core kompiliert nun das ASP.NET Core Programm in diesem Ordner und der Server ist unter *http://localhost:8080*
 erreichbar. Die HTML Dateien, die wir in den Übungen bearbeiten, sind im Unterordner *wwwroot*. Hinweis:
 der Port kann in der Datei *launchSettings.json* im Ordner *Properties* geändert werden. Natürlich muss
 dann die Datei *launch.json* für den VS Code Debugger ebenfalls angepasst werden.
