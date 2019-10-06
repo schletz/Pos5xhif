@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>eispiel 1: Binding mit Vue.js</title>
     <meta charset="utf-8" />
@@ -10,10 +11,13 @@
 </head>
 
 <body>
+    <script>
+        console.log("Test für den Debugger!");
+    </script>
     <div id="myFirstApp" class="container">
         <h1>Beispiel 1: Binding mit Vue.js</h1>
         <div class="form-group row">
-                <label class="col-sm-2  col-form-label" for="nameInput">Add your Name:</label>
+            <label class="col-sm-2  col-form-label" for="nameInput">Add your Name:</label>
             <div class="col-sm-8">
                 <input class="form-control" type="text" id="nameInput" v-model="newName">
             </div>
@@ -31,6 +35,7 @@
             </ul>
         </div>
     </div>
+
     <script src="index.vm.js"></script>
 </body>
 

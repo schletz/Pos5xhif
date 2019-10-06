@@ -1,6 +1,7 @@
 /* jshint esversion: 6, strict:global */
 /* globals console, Vue */
 "use strict";
+
 const vm = new Vue({
   el: '#myFirstApp',
   data: {
