@@ -5,12 +5,14 @@
 const vm = new Vue({
   el: '#myFirstApp',
   data: {
+    title: "Beispiel 1: Binding mit Vue.js",
     names: [],
     newName: "",
   },
   computed: {
-    // this zeigt auf das Viewmodel. Wird beim Aufruf der Methode von Vue.js so gesetzt.
+    // Arrow Functions funktionieren nicht, da this nicht auf data im Viewmodel zeigen würde.
     hasName: function () {
+      // this zeigt auf data im Viewmodel. Wird beim Aufruf der Methode von Vue.js so gesetzt.
       return this.newName != "";
     }
   },

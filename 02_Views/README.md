@@ -18,7 +18,10 @@ dotnet run
 ```
 
 .NET Core kompiliert nun das ASP.NET Core Programm in diesem Ordner und der Server ist unter *http://localhost:8080*
-erreichbar. Die HTML Dateien, die wir in den Übungen bearbeiten, sind im Unterordner *wwwroot*. Hinweis:
+erreichbar. Die Konsole darf natürlich nicht geschlossen werden, solange der Webserver laufen soll. Die Tastenkombination
+*STRG* + *C* beendet den Webserver, wenn er nicht mehr benötigt wird.
+
+Die HTML Dateien, die wir in den Übungen bearbeiten, sind im Unterordner *wwwroot*. Hinweis:
 der Port kann in der Datei *launchSettings.json* im Ordner *Properties* geändert werden. Natürlich muss
 dann die Datei *launch.json* für den VS Code Debugger ebenfalls angepasst werden.
 
@@ -52,4 +55,8 @@ Damit das Remote Debugging mit ASP.NET Core funktioniert, muss der Eintrag *webR
 
 ### Testen des Debuggers
 Setze in der Datei *index.htm* in der Zeile mit *console.log("Test für den Debugger!");* einen Haltepunkt.
-Starte mit *F5* den Browser und prüfe, ob der Debugger an dieser Stelle hält.
+Starte mit *F5* den Browser und prüfe, ob der Debugger an dieser Stelle hält. Wird der Quelltext geändert,
+so muss dieser mit *STRG* + *S* gespeichert werden. Ein Neuladen im Browser ist natürlich erforderlich.
+
+In der Debug Console in VS Code erscheinen auch die Meldungen, die mit *console.log()* aus Javascript
+ausgegeben wurden.
