@@ -60,5 +60,8 @@ Setze in der Datei *index.htm* in der Zeile mit *console.log("Test für den Debu
 Starte mit *F5* den Browser und prüfe, ob der Debugger an dieser Stelle hält. Wird der Quelltext geändert,
 so muss dieser mit *STRG* + *S* gespeichert werden. Ein Neuladen im Browser ist natürlich erforderlich.
 
+Falls das Setzen eines Breakpoints in der GUI nicht funktioniert, kann die Anweisung *debug;* in den 
+Code geschrieben werden. 
+
 In der Debug Console in VS Code erscheinen auch die Meldungen, die mit *console.log()* aus Javascript
 ausgegeben wurden.
