@@ -22,6 +22,7 @@ dotnet run
 erreichbar. Die Konsole darf natürlich nicht geschlossen werden, solange der Webserver laufen soll. Die Tastenkombination
 *STRG* + *C* beendet den Webserver, wenn er nicht mehr benötigt wird.
 
+
 Die HTML Dateien, die wir in den Übungen bearbeiten, sind im Unterordner *wwwroot*. Hinweis:
 Der Port kann in der Datei *launchSettings.json* im Ordner *Properties* geändert werden. Natürlich muss
 dann die Datei *launch.json* für den VS Code Debugger ebenfalls angepasst werden.
@@ -61,7 +62,12 @@ Starte mit *F5* den Browser und prüfe, ob der Debugger an dieser Stelle hält. 
 so muss dieser mit *STRG* + *S* gespeichert werden. Ein Neuladen im Browser ist natürlich erforderlich.
 
 Falls das Setzen eines Breakpoints in der GUI nicht funktioniert, kann die Anweisung *debug;* in den 
-Code geschrieben werden. 
+Code geschrieben werden.
 
 In der Debug Console in VS Code erscheinen auch die Meldungen, die mit *console.log()* aus Javascript
 ausgegeben wurden.
+
+## Chrome Plugins
+Für Google Chrome gibt es die Extension *Vue.js devtools*. Nach der Installation steht in einer Vue.js
+Anwendung in der Konsole (*F12*) der Punkt Vue zur Verfügung. Hier kann der aktuelle Zustand des Viewmodels
+für das Debugging angesehen werden.
