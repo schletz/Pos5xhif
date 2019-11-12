@@ -21,7 +21,7 @@ namespace Weatherservice
         public Task<ForecastSeries> GetLocationForecastAsync(Location location)
         {
             string url = $"{_url}/?lat={location.Latitude}&lon={location.Longitude}&msl={location.Height}";
-            return RequestData(url, new ForecastSeries() { Location = location });
+            return RequestData(url, new ForecastSeries() { Location = location, RequestTime = DateTime.UtcNow });
         }
 
         /// <summary>

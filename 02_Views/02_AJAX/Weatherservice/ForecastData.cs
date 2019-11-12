@@ -20,6 +20,7 @@ namespace Weatherservice
         public decimal? MinTemperature6h { get; internal set; }
         public decimal? MaxTemperature6h { get; internal set; }
         public SignificantWeather? SignificantWeather { get; internal set; }
+        public string IconUrl => SignificantWeather == null ? "" : $"https://api.met.no/weatherapi/weathericon/1.1/?symbol={(int) SignificantWeather}&content_type=image/png";
         public override bool Equals(object obj) => Equals(obj as ForecastData);
         public bool Equals(ForecastData other) => Time.Equals(other?.Time);
         public override int GetHashCode() => Time.GetHashCode();
