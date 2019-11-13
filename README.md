@@ -14,11 +14,17 @@ werden im anderen zweistündigen Teil unterrichtet.
 | Verschiedene Softwarearchitekturen beschreiben und für konkrete, in der Praxis auftretende, Problemstellungen entsprechende Architekturen erstellen: *Softwarearchitekturen*, Architekturmuster.	|                                                                                                                                                                               	| 
 
 ## Beurteilungskriterien
-Im Web- und im Javateil wird jeweils eine Note vergeben, die gemittelt wird. Es müssen beide Teile 
-positiv sein. Als Basis der Beurteilung des Webteils gilt
-- Wintersemester: 1 Praktische LF im Wintersemester, 1 Abgabe im Wintersemester. 
-- 1 vorbereitende Arbeit zur RDP im Sommersemester
-
+Leistungsbeurteilung für das Wintersemester
+- PLF am 8. Jänner 2020, alternativ:
+- Einer oder eine Gruppe stellt eine Technologie vor,
+  die er oder das Team verwendet hat.
+  - Kein Powerpoint, live Coding bzw. Snippets.
+  - Unterlagen für die Klasse in Form von Code, ...
+  - Dauer: mind. 20 min pro Person.
+  - Termine: bis spätestens 22. Jänner. Jeder kann sich
+    kurzfristig zu Beginn der Stunde anmelden.
+  
+  
 
 ## Wichtiges zum Start
 1. [Javascript mit Node.js und VS Code](01_ECMAScript6/README.md)
