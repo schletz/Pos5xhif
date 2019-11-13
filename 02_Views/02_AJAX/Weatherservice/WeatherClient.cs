@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
@@ -20,7 +21,7 @@ namespace Weatherservice
         /// <returns></returns>
         public Task<ForecastSeries> GetLocationForecastAsync(Location location)
         {
-            string url = $"{_url}/?lat={location.Latitude}&lon={location.Longitude}&msl={location.Height}";
+            string url = $"{_url}/?lat={location.Latitude.ToString(CultureInfo.InvariantCulture)}&lon={location.Longitude.ToString(CultureInfo.InvariantCulture)}&msl={location.Height.ToString(CultureInfo.InvariantCulture)}";
             return RequestData(url, new ForecastSeries() { Location = location, RequestTime = DateTime.UtcNow });
         }
 
