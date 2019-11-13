@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -11,6 +12,7 @@ using Weatherservice;
 namespace Webserver.Controllers
 {
     [ApiController]
+    [EnableCors("AllowAll")]
     [Route("[controller]")]
     public class ForecastController : ControllerBase
     {
@@ -28,6 +30,7 @@ namespace Webserver.Controllers
         /// <param name="height"></param>
         /// <returns></returns>
         [HttpGet]
+        [EnableCors("AllowAll")]
         public async Task<ActionResult<ForecastSeries>> Get(
             [FromQuery(Name = "lat")]    decimal? latitude,
             [FromQuery(Name = "lng")]    decimal? longitude,

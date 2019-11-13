@@ -30,7 +30,7 @@ namespace Webserver
             services.AddSingleton<WeatherClient>();
             services.AddCors(options =>
             {
-                options.AddPolicy("CorsPolicy",
+                options.AddPolicy("AllowAll",
                     builder => builder
                     .AllowAnyOrigin()
                     .AllowAnyMethod()
@@ -47,7 +47,7 @@ namespace Webserver
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseCors("CorsPolicy");
+            app.UseCors("AllowAll");
 
             app.UseDefaultFiles();
             app.UseStaticFiles();
