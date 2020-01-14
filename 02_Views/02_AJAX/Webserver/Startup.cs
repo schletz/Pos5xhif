@@ -46,14 +46,13 @@ namespace Webserver
             {
                 app.UseDeveloperExceptionPage();
             }
-
-            app.UseCors("AllowAll");
-
             app.UseDefaultFiles();
             app.UseStaticFiles();
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors("AllowAll");
 
             app.UseEndpoints(endpoints =>
             {
