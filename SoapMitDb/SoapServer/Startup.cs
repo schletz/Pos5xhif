@@ -28,6 +28,8 @@ namespace SoapServer
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSoapCore();
+            services.AddMvc();
             // Beim Starten des Servers prüfen wir, ob die Datenbank existiert. Falls nicht, wird sie
             // auf Basis der Modelklassen erstellt.
             // Aktuell wird eine SQLite Datenbank mit dem Namen Soap.db erstellt. Diese kann z. B.
@@ -54,9 +56,10 @@ namespace SoapServer
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseRouting();
             // Wir weisen hier die Routen zu, unter denen das Service erreichbar ist. Diese Route
             // wird dann im Client gebraucht.
-            app.UseSoapEndpoint<CalcService>(path: "/CalcService.svc", binding: new System.ServiceModel.BasicHttpBinding());
+            app.UseSoapEndpoint<CalcService>(path: "/CalcService.asmx", binding: new System.ServiceModel.BasicHttpBinding());
 
         }
     }

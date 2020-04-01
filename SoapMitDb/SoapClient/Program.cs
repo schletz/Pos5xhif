@@ -27,7 +27,7 @@ namespace SoapClient
                 // Öffnet die Http Verbindung und ruft CalcService.svc auf. Diese Route muss in Configure
                 // der Datei Startup.cs registiert werden.
                 BasicHttpBinding binding = new BasicHttpBinding();
-                EndpointAddress endpoint = new EndpointAddress($"{BaseUrl}/CalcService.svc");
+                EndpointAddress endpoint = new EndpointAddress($"{BaseUrl}/CalcService.asmx");
                 // Jetzt kommt das Interface ins Spiel. Der Request ruft Methoden von ICalcService
                 // auf, deswegen verwenden wir hier das Interface.
                 ChannelFactory<ICalcService> channelFactory = new ChannelFactory<ICalcService>(binding, endpoint);

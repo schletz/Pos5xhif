@@ -20,15 +20,12 @@ namespace SoapServer
     {
         public static void Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
+            var host = new WebHostBuilder()
+                .UseKestrel()
+                .UseUrls("http://*:8080")
+                .UseStartup<Startup>()
+                .Build();
+            host.Run();
         }
-
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseUrls("http://*:8080")
-                              .UseStartup<Startup>();
-                });
     }
 }
