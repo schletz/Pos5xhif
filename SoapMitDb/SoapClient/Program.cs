@@ -15,7 +15,7 @@ namespace SoapClient
     class Program
     {
         /// <summary>
-        /// Die Adresse, unter der der Server erreichbar ist. Konfigurierbat in Program.cs des
+        /// Die Adresse, unter der der Server erreichbar ist. Konfigurierbar in Program.cs des
         /// SoapServer (in CreateHostBuilder)
         /// </summary>
         static string BaseUrl => "http://localhost:8080";
@@ -24,27 +24,7 @@ namespace SoapClient
         {
             try
             {
-                // Öffnet die Http Verbindung und ruft CalcService.svc auf. Diese Route muss in Configure
-                // der Datei Startup.cs registiert werden.
-                BasicHttpBinding binding = new BasicHttpBinding();
-                EndpointAddress endpoint = new EndpointAddress($"{BaseUrl}/CalcService.asmx");
-                // Jetzt kommt das Interface ins Spiel. Der Request ruft Methoden von ICalcService
-                // auf, deswegen verwenden wir hier das Interface.
-                ChannelFactory<ICalcService> channelFactory = new ChannelFactory<ICalcService>(binding, endpoint);
-                ICalcService serviceClient = channelFactory.CreateChannel();
-
-                // Nun können wir ganz normal Methoden aufrufen, wie wenn wir eine lokale
-                // Klasse hätten, die das Interface implementiert.
-                int result = serviceClient.Add(1, 3);
-                List<CalcStats> calcCount = serviceClient.GetCalculationCount();
-                channelFactory.Close();
-
-                Console.WriteLine($"=========================");
-                Console.WriteLine($"Das Ergebnis ist {result}");
-                foreach (var c in calcCount)
-                {
-                    Console.WriteLine($"Operator {c.Operation}: {c.Count} Berechnungen durchgeführt.");
-                }
+                TestCalcService();
             }
             catch (CommunicationException e)
             {
@@ -58,6 +38,31 @@ namespace SoapClient
                 Console.Error.WriteLine(e.Message);
                 Console.Error.WriteLine(e.InnerException?.Message);
                 Console.Error.WriteLine(e.StackTrace);
+            }
+        }
+
+        private static void TestCalcService()
+        {
+            // Öffnet die Http Verbindung und ruft CalcService.svc auf. Diese Route muss in Configure
+            // der Datei Startup.cs registiert werden.
+            BasicHttpBinding binding = new BasicHttpBinding();
+            EndpointAddress endpoint = new EndpointAddress($"{BaseUrl}/CalcService.asmx");
+            // Jetzt kommt das Interface ins Spiel. Der Request ruft Methoden von ICalcService
+            // auf, deswegen verwenden wir hier das Interface.
+            ChannelFactory<ICalcService> channelFactory = new ChannelFactory<ICalcService>(binding, endpoint);
+            ICalcService serviceClient = channelFactory.CreateChannel();
+
+            // Nun können wir ganz normal Methoden aufrufen, wie wenn wir eine lokale
+            // Klasse hätten, die das Interface implementiert.
+            int result = serviceClient.Add(1, 3);
+            List<CalcStats> calcCount = serviceClient.GetCalculationCount();
+            channelFactory.Close();
+
+            Console.WriteLine($"=========================");
+            Console.WriteLine($"Das Ergebnis ist {result}");
+            foreach (var c in calcCount)
+            {
+                Console.WriteLine($"Operator {c.Operation}: {c.Count} Berechnungen durchgeführt.");
             }
         }
     }

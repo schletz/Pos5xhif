@@ -1,6 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using ContractLibrary;
+using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -47,6 +47,14 @@ namespace SoapServer.Model
             modelBuilder.Entity<Calculation>().HasKey(c => c.Id);
             modelBuilder.Entity<Calculation>().Property(c => c.Id).ValueGeneratedOnAdd();
             modelBuilder.Entity<Calculation>().Property(c => c.Operation).HasMaxLength(1);
+        }
+
+        /// <summary>
+        /// Hier können Musterdaten generiert werden, die beim Anlegen der DB zur Verfügung stehen.
+        /// </summary>
+        public void Seed()
+        {
+
         }
     }
 }

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ContractLibrary;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -39,8 +40,9 @@ namespace SoapServer
             // die vorhandene DB gelöscht werden.
             using (SoapDatabase db = new SoapDatabase())
             {
-                // db.Database.EnsureDeleted();
-                db.Database.EnsureCreated();
+                //  db.Database.EnsureDeleted();
+                if (db.Database.EnsureCreated())
+                    db.Seed();
             }
 
             // Ein Singleton wird nur 1x instanziert und dann wird diese Instanz für jeden Request
@@ -60,7 +62,6 @@ namespace SoapServer
             // Wir weisen hier die Routen zu, unter denen das Service erreichbar ist. Diese Route
             // wird dann im Client gebraucht.
             app.UseSoapEndpoint<CalcService>(path: "/CalcService.asmx", binding: new System.ServiceModel.BasicHttpBinding());
-
         }
     }
 }
