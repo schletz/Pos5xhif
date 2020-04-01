@@ -41,10 +41,9 @@ namespace SoapServer
                 db.Database.EnsureCreated();
             }
 
-            // Ein Scoped Service bedeutet, dass bei jedem Request eine neue Instanz von CalcService
-            // erstellt wird. Ein Singleton würde zwar nur 1x instanziert werden, aber das muss dann
-            // thread safe sein.
-            services.AddScoped<CalcService>();
+            // Ein Singleton wird nur 1x instanziert und dann wird diese Instanz für jeden Request
+            // benutzt. Wir können daher auch einen State speichern.
+            services.AddSingleton<CalcService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
