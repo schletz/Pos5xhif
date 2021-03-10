@@ -11,14 +11,11 @@ namespace Spg_Fahrzeugvermietung.Test
         [Fact]
         public void DbCreationTest()
         {
-            var assembly = typeof(DbContextTests).Assembly.GetName().Name;
-            var currentPath = AppContext.BaseDirectory.Substring(0, AppContext.BaseDirectory.IndexOf(assembly));
             using (var db = new FahrzeugContext())
             {
                 db.Database.EnsureDeleted();
                 db.Database.EnsureCreated();
                 db.Import("data.sql");
-                //db.Seed();
                 Assert.True(true);
             }
         }
