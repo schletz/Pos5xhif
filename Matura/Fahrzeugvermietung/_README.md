@@ -131,9 +131,10 @@ mit *EnsureCreated()* erzeugt werden soll:
 
 Nachdem die Datei [data.sql](data.sql) importiert wurde, implementieren Sie ein *CarRepository*,
 welches folgende Abfragen erlaubt:
+
 - Abfrage *eines Fahrzeuges* auf Basis des Kennzeichens. Rückgabetyp: `Fahrzeug`
-- Abfrage *von Fahrzeugen*, die mit einer bestimmten Lenkberechtigung gefahren werden dürfen. Rückgabetyp: `List<Fahrzeug>`
-- Abfrage *von Fahrzeugen*, dessen Kennzeichen mit einem bestimmten Bundesland beginnt (W... für Wien). Rückgabetyp: `List<Fahrzeug>`
+- Abfrage *von Fahrzeugen*, die mit einer bestimmten Lenkberechtigung gefahren werden dürfen. Rückgabetyp: `IQueryable<Fahrzeug>`
+- Abfrage *von Fahrzeugen*, dessen Kennzeichen mit einem bestimmten Bundesland beginnt (W... für Wien). Rückgabetyp: `IQueryable<Fahrzeug>`
 
 Sie können die Funktionen auch im DbContext implementieren, welche das Ergebnis als
 `IQueryable<T>` zurückgeben.
