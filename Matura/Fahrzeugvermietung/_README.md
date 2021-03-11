@@ -2,7 +2,7 @@
 
 ## Umgebung
 
-Im Labor steht Visual Studio 2017 mit der .NET Version 2.1.520 zur Verfügung. Die C# Sprachversion
+Im Labor steht Visual Studio 2017 mit der .NET Core Version 2.1.520 zur Verfügung. Die C# Sprachversion
 ist 7.3. Daher können keine nullable reference Types oder records verwendet werden. Alle erstellten
 C# Projektdateien (csproj) müssen sich daher auf .NET Core 2.1 beziehen:
 
