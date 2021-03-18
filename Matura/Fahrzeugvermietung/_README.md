@@ -152,12 +152,7 @@ ein bestimmtes Auto für einen bestimmten Kunden zu reservieren, also einen Eint
 *Vermietungen* zu erstellen. Liefert true, wenn der Eintrag angelegt werden konnte. Liefert false,
 wenn das Auto in diesem Zeitraum schon reserviert wurde.
 
-Testcases:
-
-- `TryRentVehicle(1, 17, 2020-09-01 13:00:00, 2020-09-03 13:00:00)` liefert true
-- `TryRentVehicle(1, 17, 2021-01-23 13:00:00, 2021-01-25 13:00:00)` liefert false
-- `TryRentVehicle(1, 17, 2021-01-28 13:00:00, 2021-01-31 13:00:00)` liefert false
-- `TryRentVehicle(1, 17, 2021-01-30 13:00:00, 2021-01-31 13:00:00)` liefert true
+Die Testcases sind basierend den vorhandenen Musterdaten geeignet anzulegen.
 
 **CalcMonthlyRevenue()** liefert eine Liste von DTO Klassen mit folgenden Informationen zurück:
 
