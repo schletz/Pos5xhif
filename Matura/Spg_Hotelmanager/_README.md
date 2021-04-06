@@ -332,5 +332,5 @@ Verwenden Sie zur Erstellung des Abgabearchives die Datei *backup.cmd*. Sie ben�
 Programm 7zip im Standardordner (*C:\Program Files\7-Zip\7z.exe*). Das Archiv wird im
 Verzeichnis darüber unter dem Namen *Spg_Hotelmanager(timestamp).7z* erstellt. Dies ist dann
 in Microsoft Teams abzugeben. Damit die Abgabe berücksichtigt werden kann, muss sie bis spätestens
-*Do, 15.4.2021 23:59* abgegeben werden.
+*Fr, 16.4.2021 23:59* abgegeben werden.
 
