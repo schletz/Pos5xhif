@@ -1,5 +1,0 @@
-@startuml
-class DbContextExtensions <<static>> {
-    + {static} Import(db:DbContext, filename:string) : void
-}
-@enduml

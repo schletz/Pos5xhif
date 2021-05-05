@@ -1,7 +1,0 @@
-@startuml
-class Address {
-    + Street : string <<get>> <<set>>
-    + Zip : string <<get>> <<set>>
-    + City : string <<get>> <<set>>
-}
-@enduml

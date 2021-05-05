@@ -1,5 +1,0 @@
-@startuml
-class TeacherRatingCategory {
-}
-RatingCategory <|-- TeacherRatingCategory
-@enduml

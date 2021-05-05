@@ -1,7 +1,0 @@
-@startuml
-class Name {
-    + Title : string <<get>> <<set>>
-    + Firstname : string <<get>> <<set>>
-    + Lastname : string <<get>> <<set>>
-}
-@enduml
