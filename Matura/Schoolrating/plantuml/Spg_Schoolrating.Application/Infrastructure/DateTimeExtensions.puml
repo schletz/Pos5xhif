@@ -1,0 +1,5 @@
+@startuml
+class DateTimeExtensions <<static>> {
+    + {static} SecondsAccurate(dateTime:DateTime) : DateTime
+}
+@enduml

@@ -1,0 +1,6 @@
+@startuml
+class RatingCategory {
+    + Id : int <<get>> <<set>>
+    + Name : string <<get>> <<set>>
+}
+@enduml

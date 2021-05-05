@@ -1,0 +1,5 @@
+@startuml
+class SchoolRatingCategory {
+}
+RatingCategory <|-- SchoolRatingCategory
+@enduml

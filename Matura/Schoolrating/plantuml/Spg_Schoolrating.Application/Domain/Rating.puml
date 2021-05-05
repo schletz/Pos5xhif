@@ -1,0 +1,8 @@
+@startuml
+class Rating {
+    + Id : int <<get>> <<set>>
+    + Value : int <<get>> <<set>>
+    + RatingUpdated : DateTime? <<get>> <<set>>
+}
+Rating --> "RatingDate" DateTime
+@enduml

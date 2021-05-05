@@ -1,0 +1,9 @@
+@startuml
+class TeacherRating {
+    + TeacherId : int <<get>> <<set>>
+    + RatingCategoryId : int <<get>> <<set>>
+}
+Rating <|-- TeacherRating
+TeacherRating --> "Teacher" Teacher
+TeacherRating --> "RatingCategory" TeacherRatingCategory
+@enduml

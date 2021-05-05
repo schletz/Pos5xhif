@@ -1,0 +1,13 @@
+@startuml
+class School {
+    + Id : int <<get>> <<set>>
+    + SchoolNumber : int <<get>> <<set>>
+    + Name : string <<get>> <<internal set>>
+    + PupilsCount : int? <<get>> <<set>>
+}
+class "List`1"<T> {
+}
+School --> "Address" Address
+School --> "SchoolType" SchoolType
+School --> "SchoolRatings<SchoolRating>" "List`1"
+@enduml
