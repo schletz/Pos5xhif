@@ -27,27 +27,6 @@ namespace Spg_Schoolrating.Rest.Controllers
         {
             return Ok(_service.GetSchoolStatistics(schoolId));
         }
-        [HttpGet("SchoolBySchoolNr/{schoolNumber}")]
-        public IActionResult GetSchoolBySchoolNr(int schoolNumber)
-        {
-            return Ok(_db.GetSchoolBySchoolNr(schoolNumber));
-        }
-        [HttpGet("TeachersBySchool/{schoolId}")]
-        public IActionResult GetTeachersBySchool(int schoolId)
-        {
-            return Ok(_db.GetTeachersBySchool(schoolId));
-        }
-        [HttpGet("AverageTeacherRating/{teacherId}/{categoryId}")]
-        public IActionResult GetAverageTeacherRating(int teacherId, int categoryId)
-        {
-            return Ok(_db.GetAverageTeacherRating(teacherId, categoryId));
-        }
-
-        [HttpGet("AverageTeacherRating/{teacherId}/{categoryId}/{ratedFrom}")]
-        public IActionResult GetAverageTeacherRating(int teacherId, int categoryId, DateTime ratedFrom)
-        {
-            return Ok(_db.GetAverageTeacherRating(teacherId, categoryId, ratedFrom));
-        }
 
     }
 }
