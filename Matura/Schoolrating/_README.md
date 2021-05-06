@@ -35,30 +35,29 @@ Die Grundfeatures bleiben gleich:
 Ein Klassendiagramm, welches diese Daten speichern kann, wurde bereits in UML entworfen:
 
 ```plantuml
-class Address {
+class Address <<embeddable>> {
     + Street : string
     + Zip : string
     + City : string
 }
-class Name {
+class Name  <<embeddable>> {
     + Title : string
     + Firstname : string
     + Lastname : string
 }
 class Rating {
-    + Id : int
     + Value : int
+    + RatingDate : DateTime
     + RatingUpdated : DateTime
 }
-Rating --> DateTime
 class RatingCategory {
-    + Id : int
     + Name : string
 }
 class School {
-    + Id : int
     + SchoolNumber : int
     + Name : string
+    + Address : Address
+    + SchoolType : SchoolType
     + PupilsCount : int
 }
 
@@ -66,9 +65,11 @@ School --> Address
 School --> SchoolType
 
 class SchoolRating {
-    + SchoolId : int
-    + RatingCategoryId : int
+    + School : School
+    + RatingCategory : SchoolRatingCategory
 }
+
+
 Rating <|-- SchoolRating
 SchoolRating --> School
 SchoolRating --> SchoolRatingCategory
@@ -83,17 +84,17 @@ enum SchoolType {
     NMS
 }
 class Teacher {
-    + Id : int
+    + Name : Name
     + Email : string
-    + SchoolId : int
+    + School : School
 }
 
 Teacher --> Name
 Teacher --> School
 
 class TeacherRating {
-    + TeacherId : int
-    + RatingCategoryId : int
+    + Teacher : Teacher
+    + RatingCategory : TeacherRatingCategory
 }
 Rating <|-- TeacherRating
 TeacherRating --> Teacher
