@@ -181,7 +181,7 @@ auf. Es soll folgende Ausgabe erscheinen:
 
 ```
 
-#### public void InsertSchoolRating(int schoolId, IEnumerable<RatingDto> ratingDtos)
+#### public void InsertSchoolRating(int schoolId, IEnumerable&lt;RatingDto&gt; ratingDtos)
 
 Fügt mehrere Ratings für eine Schule in die Datenbank ein. Die Klasse *RatingDto* besteht aus
 2 Properties:
@@ -198,7 +198,7 @@ class RatingDto {
 Das *RatingDate* soll auf den Wert aus *DateTime.UtcNow* gesetzt werden. Erstellen Sie einen
 Unittest in der Klasse *RatingServiceTests*, die diese Methode überprüft.
 
-#### public void InsertTeacherRating(int teacherId, IEnumerable<RatingDto> ratingDtos)
+#### public void InsertTeacherRating(int teacherId, IEnumerable&lt;RatingDto&gt; ratingDtos)
 
 Fügt mehrere Ratings für einn Lehrer in die Datenbank ein. DIe Klasse *RatingDto* ist wie im
 vorigen Beispiel definiert. Auch hier soll der Wert von *RatingDate* auf den Wert aus
