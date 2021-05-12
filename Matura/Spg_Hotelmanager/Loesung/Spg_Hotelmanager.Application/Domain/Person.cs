@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Spg_Hotelmanager.Application.Domain
+﻿namespace Spg_Hotelmanager.Application.Domain
 {
     public class Person
     {

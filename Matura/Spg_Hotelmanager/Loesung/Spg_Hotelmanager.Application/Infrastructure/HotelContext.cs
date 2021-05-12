@@ -14,10 +14,8 @@ namespace Spg_Hotelmanager.Application.Infrastructure
     {
         public HotelContext(DbContextOptions options) : base(options) { }
 
-        // Alles, was eine Tabelle werden soll, wird als DbSet definiert.
-        // Der Propertyname (Customers, ...) bestimmt den Tabellennamen!
-        public DbSet<Customer> Customers { get; set; }  // SELECT * FROM Persons WHERE Discriminator = 'Customer'
-        public DbSet<Employee> Employees { get; set; }  // SELECT * FROM Persons WHERE Discriminator = 'Employee'
+        public DbSet<Customer> Customers { get; set; }
+        public DbSet<Employee> Employees { get; set; }
         public DbSet<Person> Persons { get; set; }
         public DbSet<Reservation> Reservations { get; set; }
         public DbSet<Room> Rooms { get; set; }
@@ -25,42 +23,43 @@ namespace Spg_Hotelmanager.Application.Infrastructure
         /// <summary>
         /// Abfrage eines Raumes auf Basis der Keycard Nummer. Rückgabetyp: Room
         /// </summary>
-        // Mit C# 7:
-        // public Room GetRoomByKeyCard(string keycardNumber) =>
-        //    Rooms.FirstOrDefault(r => r.KeycardNumber == keycardNumber);/// 
-        public Room GetRoomByKeyCard(string keycardNumber)
+        /// 
+        //public Room GetRoomByKeyCard(string keyCardNumber) =>
+        //    Rooms.FirstOrDefault(r => r.KeycardNumber == keyCardNumber);
+        public Room GetRoomByKeyCard(string keyCardNumber)
         {
-            return Rooms.FirstOrDefault(r => r.KeycardNumber == keycardNumber);
+            return Rooms.FirstOrDefault(r => r.KeycardNumber == keyCardNumber);
         }
 
         /// <summary>
         /// Abfrage aller Räume einer Kategorie, die buchbar sind (Flag CanBeReserved).
         /// Rückgabetyp: IQueryable<Room>
         /// </summary>
-        public IQueryable<Room> GetAvailableRooms(RoomCategory roomCategory)
+        public IQueryable<Room> GetRoomsByCategory(RoomCategory roomCategory)
         {
-            // SELECT * FROM Rooms WHERE RoomCategory = 0 AND CanBeReserved = 1
-            return Rooms.Where(r => r.RoomCategory == roomCategory && r.CanBeReserved);
+            return Rooms.Where(r => r.CanBeReserved && r.RoomCategory == roomCategory);
         }
 
         /// <summary>
         /// Abfrage der Mitarbeiter, die vor einem übergebenen Datum in das Unternehmen
         /// eingetreten sind.Rückgabetyp: IQueryable<Employee>
         /// </summary>
-        public IQueryable<Employee> GetEmployeesByEntryDate(DateTime entryDate)
+
+        public IQueryable<Employee> GetEmployeesEntersBefore(DateTime entryDate)
         {
             return Employees.Where(e => e.EntryDate < entryDate);
         }
+
 
         /// <summary>
         /// Abfrage der Kunden, die keine Rechnungsadresse eingetragen haben (Die Felder
         /// Street, ZIP, City und CountryCode sind NULL). Rückgabetyp: IQueryable<Customer>
         /// </summary>
+        /// 
         public IQueryable<Customer> GetCustomersWithoutBillingAddress()
         {
-            // Falsch:
-            // return Customers.Where(c => c.BillingAddress == null);
-            return Customers.Where(c =>
+            // Falsch: return Customers.Where(c => c.BillingAddress == null);
+            return Customers.Where(c => 
                 c.BillingAddress.Street == null
                 && c.BillingAddress.Zip == null
                 && c.BillingAddress.City == null
@@ -76,12 +75,12 @@ namespace Spg_Hotelmanager.Application.Infrastructure
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // Konfiguration der Value Objects in EF Core.
             modelBuilder.Entity<Person>().OwnsOne(p => p.Name);
-            modelBuilder.Entity<Customer>().OwnsOne(c => c.HomeAddress);
-            modelBuilder.Entity<Customer>().OwnsOne(c => c.BillingAddress);
+            modelBuilder.Entity<Customer>().OwnsOne(p => p.HomeAddress);
+            modelBuilder.Entity<Customer>().OwnsOne(p => p.BillingAddress);
         }
 
+        
         // Method to fill the database with sample data. Can be ignored.
         //public void Seed()
         //{

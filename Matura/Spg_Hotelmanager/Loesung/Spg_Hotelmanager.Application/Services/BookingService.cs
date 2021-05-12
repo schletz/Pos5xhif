@@ -11,7 +11,6 @@ namespace Spg_Hotelmanager.Application.Services
     {
         private readonly HotelContext _db;
 
-
         public BookingService(HotelContext db)
         {
             _db = db;
@@ -19,7 +18,7 @@ namespace Spg_Hotelmanager.Application.Services
 
         public class RevenueCategoryItem
         {
-            public class Customer
+            public class CustomerDto
             {
                 public int Id { get; set; }
                 public string Firstname { get; set; }
@@ -30,14 +29,16 @@ namespace Spg_Hotelmanager.Application.Services
                 public decimal Revenue { get; set; }
             }
             public int RevenueCategory { get; set; }
-            public List<Customer> Customers { get; set; }
+            public List<CustomerDto> Customers { get; set; }
         }
+
         public int? GetPreferredRoom(int customerId, RoomCategory category)
         {
             var reservations = _db.Reservations.Where(r =>
-                r.CustomerId == customerId &&
-                r.Room.RoomCategory == category &&
-                r.Room.CanBeReserved == true);
+                r.CustomerId == customerId
+                && r.Room.RoomCategory == category
+                && r.Room.CanBeReserved);
+
             var lastReservation = reservations
                 .OrderByDescending(r => r.ReservationFrom)
                 .FirstOrDefault();
@@ -46,27 +47,28 @@ namespace Spg_Hotelmanager.Application.Services
 
         public List<RevenueCategoryItem> GetCustomerRevenueCategories()
         {
-            List<RevenueCategoryItem.Customer> customers = _db.Customers
-                .Select(c => new RevenueCategoryItem.Customer
+            List<RevenueCategoryItem.CustomerDto> customers = _db.Customers
+                .Select(c => new RevenueCategoryItem.CustomerDto
                 {
+                    Id = c.Id,
                     City = c.HomeAddress.City,
                     Country = c.HomeAddress.CountryCode,
+                    Street = c.HomeAddress.Street,
                     Firstname = c.Name.Firstname,
                     Lastname = c.Name.Lastname,
-                    Street = c.HomeAddress.Street,
-                    Id = c.Id,
                     Revenue = c.Reservations.Sum(r => r.InvoiceAmount) ?? 0
                 })
                 .ToList();
-            List<RevenueCategoryItem> items = customers
-                .GroupBy(c => 1 + (int)c.Revenue / 10000)
+
+            List<RevenueCategoryItem> result = customers
+                .GroupBy(c => 1 + (int)(c.Revenue / 10000))
                 .Select(g => new RevenueCategoryItem
                 {
                     RevenueCategory = g.Key,
                     Customers = g.ToList()
                 })
                 .ToList();
-            return items;
+            return result;
         }
     }
 }

@@ -31,23 +31,24 @@ namespace Spg_Hotelmanager.Test
             using (var db = GetContext())
             {
                 var controller = new ReservationController(db);
-                var result = controller.GetReservations(RoomCategory.Premium, default) as OkObjectResult;
-                Assert.NotNull(result);  // Wurde HTTP 200 geliefert?
+                var result = controller.GetReservations(RoomCategory.Superior, default) as OkObjectResult;
+                Assert.NotNull(result);   // Wurde HTTP 200 geliefert?
 
+                //var reservations = result.Value as List<Reservation>;
                 var reservations = result.Value as IEnumerable<Reservation>;
-                Assert.True(reservations.Count() == 6);
-                //Assert.All(reservations, r => r.Room.RoomCategory == RoomCategory.Premium);
+                Assert.NotNull(reservations);
+                Assert.True(reservations.Count() == 28);
             }
         }
 
         [Fact]
-        public void GetReservationsReturnsNotFoundWhenCategoryIsInvalidTest()
+        public void GetReservationsReturnsNotFoundIfCategoryInvalidTest()
         {
             using (var db = GetContext())
             {
                 var controller = new ReservationController(db);
-                var result = controller.GetReservations((RoomCategory) 10, default) as NotFoundResult;
-                Assert.NotNull(result);  // Wurde HTTP 200 geliefert?
+                var result = controller.GetReservations((RoomCategory)10, default) as NotFoundResult;
+                Assert.NotNull(result);   // Wurde HTTP 404 geliefert?
             }
         }
 
@@ -57,37 +58,37 @@ namespace Spg_Hotelmanager.Test
             using (var db = GetContext())
             {
                 var controller = new ReservationController(db);
-                var request = new ReservationController.ReservationRequest
+                var reservationRequest = new ReservationController.ReservationRequest
                 {
                     CustomerId = db.Customers.FirstOrDefault().Id,
                     EmployeeId = db.Employees.FirstOrDefault().Id,
-                    Nights = 4,
-                    ReservationFrom = new DateTime(2022, 1, 1)
+                    ReservationFrom = db.Reservations.Max(r => r.ReservationTo).AddDays(1),
+                    Nights = 4
                 };
-                var result = controller.AddReservation(request) as OkObjectResult;
-                Assert.NotNull(result);  // Wurde HTTP 200 geliefert?
-
+                var result = controller.AddReservation(reservationRequest) as OkObjectResult;
+                Assert.NotNull(result);   // Wurde HTTP 200 geliefert?
                 var reservation = result.Value as Reservation;
+                Assert.NotNull(reservation);
                 Assert.True(reservation.Id != default);
             }
         }
 
         [Fact]
-        public void AddReservationReturnsBadRequestWhenOverlappingTest()
+        public void AddReservationReturnsBadRequestIfReservationIsOverlappingTest()
         {
             using (var db = GetContext())
             {
                 var controller = new ReservationController(db);
-                var customerId = db.Customers.FirstOrDefault().Id;
-                var request = new ReservationController.ReservationRequest
+                var reservation = db.Reservations.FirstOrDefault();
+                var reservationRequest = new ReservationController.ReservationRequest
                 {
-                    CustomerId = customerId,
-                    EmployeeId = db.Employees.FirstOrDefault().Id,
-                    Nights = 1,
-                    ReservationFrom = db.Reservations.FirstOrDefault(r => r.CustomerId == customerId).ReservationFrom
+                    CustomerId = reservation.CustomerId,
+                    EmployeeId = reservation.EmployeeId,
+                    ReservationFrom = reservation.ReservationFrom,
+                    Nights = 4
                 };
-                var result = controller.AddReservation(request) as BadRequestResult;
-                Assert.NotNull(result);  // Wurde HTTP 200 geliefert?
+                var result = controller.AddReservation(reservationRequest) as BadRequestResult;
+                Assert.NotNull(result);   // Wurde HTTP 200 geliefert?
             }
         }
 
