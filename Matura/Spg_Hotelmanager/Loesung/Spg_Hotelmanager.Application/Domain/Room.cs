@@ -1,4 +1,6 @@
-﻿namespace Spg_Hotelmanager.Application.Domain
+﻿using System.Collections.Generic;
+
+namespace Spg_Hotelmanager.Application.Domain
 {
     public class Room
     {
@@ -8,5 +10,6 @@
         public bool CanBeReserved { get; set; }
         public RoomCategory RoomCategory { get; set; }
         public decimal PricePerNight { get; set; }
+        public List<Reservation> Reservations { get; set; }
     }
 }

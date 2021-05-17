@@ -23,13 +23,13 @@ namespace Spg_Hotelmanager.Rest
             var options = new DbContextOptionsBuilder()
                 .UseSqlite("Data Source=Hotel.db")
                 .Options;
+
             using (var db = new HotelContext(options))
             {
                 db.Database.EnsureDeleted();
                 db.Database.EnsureCreated();
                 db.Import("data.sql");
             }
-
             CreateHostBuilder(args).Build().Run();
         }
 

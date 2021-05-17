@@ -25,11 +25,11 @@ namespace Spg_Hotelmanager.Test
         [Fact]
         public void GetPreferredRoomSuccessTest()
         {
-            using(var db = GetContext())
+            using (var db = GetContext())
             {
-                var serice = new BookingService(db);
-                var roomId = serice.GetPreferredRoom(11, Application.Domain.RoomCategory.Basic);
-                Assert.True(roomId == 18);
+                var service = new BookingService(db);
+                var roomId = service.GetPreferredRoom(35, Application.Domain.RoomCategory.Superior);
+                Assert.True(roomId == 6);
             }
         }
 
@@ -38,10 +38,11 @@ namespace Spg_Hotelmanager.Test
         {
             using (var db = GetContext())
             {
-                var serice = new BookingService(db);
-                var result = serice.GetCustomerRevenueCategories();
+                var service = new BookingService(db);
+                var result = service.GetCustomerRevenueCategories();
                 Assert.True(result.Count == 3);
             }
         }
+
     }
 }

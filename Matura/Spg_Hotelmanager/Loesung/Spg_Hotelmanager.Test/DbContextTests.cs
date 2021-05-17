@@ -8,10 +8,6 @@ namespace Spg_Hotelmanager.Test
 {
     public class DbContextTests
     {
-        /// <summary>
-        /// "Mockup" der Datenbank
-        /// </summary>
-        /// <returns></returns>
         private HotelContext GetContext()
         {
             var options = new DbContextOptionsBuilder()
@@ -23,7 +19,6 @@ namespace Spg_Hotelmanager.Test
             db.Import("data.sql");
             return db;
         }
-
         [Fact]
         public void DbCreationTest()
         {
@@ -44,37 +39,30 @@ namespace Spg_Hotelmanager.Test
         [Fact]
         public void GetRoomByKeyCardSuccessTest()
         {
-            // Arrange: Erzeugen der Musterdatenbank
             using (var db = GetContext())
             {
-                // Act
-                var room = db.GetRoomByKeyCard("8CE09B8F");
-                // Assert
-                Assert.True(room.KeycardNumber == "8CE09B8F");
+                var room = db.GetRoomByKeyCard("323AF540");
+                Assert.True(room.KeycardNumber == "323AF540");
             }
         }
 
         [Fact]
-        public void GetAvailableRoomsSuccessTest()
+        public void GetRoomsByCategorySuccessTest()
         {
             using (var db = GetContext())
             {
-                // Act
-                var room = db.GetAvailableRooms(Application.Domain.RoomCategory.Superior);
-                // Assert
-                Assert.True(room.Count() == 7);
+                var rooms = db.GetRoomsByCategory(Application.Domain.RoomCategory.Basic);
+                Assert.True(rooms.Count() == 7);
             }
         }
 
         [Fact]
-        public void GetEmployeesByEntryDateSuccessTest()
+        public void GetEmployeesEntersBeforeSuccessTest()
         {
             using (var db = GetContext())
             {
-                // Act
-                var room = db.GetEmployeesByEntryDate(new DateTime(2000,1,1));
-                // Assert
-                Assert.True(room.Count() == 4);
+                var rooms = db.GetEmployeesEntersBefore(new DateTime(2000,1,1));
+                Assert.True(rooms.Count() == 4);
             }
         }
 
@@ -83,10 +71,8 @@ namespace Spg_Hotelmanager.Test
         {
             using (var db = GetContext())
             {
-                // Act
-                var room = db.GetCustomersWithoutBillingAddress();
-                // Assert
-                Assert.True(room.Count() == 21);
+                var rooms = db.GetCustomersWithoutBillingAddress();
+                Assert.True(rooms.Count() == 21);
             }
         }
     }
