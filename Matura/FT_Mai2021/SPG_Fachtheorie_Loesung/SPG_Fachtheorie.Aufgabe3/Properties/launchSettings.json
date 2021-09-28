@@ -1,0 +1,14 @@
+﻿{
+  "profiles": {
+    "SPG_Fachtheorie.Aufgabe3RazorPages": {
+      "commandName": "Project",
+      "dotnetRunMessages": "true",
+      "launchBrowser": true,
+      "applicationUrl": "http://localhost:5000",
+      "launchUrl": "api/persons",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}

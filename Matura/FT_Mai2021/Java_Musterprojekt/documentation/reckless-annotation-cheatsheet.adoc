@@ -1,0 +1,371 @@
+# Official annotations and import cheatsheet
+
+## Import statements
+
+[source,java]
+----
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assumptions.assumeThat;
+
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+----
+
+## Lombok Annotations
+
+[source,java]
+----
+@Data
+@NoArgsConstructor
+@RequiredArgsConstructor
+@AllArgsConstructor
+@Builder
+----
+
+<<<
+
+## JPA annotations
+
+### Embeddable
+
+[source,java]
+----
+@Documented
+@Target({ElementType.TYPE})
+@Retention(RetentionPolicy.RUNTIME)
+public @interface Embeddable {}
+----
+
+### Embedded
+
+[source,java]
+----
+@Target({ElementType.METHOD, ElementType.FIELD})
+@Retention(RetentionPolicy.RUNTIME)
+public @interface Embedded {}
+----
+
+### AttributeOverrides
+
+[source,java]
+----
+@Target({ElementType.TYPE, ElementType.METHOD, ElementType.FIELD})
+@Retention(RetentionPolicy.RUNTIME)
+public @interface AttributeOverrides {
+    AttributeOverride[] value();
+}
+----
+
+### AttributeOverride
+
+[source,java]
+----
+@Repeatable(AttributeOverrides.class)
+@Target({ElementType.TYPE, ElementType.METHOD, ElementType.FIELD})
+@Retention(RetentionPolicy.RUNTIME)
+public @interface AttributeOverride {
+    String name();
+    Column column();
+}
+----
+
+### Enumerated
+
+[source,java]
+----
+@Target({ElementType.METHOD, ElementType.FIELD})
+@Retention(RetentionPolicy.RUNTIME)
+public @interface Enumerated {
+    EnumType value() default EnumType.ORDINAL;
+}
+----
+
+### Column
+
+[source,java]
+----
+@Target({ElementType.METHOD, ElementType.FIELD})
+@Retention(RetentionPolicy.RUNTIME)
+public @interface Column {
+    String name() default "";
+    boolean unique() default false;
+    boolean nullable() default true;
+    boolean insertable() default true;
+    boolean updatable() default true;
+    String columnDefinition() default "";
+    String table() default "";
+    int length() default 255;
+    int precision() default 0;
+    int scale() default 0;
+}
+----
+
+### Inheritance
+
+[source,java]
+----
+@Target({ElementType.TYPE})
+@Retention(RetentionPolicy.RUNTIME)
+public @interface Inheritance {
+    InheritanceType strategy() default InheritanceType.SINGLE_TABLE;
+}
+----
+
+### DiscriminatorColumn
+
+[source,java]
+----
+@Target({ElementType.TYPE})
+@Retention(RetentionPolicy.RUNTIME)
+public @interface DiscriminatorColumn {
+    String name() default "DTYPE";
+    DiscriminatorType discriminatorType() default DiscriminatorType.STRING;
+    String columnDefinition() default "";
+    int length() default 31;
+}
+----
+
+<<<
+
+### ManyToOne
+
+[source,java]
+----
+@Target({ElementType.METHOD, ElementType.FIELD})
+@Retention(RetentionPolicy.RUNTIME)
+public @interface ManyToOne {
+    Class targetEntity() default void.class;
+    CascadeType[] cascade() default {};
+    FetchType fetch() default FetchType.EAGER;
+    boolean optional() default true;
+}
+----
+
+<<<
+
+## SPRING Annotations
+
+### Controller
+
+[source,java]
+----
+@Target({ElementType.TYPE})
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+@Component
+public @interface Controller {
+    @AliasFor(
+        annotation = Component.class
+    )
+    String value() default "";
+}
+----
+
+### RestController
+
+[source,java]
+----
+@Target({ElementType.TYPE})
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+@Controller
+@ResponseBody
+public @interface RestController {
+    @AliasFor(
+        annotation = Controller.class
+    )
+    String value() default "";
+}
+----
+
+### Service
+
+[source,java]
+----
+@Target({ElementType.TYPE})
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+@Component
+public @interface Service {
+    @AliasFor(
+        annotation = Component.class
+    )
+    String value() default "";
+}
+----
+
+### Repository
+
+[source,java]
+----
+@Target({ElementType.TYPE})
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+@Component
+public @interface Repository {
+    @AliasFor(
+        annotation = Component.class
+    )
+    String value() default "";
+}
+----
+
+### Component
+
+[source,java]
+----
+@Target({ElementType.TYPE})
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+@Indexed
+public @interface Component {
+    String value() default "";
+}
+----
+
+### Configuration
+
+[source,java]
+----
+@Target({ElementType.TYPE})
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+@Component
+public @interface Configuration {
+    @AliasFor(
+        annotation = Component.class
+    )
+    String value() default "";
+    boolean proxyBeanMethods() default true;
+}
+----
+
+<<<
+
+## Test Annotations
+
+### ExtendWith
+
+[source,java]
+----
+@Target({ElementType.TYPE, ElementType.METHOD})
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+@Inherited
+@Repeatable(Extensions.class)
+public @interface ExtendWith {
+    Class<? extends Extension>[] value();
+}
+----
+
+### SpringBootTest
+
+[source,java]
+----
+@Target({ElementType.TYPE})
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+@Inherited
+public @interface SpringBootTest {
+    @AliasFor("properties") String[] value() default {};
+    @AliasFor("value") String[] properties() default {};
+    String[] args() default {};
+    Class<?>[] classes() default {};
+    SpringBootTest.WebEnvironment webEnvironment() default SpringBootTest.WebEnvironment.MOCK;
+
+    public static enum WebEnvironment {
+        MOCK(false),
+        RANDOM_PORT(true),
+        DEFINED_PORT(true),
+        NONE(false);
+
+        private final boolean embedded;
+
+        private WebEnvironment(boolean embedded) {
+            this.embedded = embedded;
+        }
+
+        public boolean isEmbedded() {
+            return this.embedded;
+        }
+    }
+}
+----
+
+### DataJpaTest
+
+[source,java]
+----
+@Target({ElementType.TYPE})
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+@Inherited
+public @interface DataJpaTest {
+    String[] properties() default {};
+    @PropertyMapping("spring.jpa.show-sql")
+    boolean showSql() default true;
+    @PropertyMapping("spring.data.jpa.repositories.bootstrap-mode")
+    BootstrapMode bootstrapMode() default BootstrapMode.DEFAULT;
+    boolean useDefaultFilters() default true;
+    Filter[] includeFilters() default {};
+    Filter[] excludeFilters() default {};
+    @AliasFor(
+        annotation = ImportAutoConfiguration.class,
+        attribute = "exclude"
+    )
+    Class<?>[] excludeAutoConfiguration() default {};
+}
+----
+
+### WebMvcTest
+
+[source,java]
+----
+@Target({ElementType.TYPE})
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+@Inherited
+@BootstrapWith(WebMvcTestContextBootstrapper.class)
+public @interface WebMvcTest {
+    String[] properties() default {};
+    @AliasFor("controllers") Class<?>[] value() default {};
+    @AliasFor("value") Class<?>[] controllers() default {};
+    boolean useDefaultFilters() default true;
+    Filter[] includeFilters() default {};
+    Filter[] excludeFilters() default {};
+    @AliasFor(
+        annotation = ImportAutoConfiguration.class,
+        attribute = "exclude"
+    )
+    Class<?>[] excludeAutoConfiguration() default {};
+}
+----
+
+<<<
+
+### TestConfiguration
+
+[source,groovy]
+----
+@TestConfiguration
+static class StubConfig {
+    DetachedMockFactory detachedMockFactory = new DetachedMockFactory()
+
+    @Bean SchoolFacade schoolFacade() {
+        return detachedMockFactory.Stub(SchoolFacade)
+    }
+}
+----
+
+## Miscellaneous
+
+[source,java]
+----
+@ResponseStatus(HttpStatus.BAD_REQUEST)
+----
