@@ -12,5 +12,6 @@ namespace ScsOnlineShop.Application.Entities
         public StoreContext(DbContextOptions opt) : base(opt) { }
         public DbSet<Store> Stores => Set<Store>();
         public DbSet<ActiveStore> ActiveStore => Set<ActiveStore>();
+        public DbSet<Tenant> Tenants => Set<Tenant>();
     }
 }
