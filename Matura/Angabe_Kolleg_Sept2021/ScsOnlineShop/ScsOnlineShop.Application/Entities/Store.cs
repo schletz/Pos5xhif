@@ -26,8 +26,8 @@ namespace ScsOnlineShop.Application.Entities
         // Wert des FK
         public int? TenantId { get; set; }
         // Navigation zum FK Objekt
-        public Tenant? Tenant { get; set; }
-        public StoreState State { get; set; }
+        public virtual Tenant? Tenant { get; set; }
+        public virtual StoreState State { get; set; }
         // Besser wäre eine lookup table
         public DeliveryOption DeliveryOption { get; set; }
     }

@@ -13,5 +13,8 @@ namespace ScsOnlineShop.Application.Entities
         public DbSet<Store> Stores => Set<Store>();
         public DbSet<ActiveStore> ActiveStore => Set<ActiveStore>();
         public DbSet<Tenant> Tenants => Set<Tenant>();
+        public DbSet<ProductCategory> ProductCategories => Set<ProductCategory>();
+        public DbSet<BusinessHour> BusinessHours => Set<BusinessHour>();
+        public DbSet<DeliveryHour> DeliveryHours => Set<DeliveryHour>();
     }
 }

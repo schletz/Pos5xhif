@@ -16,6 +16,6 @@ namespace ScsOnlineShop.Application.Entities
         public string Firstname { get; set; } = default!;
         public string Lastname { get; set; } = default!;
         public string Email { get; set; } = default!;
-        public List<Store> Stores { get; } = new(0);
+        public virtual ICollection<Store> Stores { get; } = new List<Store>(0);
     }
 }
