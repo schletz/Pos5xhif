@@ -22,6 +22,8 @@ namespace ScsOnlineShop.Application.Services
 
         public async Task<bool> Checkout(int customerId)
         {
+            // Wir haben UseLazyLoadingProxies() aktiviert,
+            // daher ist kein explizites Laden nötig.
             var customer = _db.Customers
                 //.Include(c=>c.ShoppingCarts)
                 //    .ThenInclude(s=>s.Offer)
@@ -43,9 +45,9 @@ namespace ScsOnlineShop.Application.Services
                         item.Quantity, item.Offer.Product,
                         item.Offer.Price, order);
                     _db.OrderItems.Add(orderItem);
-                    _db.SaveChanges();
                 }
             }
+            _db.SaveChanges();
             await _mailClient.SendCustomerMail(customer, "Vielen Dank für Ihre Bestellung");
             return true;
         }
