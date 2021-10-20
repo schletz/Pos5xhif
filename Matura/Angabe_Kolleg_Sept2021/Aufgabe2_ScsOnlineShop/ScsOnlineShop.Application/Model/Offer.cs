@@ -19,7 +19,7 @@ namespace ScsOnlineShop.Application.Model
         public int ProductEan { get; set; }  // FK: Property Name + Name des PK (EAN)
         public virtual Product Product { get; set; } = default!;
         public int StoreId { get; set; }
-        public Store Store { get; set; } = default!;
+        public virtual Store Store { get; set; } = default!;
         // [Column(TypeName ="NUMERIC(9,4)")]  // Alter Stil; DB spezifische Typen werden modelliert.
         // In OnModelCreating mit .HasPrecision(9,4) zu definieren.
         public decimal Price { get; set; }

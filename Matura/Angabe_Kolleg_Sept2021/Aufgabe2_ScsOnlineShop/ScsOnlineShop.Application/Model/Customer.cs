@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ScsOnlineShop.Application.Model
 {
@@ -30,6 +31,5 @@ namespace ScsOnlineShop.Application.Model
             ShoppingCarts.Add(shoppingCart);
             return true;
         }
-
     }
 }
