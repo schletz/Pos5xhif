@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace ScsOnlineShop.Dto
 {
-    public record StoreDto(
+    public record OfferDto(
         Guid Guid,
-        string Name,
-        IEnumerable<OfferDto> Offers);
+        int ProductEan,
+        decimal Price);
 }

@@ -8,6 +8,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OData.Edm;
 using Microsoft.OData.ModelBuilder;
 using ScsOnlineShop.Application.Infrastructure;
+using ScsOnlineShop.Application.Model;
 using ScsOnlineShop.Dto;
 
 namespace ScsOnlineShop.Api
@@ -60,7 +61,9 @@ namespace ScsOnlineShop.Api
         {
             ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
             builder.EntitySet<StoreDto>("Stores");
+            builder.EntitySet<OfferDto>("Offers");
             builder.EntityType<StoreDto>().HasKey(s => s.Guid);
+            builder.EntityType<OfferDto>().HasKey(o => o.Guid);
             return builder.GetEdmModel();
         }
     }
