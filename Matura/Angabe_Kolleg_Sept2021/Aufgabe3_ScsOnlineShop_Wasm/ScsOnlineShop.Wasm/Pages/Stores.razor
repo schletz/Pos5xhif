@@ -1,0 +1,20 @@
+﻿@page "/stores"
+@inject HttpClient Http
+@using ScsOnlineShop.Dto
+
+<h3>Stores</h3>
+@foreach (var s in stores)
+{
+    <p>@s.Name</p>
+}
+
+@code {
+    private StoreDto[] stores = Array.Empty<StoreDto>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        var response = await Http.GetStringAsync("/odata/Stores");
+        var value = System.Text.Json.JsonDocument.Parse(response).RootElement.GetProperty("value").GetRawText();
+        stores = System.Text.Json.JsonSerializer.Deserialize<StoreDto[]>(value) ?? Array.Empty<StoreDto>();
+    }
+}
