@@ -1,0 +1,22 @@
+﻿@page "/stores"
+<h3>Stores</h3>
+<AddStore>
+
+</AddStore>
+<table class="table table-sm">
+    <thead>
+        <tr>
+            <th>GUID</th>
+            <th>Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var s in StoreList)
+        {
+            <tr>
+                <td>@s.Guid</td>
+                <td>@s.Name</td>
+            </tr>
+        }
+    </tbody>
+</table>
