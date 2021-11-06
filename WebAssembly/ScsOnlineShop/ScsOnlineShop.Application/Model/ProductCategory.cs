@@ -1,17 +1,23 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace ScsOnlineShop.Application.Model
 {
     public class ProductCategory
     {
-        public int Id { get; private set; }
-        public string Name { get; set; } = default!;
-        public virtual ICollection<Product> Products { get; } = new List<Product>(0);
-
         public ProductCategory(string name)
         {
             Name = name;
+            Guid = Guid.NewGuid();
         }
-        protected ProductCategory() { }
+
+        protected ProductCategory()
+        {
+        }
+
+        public int Id { get; private set; }
+        public string Name { get; set; } = default!;
+        public Guid Guid { get; set; }
+        public virtual ICollection<Product> Products { get; } = new List<Product>(0);
     }
 }

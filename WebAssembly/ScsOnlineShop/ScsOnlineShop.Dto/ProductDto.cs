@@ -1,13 +1,16 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace ScsOnlineShop.Dto
 {
-    public class ProductDto
+    public class ProductDtoBase
     {
-        public ProductDto(int ean, string name)
+        public ProductDtoBase(int ean, string name, Guid productCategoryId)
         {
             Ean = ean;
             Name = name;
+            ProductCategoryGuid = productCategoryId;
         }
 
         [Display(Name = "EAN", Prompt = "6stellige EAN Nummer")]
@@ -17,5 +20,18 @@ namespace ScsOnlineShop.Dto
         [Required]
         [RegularExpression(@"^[A-ZÄÖÜ]", ErrorMessage = "Der Produktname muss mit einem Buchstaben beginnen.")]
         public string Name { get; set; }
+
+        public Guid ProductCategoryGuid { get; set; }
+    }
+
+    public class ProductDto : ProductDtoBase
+    {
+        public ProductDto(int ean, string name, ProductCategoryDto productCategory) :
+            base(ean, name, productCategory.Guid)
+        {
+            ProductCategory = productCategory;
+        }
+
+        public ProductCategoryDto ProductCategory { get; }
     }
 }

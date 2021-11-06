@@ -13,7 +13,11 @@ namespace ScsOnlineShop.Application.Model
             CustomerId = customer.Id;
             Customer = customer;
         }
-        protected Order() { }
+
+        protected Order()
+        {
+        }
+
         public int Id { get; private set; }
         public DateTime OrderDate { get; set; }
         public DateTime? PaymentDate { get; set; }

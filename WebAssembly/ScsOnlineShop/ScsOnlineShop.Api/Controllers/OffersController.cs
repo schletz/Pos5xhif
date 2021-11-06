@@ -22,13 +22,18 @@ namespace ScsOnlineShop.Api.Controllers
 
         /// <summary>
         /// GET /api/offers
+        /// Das Mapping wird ohne named arcuments gemacht, da die Expression für EF Core dies
+        /// nicht untetstützt. Deswegen ist auch keine Map() Methode in den Modelklassen
+        /// möglich, da ja SQL erstellt wird. Wir müssen daher mit Select projizieren.
         /// </summary>
         [HttpGet]
         public IActionResult Get() =>
             Ok(_db.Offers
-                .Select(o => new OfferDto(
-                    new ProductDto(o.Product.Ean, o.Product.Name),
-                    new StoreDto(o.Store.Guid, o.Store.Name), o.Price, o.Guid)));
+                .Select(o => new OfferDto(o.Guid, o.Price,
+                    new ProductDto(
+                        o.Product.Ean, o.Product.Name,
+                        new ProductCategoryDto(o.Product.ProductCategory.Name, o.Product.ProductCategory.Guid)),
+                    new StoreDto(o.Store.Guid, o.Store.Name))));
 
         /// <summary>
         /// GET /api/offers/(GUID)
@@ -38,9 +43,11 @@ namespace ScsOnlineShop.Api.Controllers
         {
             var offer = _db.Offers.FirstOrDefault(o => o.Guid == guid);
             if (offer is null) { return NotFound(); }
-            return Ok(new OfferDto(
-                    new ProductDto(offer.Product.Ean, offer.Product.Name),
-                    new StoreDto(offer.Store.Guid, offer.Store.Name), offer.Price, offer.Guid));
+            return Ok(new OfferDto(offer.Guid, offer.Price,
+                    new ProductDto(
+                        offer.Product.Ean, offer.Product.Name,
+                        new ProductCategoryDto(offer.Product.ProductCategory.Name, offer.Product.ProductCategory.Guid)),
+                    new StoreDto(offer.Store.Guid, offer.Store.Name)));
         }
     }
 }
