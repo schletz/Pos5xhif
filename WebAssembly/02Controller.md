@@ -33,7 +33,8 @@ public class Store
 
 Damit die Daten über JSON ausgetauscht werden können (wir haben schließlich eine Client/Server
 Applikation), definieren wir eine DTO Klasse.
-> **Hinweis:** Die DTO Klasse ist bewusst nicht immutable, also ein C# 9 record. Wird ein neuer
+
+> **Hinweis:** Die DTO Klasse ist bewusst kein C# 9 record, also nicht immutable. Wird ein neuer
 > Store erfasst, schreibt das HTML Input Feld den Wert in eine Instanz von StoreDto. Das widerspricht
 > natürlich dem Konzept von records.
 
@@ -54,7 +55,9 @@ public class StoreDto
 }
 ```
 
-Nun wird im API Projekt ein Ordner Controllers erstellt, falls er nicht schon vorhanden ist.
+Nun wird im API Projekt ein Ordner *Controllers* erstellt, falls er nicht schon vorhanden ist.
+Darin erstellen wir die Klasse *StoresController*, um auf Requests mit der URL */api/stores* zu
+reagieren.
 
 ```c#
 [Route("api/[controller]")]
@@ -68,6 +71,11 @@ public class StoresController : ControllerBase
         _db = db;
     }
 
+    /// <summary>
+    /// GET /api/stores
+    /// Liefert alle Stores und projiziert das Ergebnis auf die Klasse StoreDto.
+    /// Natürlich kann auch Automapper verwendet werden, um das zu erledigen.
+    /// </summary>
     [HttpGet]
     public IActionResult GetAllStores()
     {
@@ -75,3 +83,4 @@ public class StoresController : ControllerBase
     }
 }
 ```
+

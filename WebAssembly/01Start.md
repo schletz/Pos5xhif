@@ -43,13 +43,13 @@ Optionen *Nullable* und *TreatWarningsAsErrors*.
 ```
 
 Danach muss im Wasm Projekt die *FetchData* Komponente entfernt werden (verwendet
-noch keine nullable reference types) und ggf. anderer Code auf nullable reference
-types umgestellt werden.
+noch keine nullable reference types) und ggf. anderer Code durch nullable reference
+types ersetzt werden (aus *string* wird *string?* gemacht).
 
 ## Konfigurieren des API Projektes
 
 Installiere über NuGet im Api Projekt das Paket *Microsoft.AspNetCore.Components.WebAssembly.Server*.
-Nun kann die Startup Klasse in Startup.cs geändert werden, dass die Webassembly ausgeliefert wird.
+Nun kann die Startup Klasse in *Startup.cs* geändert werden, dass die Webassembly ausgeliefert wird.
 Anfragen an */api* werden wie gewohnt an Controller weitergegeben.
 
 

@@ -62,7 +62,7 @@ besitzt.</p>
 <p>Damit die Daten über JSON ausgetauscht werden können (wir haben schließlich eine Client/Server
 Applikation), definieren wir eine DTO Klasse.</p>
 <blockquote>
-<p><strong>Hinweis:</strong> Die DTO Klasse ist bewusst nicht immutable, also ein C# 9 record. Wird ein neuer
+<p><strong>Hinweis:</strong> Die DTO Klasse ist bewusst kein C# 9 record, also nicht immutable. Wird ein neuer
 Store erfasst, schreibt das HTML Input Feld den Wert in eine Instanz von StoreDto. Das widerspricht
 natürlich dem Konzept von records.</p>
 </blockquote>
@@ -81,7 +81,9 @@ natürlich dem Konzept von records.</p>
     <span class="hljs-keyword">public</span> <span class="hljs-keyword">string</span> Name { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">set</span>; }
 }
 </div></code></pre>
-<p>Nun wird im API Projekt ein Ordner Controllers erstellt, falls er nicht schon vorhanden ist.</p>
+<p>Nun wird im API Projekt ein Ordner <em>Controllers</em> erstellt, falls er nicht schon vorhanden ist.
+Darin erstellen wir die Klasse <em>StoresController</em>, um auf Requests mit der URL <em>/api/stores</em> zu
+reagieren.</p>
 <pre><code class="language-c#"><div>[<span class="hljs-meta">Route(<span class="hljs-meta-string">&quot;api/[controller]&quot;</span>)</span>]
 [<span class="hljs-meta">ApiController</span>]
 <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">StoresController</span> : <span class="hljs-title">ControllerBase</span>
@@ -93,6 +95,11 @@ natürlich dem Konzept von records.</p>
         _db = db;
     }
 
+    <span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;summary&gt;</span></span>
+    <span class="hljs-comment"><span class="hljs-doctag">///</span> GET /api/stores</span>
+    <span class="hljs-comment"><span class="hljs-doctag">///</span> Liefert alle Stores und projiziert das Ergebnis auf die Klasse StoreDto.</span>
+    <span class="hljs-comment"><span class="hljs-doctag">///</span> Natürlich kann auch Automapper verwendet werden, um das zu erledigen.</span>
+    <span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;/summary&gt;</span></span>
     [<span class="hljs-meta">HttpGet</span>]
     <span class="hljs-function"><span class="hljs-keyword">public</span> IActionResult <span class="hljs-title">GetAllStores</span>(<span class="hljs-params"></span>)</span>
     {
