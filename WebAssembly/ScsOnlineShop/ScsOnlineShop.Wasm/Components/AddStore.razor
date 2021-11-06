@@ -1,10 +1,8 @@
-﻿<h3>AddStore</h3>
-
-<EditForm Model="@NewStore" OnValidSubmit="@HandleValidSubmit">
+﻿<EditForm Model="@NewStore" OnValidSubmit="@HandleValidSubmit">
     <DataAnnotationsValidator />
     <ValidationSummary />
     <InputText id="name" @bind-Value="NewStore.Name" />
-    <button type="submit">Submit</button>
+    <button type="submit" class="btn-primary">Submit</button>
 </EditForm>
 
 @if (!string.IsNullOrEmpty(ErrorMessage))

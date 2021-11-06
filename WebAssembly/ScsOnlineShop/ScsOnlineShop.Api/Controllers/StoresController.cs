@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ScsOnlineShop.Api.Controller
+namespace ScsOnlineShop.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -19,11 +19,16 @@ namespace ScsOnlineShop.Api.Controller
         {
             _db = db;
         }
+
+        /// <summary>
+        /// GET /api/stores
+        /// Liefert alle Stores und projiziert das Ergebnis auf die Klasse StoreDto.
+        /// Natürlich kann auch Automapper verwendet werden, um das zu erledigen.
+        /// </summary>
         [HttpGet]
         public IActionResult GetAllStores()
         {
             return Ok(_db.Stores.Select(s => new StoreDto(s.Guid, s.Name)));
         }
-
     }
 }

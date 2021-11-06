@@ -13,10 +13,12 @@ namespace ScsOnlineShop.Application.Model
             Guid = Guid.NewGuid();
         }
 
-        protected Store() { }
+        protected Store()
+        {
+        }
+
         public int Id { get; private set; }
         public string Name { get; set; } = default!;
-        [NotMapped]
         public virtual ICollection<Offer> Offers { get; } = new List<Offer>();
         public Guid Guid { get; private set; }
     }
