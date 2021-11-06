@@ -10,7 +10,7 @@ Alle nachfolgenden Schritte sind im Wasm Projekt durchzuführen.
 
 ## Erstellen der Komponente Stores
 
-Für die Auflistung der Stores erstellen wir im Ordner Pages eine Razor Component mit dem Namen
+Für die Auflistung der Stores erstellen wir im Ordner *Pages* eine Razor component mit dem Namen
 *Stores.razor*. Die erste Direktive (*@pages*) gibt an, dass es sich um eine routingfähige
 Komponente handelt. Sie kann mit der URL */stores* erreicht werden.
 
@@ -72,11 +72,11 @@ namespace ScsOnlineShop.Wasm.Pages
 ```
 
 Folgende Dinge fallen auf:
-- Mit [Inject] können - wie in ASP üblich - Services genutzt werden. Da wir keinen Konstruktor
+- Mit *[Inject]* können - wie in ASP üblich - Services genutzt werden. Da wir keinen Konstruktor
   definieren können (das macht bereits die Komponente selbst), müssen wir mit einer Annotateion
   arbeiten. Die Zuweisung von *default!* verhindert Warnungen bei aktivierten nullable reference
   types.
-- Das Service wird in der Datei Program.cs registriert.
+- Das Service wird in der Datei *Program.cs* registriert.
 - Die DTO Klassen sind in einem gemeinsamen Projekt. Dadurch können wir auch am Client darauf
   zugreifen und den Datentyp, den die API sendet, wiederherstellen.
 
@@ -92,7 +92,7 @@ bearbeiten wir die Datei *_Imports.razor* und ergänzen 2 usings:
 @using ScsOnlineShop.Wasm.Components
 ```
 
-Nun fügen wir im Ordner Components eine neue Razor component hinzu und benennen sie AddStore.razor.
+Nun fügen wir im Ordner *Components* eine neue Razor component hinzu und benennen sie AddStore.razor.
 
 ```html
 <EditForm Model="@NewStore" OnValidSubmit="@HandleValidSubmit">
@@ -152,3 +152,23 @@ Nun kann die neu erstelle Komponente in *Stores.razor* verwendet werden:
 <h4>Alle Stores</h4>
 @*...*@
 ```
+
+## CSS Isolation
+
+In der Datei *wwwroot/index.html* wird auf eine seltsame Datei verwiesen:
+
+```html
+<link href="ScsOnlineShop.Wasm.styles.css" rel="stylesheet" />
+```
+
+Dieses Feature nennt sich CSS Isolation. Dafür erstellen wir im Ordner *Pages* die Datei
+*Stores.razor.css*. Der Name ist wichtig, er muss Komponentendatei + *.css* lauten. Dort
+können normale CSS Anweisungen geschrieben werden:
+
+```css
+tr:hover {
+    background-color: lightblue;
+}
+```
+
+Nun werden Zeilen in der Komponente *Stores* beim darüberfahren mit dem Mauszeiger hervorgehoben.
