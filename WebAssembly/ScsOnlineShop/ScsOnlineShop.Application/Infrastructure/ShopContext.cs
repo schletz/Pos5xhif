@@ -1,12 +1,16 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Bogus;
+using Microsoft.EntityFrameworkCore;
 using ScsOnlineShop.Application.Model;
 using System;
+using System.Linq;
 
 namespace ScsOnlineShop.Application.Infrastructure
 {
     public class ShopContext : DbContext
     {
-        public ShopContext(DbContextOptions opt) : base(opt) { }
+        public ShopContext(DbContextOptions opt) : base(opt)
+        {
+        }
 
         public DbSet<ShoppingCart> ShoppingCarts => Set<ShoppingCart>();
         public DbSet<OrderItem> OrderItems => Set<OrderItem>();
@@ -26,24 +30,50 @@ namespace ScsOnlineShop.Application.Infrastructure
 
         public void Seed()
         {
-            var store = new Store(name: "Spengershop");
-            Stores.Add(store);
-            Stores.Add(new Store(name: "TGM Shop"));
-            var category = new ProductCategory(name: "Noten");
-            ProductCategories.Add(category);
-            var product = new Product(ean: 1001, "POS Note", productCategory: category);
-            Products.Add(product);
-            var offer = new Offer(product: product, store: store, 20000);
-            Offers.Add(offer);
-            var customer = new Customer(
-                firstname: "Max",
-                lastname: "Mustermann",
-                email: "muster@spengergasse.at",
-                address: new Address(Street: "Spengergasse 20", Zip: "1050", City: "Wien", Country: "AT"));
-            Customers.Add(customer);
+            Randomizer.Seed = new Random(1318);
 
-            var cartItem = new ShoppingCart(customer, offer, 2, new DateTime(2021, 10, 20));
-            ShoppingCarts.Add(cartItem);
+            var productCategories = new Faker<ProductCategory>("de")
+                .CustomInstantiator(f => new ProductCategory(f.Commerce.ProductAdjective()))
+                .Generate(3)
+                .GroupBy(p => p.Name).Select(g => g.First())
+                .ToList();
+            ProductCategories.AddRange(productCategories);
+            SaveChanges();
+
+            var products = new Faker<Product>("de").CustomInstantiator(f =>
+                    new Product(
+                        f.Random.Int(100000, 999999),
+                        f.Commerce.Product(),
+                        f.Random.ListItem(productCategories)))
+                .Generate(24)
+                .GroupBy(p => p.Name).Select(g => g.First())
+                .ToList();
+            Products.AddRange(products);
+            SaveChanges();
+
+            var stores = new Faker<Store>("de")
+                .CustomInstantiator(f => new Store(name: f.Company.CompanyName()))
+                .Generate(8)
+                .GroupBy(s => s.Name).Select(g => g.First())
+                .ToList();
+
+            Stores.AddRange(stores);
+            SaveChanges();
+
+            var offers = new Faker<Offer>("de")
+                .CustomInstantiator(f => new Offer(f.Random.ListItem(products), f.Random.ListItem(stores), Math.Round(f.Random.Decimal(100, 999), 2)))
+                .Generate(80);
+            Offers.AddRange(offers);
+            SaveChanges();
+
+            var customers = new Faker<Customer>("de")
+                .CustomInstantiator(f => new Customer(
+                    firstname: f.Name.FirstName(),
+                    lastname: f.Name.LastName(),
+                    email: f.Internet.Email(),
+                    address: new Address(f.Address.StreetAddress(), f.Random.Int(1000, 9999).ToString(), f.Address.City(), f.Address.Country())))
+                .Generate(8);
+            Customers.AddRange(customers);
             SaveChanges();
         }
     }

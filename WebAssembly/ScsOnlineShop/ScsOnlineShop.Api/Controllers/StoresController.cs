@@ -26,9 +26,7 @@ namespace ScsOnlineShop.Api.Controllers
         /// Natürlich kann auch Automapper verwendet werden, um das zu erledigen.
         /// </summary>
         [HttpGet]
-        public IActionResult GetAllStores()
-        {
-            return Ok(_db.Stores.Select(s => new StoreDto(s.Guid, s.Name)));
-        }
+        public IActionResult GetAllStores() =>
+            Ok(_db.Stores.Select(s => new StoreDto(s.Guid, s.Name)));
     }
 }
