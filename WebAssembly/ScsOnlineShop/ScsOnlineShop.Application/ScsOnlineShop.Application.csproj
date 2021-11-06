@@ -12,8 +12,4 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="5.*" />
     <PackageReference Include="Bogus" Version="33.*" />
   </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\ScsOnlineShop.Dto\ScsOnlineShop.Dto.csproj" />
-  </ItemGroup>
 </Project>

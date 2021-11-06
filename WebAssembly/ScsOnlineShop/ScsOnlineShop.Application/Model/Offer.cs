@@ -1,5 +1,4 @@
-﻿using ScsOnlineShop.Dto;
-using System;
+﻿using System;
 
 namespace ScsOnlineShop.Application.Model
 {
