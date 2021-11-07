@@ -3,7 +3,7 @@
 ## Inhalt
 
 - [Start](01Start.md)
-- [DTO Klassen](02Dto.md)
+- [DTO Klassen](02Dtos.md)
 - [Controller anlegen](03Controller.md)
 - [Erste Komponenten](04Components.md)
 - [Komponenten kommunizieren miteinander: Parameter](05Paramters.md)
