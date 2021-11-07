@@ -17,7 +17,7 @@ Um Ordnung zu halten, erstellen wir einen Unterordner *Dto* im Projekt *Shared*.
 
 Die Modelklasse Store besteht im Moment nur aus 2 Properties: *Id* und *Name*. Als ID wird ein
 Autoincrement Wert verwendet. **Vorsicht: Sende Autoincrement Werte nie an den Client. Durch
-Erhönen des Wertes kann der nächste Datensatz leicht erraten werden!**
+Erhöhen des Wertes kann der nächste Datensatz leicht erraten werden!**
 
 Deswegen fügen wir ein Property *Guid* vom Typ *Guid* ein. Es kann als read-only Property definiert
 werden. Achte darauf, dass im public Konstruktor der Wert initialisiert wird. Sonst ist die GUID
