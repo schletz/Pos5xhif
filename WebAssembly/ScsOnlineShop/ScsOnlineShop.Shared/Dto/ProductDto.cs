@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
-namespace ScsOnlineShop.Dto
+namespace ScsOnlineShop.Shared.Dto
 {
     public class ProductDtoBase
     {
@@ -15,7 +15,7 @@ namespace ScsOnlineShop.Dto
 
         [Display(Name = "EAN", Prompt = "6stellige EAN Nummer")]
         [Range(100000, 999999, ErrorMessage = "Die EAN muss 6 Stellen haben.")]
-        public int Ean { get; private set; }
+        public int Ean { get; set; }
 
         [Required]
         [RegularExpression(@"^[A-ZÄÖÜ]", ErrorMessage = "Der Produktname muss mit einem Buchstaben beginnen.")]

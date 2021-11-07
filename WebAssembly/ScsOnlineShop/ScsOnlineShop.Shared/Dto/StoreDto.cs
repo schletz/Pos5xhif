@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ScsOnlineShop.Dto
+namespace ScsOnlineShop.Shared.Dto
 {
     /// <summary>
     /// DTO Klasse für Stores.
@@ -20,7 +20,7 @@ namespace ScsOnlineShop.Dto
             Name = name;
         }
 
-        public Guid Guid { get; set; }
+        public Guid Guid { get; }
 
         [Required(ErrorMessage = "Fehlender Name")]
         [StringLength(255, MinimumLength = 3, ErrorMessage = "Ungültiger Name")]

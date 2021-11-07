@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScsOnlineShop.Application",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScsOnlineShop.Wasm", "ScsOnlineShop.Wasm\ScsOnlineShop.Wasm.csproj", "{D8632512-3C58-41AB-AE4E-B67F3A162C19}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScsOnlineShop.Dto", "ScsOnlineShop.Dto\ScsOnlineShop.Dto.csproj", "{CE68FB01-6056-463D-9C93-6E01DFEBD0C3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScsOnlineShop.Shared", "ScsOnlineShop.Shared\ScsOnlineShop.Shared.csproj", "{CE68FB01-6056-463D-9C93-6E01DFEBD0C3}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScsOnlineShop.Test", "ScsOnlineShop.Test\ScsOnlineShop.Test.csproj", "{064CD38B-1EB2-4018-9EEB-05E668AC651C}"
 EndProject

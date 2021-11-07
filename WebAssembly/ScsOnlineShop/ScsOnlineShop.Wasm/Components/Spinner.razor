@@ -1,0 +1,9 @@
+﻿@if (Visible)
+{
+    <div v-if="loading" class="spinner"></div>
+}
+
+@code {
+    [Parameter]
+    public bool Visible { get; set; }
+}

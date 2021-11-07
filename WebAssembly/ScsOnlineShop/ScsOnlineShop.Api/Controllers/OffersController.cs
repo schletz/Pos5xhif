@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ScsOnlineShop.Application.Infrastructure;
-using ScsOnlineShop.Dto;
+using ScsOnlineShop.Shared.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;

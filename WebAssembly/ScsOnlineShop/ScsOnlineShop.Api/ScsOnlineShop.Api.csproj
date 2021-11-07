@@ -2,7 +2,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ScsOnlineShop.Wasm\ScsOnlineShop.Wasm.csproj" />
-    <ProjectReference Include="..\ScsOnlineShop.Dto\ScsOnlineShop.Dto.csproj" />
+    <ProjectReference Include="..\ScsOnlineShop.Shared\ScsOnlineShop.Shared.csproj" />
     <ProjectReference Include="..\ScsOnlineShop.Application\ScsOnlineShop.Application.csproj" />
   </ItemGroup>
   <ItemGroup>

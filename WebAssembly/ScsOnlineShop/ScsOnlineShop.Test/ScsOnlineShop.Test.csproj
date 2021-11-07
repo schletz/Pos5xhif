@@ -23,6 +23,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ScsOnlineShop.Application\ScsOnlineShop.Application.csproj" />
+    <ProjectReference Include="..\ScsOnlineShop.Shared\ScsOnlineShop.Shared.csproj" />
   </ItemGroup>
 
 </Project>

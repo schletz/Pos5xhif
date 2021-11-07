@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ScsOnlineShop.Application.Model
@@ -11,13 +12,20 @@ namespace ScsOnlineShop.Application.Model
             Name = name;
             ProductCategory = productCategory;
             ProductCategoryId = productCategory.Id;
+            Guid = Guid.NewGuid();
         }
-        protected Product() { }
+
+        protected Product()
+        {
+        }
+
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Ean { get; private set; }
+
         public string Name { get; set; } = default!;
         public int ProductCategoryId { get; set; }
         public virtual ProductCategory ProductCategory { get; set; } = default!;
+        public Guid Guid { get; }
     }
 }

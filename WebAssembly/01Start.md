@@ -11,25 +11,25 @@ md ScsOnlineShop
 cd ScsOnlineShop
 md ScsOnlineShop.Api
 md ScsOnlineShop.Wasm
-md ScsOnlineShop.Dto
+md ScsOnlineShop.Shared
 
-cd ScsOnlineShop.Dto
+cd ScsOnlineShop.Shared
 dotnet new classlib
 
 cd ..\ScsOnlineShop.Wasm
 dotnet new blazorwasm
-dotnet add reference ..\ScsOnlineShop.Dto
+dotnet add reference ..\ScsOnlineShop.Shared
 
 cd ..\ScsOnlineShop.Api
 dotnet new webapi
 dotnet add reference ..\ScsOnlineShop.Wasm
-dotnet add reference ..\ScsOnlineShop.Dto
+dotnet add reference ..\ScsOnlineShop.Shared
 
 cd ..
 dotnet new sln
 dotnet sln add ScsOnlineShop.Api
 dotnet sln add ScsOnlineShop.Wasm
-dotnet sln add ScsOnlineShop.Dto
+dotnet sln add ScsOnlineShop.Shared
 ```
 Damit das nullable Feature überall aktiv ist, ändern wir alle *csproj* Dateien und ergänzen die
 Optionen *Nullable* und *TreatWarningsAsErrors*.
@@ -51,8 +51,6 @@ types ersetzt werden (aus *string* wird *string?* gemacht).
 Installiere über NuGet im Api Projekt das Paket *Microsoft.AspNetCore.Components.WebAssembly.Server*.
 Nun kann die Startup Klasse in *Startup.cs* geändert werden, dass die Webassembly ausgeliefert wird.
 Anfragen an */api* werden wie gewohnt an Controller weitergegeben.
-
-
 
 ```c#
 using Microsoft.AspNetCore.Builder;

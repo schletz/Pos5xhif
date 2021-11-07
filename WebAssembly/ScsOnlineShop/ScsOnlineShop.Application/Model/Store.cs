@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ScsOnlineShop.Application.Model
@@ -18,8 +19,11 @@ namespace ScsOnlineShop.Application.Model
         }
 
         public int Id { get; private set; }
+
         public string Name { get; set; } = default!;
         public virtual ICollection<Offer> Offers { get; } = new List<Offer>();
-        public Guid Guid { get; private set; }
+
+        // Muss mit HasAlternateKey() in OnModelCreating definiert werden.
+        public Guid Guid { get; }
     }
 }

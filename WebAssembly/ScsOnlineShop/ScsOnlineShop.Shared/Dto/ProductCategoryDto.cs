@@ -1,16 +1,18 @@
 ﻿using System;
+using System.Text.Json.Serialization;
 
-namespace ScsOnlineShop.Dto
+namespace ScsOnlineShop.Shared.Dto
 {
     public class ProductCategoryDto
     {
+        [JsonConstructor]
         public ProductCategoryDto(string name, Guid guid)
         {
             Name = name;
             Guid = guid;
         }
 
+        public Guid Guid { get; }
         public string Name { get; set; }
-        public Guid Guid { get; set; }
     }
 }

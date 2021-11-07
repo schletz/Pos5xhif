@@ -1,4 +1,5 @@
-﻿<EditForm Model="@NewStore" OnValidSubmit="@HandleValidSubmit">
+﻿<Spinner Visible="Busy" />
+<EditForm Model="@NewStore" OnValidSubmit="@HandleValidSubmit">
     <DataAnnotationsValidator />
     <ValidationSummary />
     <InputText id="name" @bind-Value="NewStore.Name" />

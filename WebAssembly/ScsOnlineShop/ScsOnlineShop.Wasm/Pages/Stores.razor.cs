@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
-using ScsOnlineShop.Dto;
+using ScsOnlineShop.Shared.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,14 +13,19 @@ namespace ScsOnlineShop.Wasm.Pages
     {
         [Inject]
         public HttpClient HttpClient { get; set; } = default!;
-        public StoreDto[] StoreList { get; private set; } = Array.Empty<StoreDto>();
+
+        public List<StoreDto> StoreList { get; private set; } = new();
 
         protected override async Task OnInitializedAsync()
         {
             // using System.Net.Http.Json;
             StoreList = await HttpClient
-                .GetFromJsonAsync<StoreDto[]>("/api/stores") ?? Array.Empty<StoreDto>(); ;
+                .GetFromJsonAsync<List<StoreDto>>("/api/stores") ?? new();
         }
 
+        public void OnStoreAdded(StoreDto storeDto)
+        {
+            StoreList.Add(storeDto);
+        }
     }
 }

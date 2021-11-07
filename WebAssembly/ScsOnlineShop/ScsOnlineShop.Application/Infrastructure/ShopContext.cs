@@ -26,6 +26,14 @@ namespace ScsOnlineShop.Application.Infrastructure
             modelBuilder.Entity<OrderItem>().Property(o => o.Price).HasPrecision(9, 4);
             modelBuilder.Entity<Offer>().Property(o => o.Price).HasPrecision(9, 4);
             modelBuilder.Entity<Customer>().OwnsOne(c => c.Address);
+            modelBuilder.Entity<Store>().HasIndex(s => s.Name).IsUnique(true);
+
+            foreach (var entity in modelBuilder.Model.GetEntityTypes())
+            {
+                var type = entity.ClrType;
+                if (type.GetProperty("Guid") is not null)
+                    modelBuilder.Entity(type).HasAlternateKey("Guid");
+            }
         }
 
         public void Seed()

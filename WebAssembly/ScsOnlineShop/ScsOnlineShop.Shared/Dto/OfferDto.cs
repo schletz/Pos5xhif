@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ScsOnlineShop.Dto
+namespace ScsOnlineShop.Shared.Dto
 {
     /// <summary>
     /// DTO Basisklasse für Offer. Beinhaltet keine Navigation Properties und kann somit für
@@ -21,7 +21,7 @@ namespace ScsOnlineShop.Dto
             Price = price;
         }
 
-        public Guid Guid { get; set; }
+        public Guid Guid { get; }
         public int ProductEan { get; set; }
         public Guid StoreGuid { get; set; }
         public decimal Price { get; set; }
