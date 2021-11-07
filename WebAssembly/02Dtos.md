@@ -100,7 +100,7 @@ Wir erkennen folgende Besonderheiten:
 ## Navigation Properties und DTO Klassen
 
 Schwieriger wird es schon bei der Klasse *Offer*. Wollen wir sie an den Client senden, so sollten
-die Navigations zu Product und Store enthalten sein. Nur mit den Schlüsselwerten würde sich keine
+die Navigations zu *Product* und *Store* enthalten sein. Nur mit den Schlüsselwerten würde sich keine
 vernünftige GUI aufbauen lassen.
 
 ```c#

@@ -10,7 +10,7 @@ so verwenden:
 <Spinner Visible="Busy" />
 ```
 
-Busy ist ein Property der *AddStore* Komponente. Wenn es auf true gesetzt wird, soll der Spinner
+*Busy* ist ein Property der *AddStore* Komponente. Wenn es auf true gesetzt wird, soll der Spinner
 angezeigt werden. Ist der Wert false, soll er wieder verschwinden.
 
 Legen wir nun im Ordner *Components* eine neue Razor component mit dem Namen *Spinner.razor* an.
