@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>xunit.runner.visualstudio</id>
+    <version>2.4.3</version>
+    <title>xUnit.net [Runner: Visual Studio]</title>
+    <authors>.NET Foundation and Contributors</authors>
+    <owners>.NET Foundation and Contributors</owners>
+    <developmentDependency>true</developmentDependency>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <license type="expression">MIT</license>
+    <licenseUrl>https://licenses.nuget.org/MIT</licenseUrl>
+    <icon>logo-512-transparent.png</icon>
+    <projectUrl>https://github.com/xunit/visualstudio.xunit</projectUrl>
+    <description>Visual Studio 2017 15.9+ Test Explorer runner for the xUnit.net framework. Capable of running xUnit.net v1.9.2 and v2.0+ tests. Supports .NET 2.0 or later, .NET Core 2.1 or later, and Universal Windows 10.0.16299 or later.</description>
+    <copyright>Copyright (c) .NET Foundation and Contributors.</copyright>
+    <repository type="git" url="https://github.com/xunit/visualstudio.xunit" commit="1b45f5407b3ffb7f4a49b42b81212ef4452165db" />
+    <dependencies>
+      <group targetFramework=".NETFramework4.5.2" />
+      <group targetFramework=".NETCoreApp2.1" />
+      <group targetFramework="UAP10.0.16299" />
+    </dependencies>
+  </metadata>
+</package>
