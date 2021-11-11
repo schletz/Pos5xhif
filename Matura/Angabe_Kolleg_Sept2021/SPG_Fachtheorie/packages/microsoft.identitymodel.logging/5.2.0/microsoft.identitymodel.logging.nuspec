@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+  <metadata>
+    <id>Microsoft.IdentityModel.Logging</id>
+    <version>5.2.0</version>
+    <authors>Microsoft</authors>
+    <owners>Microsoft</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <licenseUrl>https://github.com/AzureAD/azure-activedirectory-identitymodel-extensions-for-dotnet/blob/master/LICENSE.txt</licenseUrl>
+    <projectUrl>https://github.com/AzureAD/azure-activedirectory-identitymodel-extensions-for-dotnet</projectUrl>
+    <description>Includes Event Source based logging support.</description>
+    <copyright>Copyright (c) Microsoft Corporation. All rights reserved.</copyright>
+    <tags>.NET Windows Authentication Identity Logging</tags>
+    <serviceable>true</serviceable>
+    <repository type="git" />
+    <dependencies>
+      <group targetFramework=".NETFramework4.5" />
+      <group targetFramework=".NETFramework4.5.1" />
+      <group targetFramework=".NETStandard1.4">
+        <dependency id="NETStandard.Library" version="1.6.1" exclude="Build,Analyzers" />
+        <dependency id="System.Diagnostics.Tracing" version="4.3.0" exclude="Build,Analyzers" />
+        <dependency id="System.Globalization" version="4.3.0" exclude="Build,Analyzers" />
+        <dependency id="System.IO" version="4.3.0" exclude="Build,Analyzers" />
+        <dependency id="System.IO.FileSystem" version="4.3.0" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+    <frameworkAssemblies>
+      <frameworkAssembly assemblyName="Microsoft.CSharp" targetFramework=".NETFramework4.5, .NETFramework4.5.1" />
+      <frameworkAssembly assemblyName="System" targetFramework=".NETFramework4.5, .NETFramework4.5.1" />
+    </frameworkAssemblies>
+  </metadata>
+</package>
