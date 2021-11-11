@@ -1,7 +1,7 @@
 ﻿@page
 @model ScsOnlineShop.Webapp.Pages.StoresModel
 @section Head {
-    <script src=~/lib~/lib/vue3.global.js></script>
+<script src=~/lib~/lib/vue3.global.js></script>
 }
 
 <h3>Stores</h3>
@@ -11,8 +11,8 @@
 </ul>
 <script>
     fetch("/Stores?handler=All")
-    .then(res=>res.json())
-    .then(stores=> {
+    .then(res => res.json())
+    .then(stores => {
         document.getElementById("storesCount").innerHTML = stores.length;
         const container = document.getElementById("stores");
         for (const store of stores)

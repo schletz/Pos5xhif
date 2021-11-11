@@ -85,8 +85,8 @@ Nun sieht die gesamte Page *Stores.cshtml* so aus:
 </ul>
 <script>
     fetch("/Stores?handler=All")
-    .then(res=>res.json())
-    .then(stores=> {
+    .then(res => res.json())
+    .then(stores => {
         document.getElementById("storesCount").innerHTML = stores.length;
         const container = document.getElementById("stores");
         for (const store of stores)
