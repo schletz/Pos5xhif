@@ -1,0 +1,26 @@
+﻿@page
+@model ScsOnlineShop.Webapp.Pages.StoresModel
+@section Head {
+    <script src=~/lib~/lib/vue3.global.js></script>
+}
+
+<h3>Stores</h3>
+<p>Es sind <span id="storesCount">0</span> Stores in der Datenbank.</p>
+
+<ul id="stores">
+</ul>
+<script>
+    fetch("/Stores?handler=All")
+    .then(res=>res.json())
+    .then(stores=> {
+        document.getElementById("storesCount").innerHTML = stores.length;
+        const container = document.getElementById("stores");
+        for (const store of stores)
+        {
+            const item = document.createElement("li");
+            item.innerHTML = store.name;
+            container.appendChild(item);
+        }
+    })
+    .catch(error => alert("Fehler beim Laden der Daten vom Server. Bitte versuchen Sie es erneut."));
+</script>
