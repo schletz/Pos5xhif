@@ -63,7 +63,7 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 ## DTO Klasse anlegen
 
 Nun wollen wir in *Shared/Dto* eine Klasse *StoreDto* anlegen. Das ist allerdings schwieriger als
-man denkt, wenn wir en Anforderungen des JSON Serializers und der *EditForm* Komponente in Blazor
+man denkt, wenn wir den Anforderungen des JSON Serializers und der *EditForm* Komponente in Blazor
 Rechnung tragen wollen.
 
 ```c#
