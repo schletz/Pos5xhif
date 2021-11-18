@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using ScsOnlineShop.Application.Infrastructure;
 using ScsOnlineShop.Shared.Dto;
+using Microsoft.EntityFrameworkCore;
 
 namespace ScsOnlineShop.Webapp.Pages
 {
@@ -14,19 +15,43 @@ namespace ScsOnlineShop.Webapp.Pages
             _db = db;
         }
 
-        /// <summary>
-        /// GET /Stores/All
-        /// Endpoint für den AJAX Request. async Task<IActionResult> bei einem async Handler.
-        /// </summary>
         public IActionResult OnGetAll()
         {
             var stores = _db.Stores
                 .OrderBy(s => s.Name)
-                .Select(s => new StoreDto(s.Guid, s.Name)).ToList();
+                .Select(s => new
+                {
+                    s.Guid,
+                    s.Name,
+                    Offers = s.Offers.Select(o => new
+                    {
+                        o.Guid,
+                        ProductGuid = o.Product.Guid,
+                        ProductName = o.Product.Name,
+                        o.Price
+                    })
+                });
             return new JsonResult(stores);
         }
         public void OnGet()
         {
         }
+
+        public IActionResult OnDeleteOffer([FromQuery] Guid offerGuid)
+        {
+            var offer = _db.Offers.FirstOrDefault(o => o.Guid == offerGuid);
+            if (offer is null) { return NotFound(); }
+            try
+            {
+                _db.Offers.Remove(offer);
+                _db.SaveChanges();
+            }
+            catch (DbUpdateException)
+            {
+                return BadRequest("Cannot delete offer.");
+            }
+            return new NoContentResult();
+        }
     }
+
 }
