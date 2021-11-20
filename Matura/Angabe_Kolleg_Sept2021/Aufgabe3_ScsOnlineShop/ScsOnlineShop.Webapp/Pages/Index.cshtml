@@ -1,0 +1,19 @@
+﻿@page
+@model IndexModel
+@section Head {
+<style>
+    ul {
+        list-style: none;
+    }
+</style>
+}
+<div class="text-center">
+    <h1 class="display-4">SCS Online Shop </h1>
+    <p>Folgende Stores sind in der Datenbank</p>
+    <ul>
+        @foreach (var s in Model.Stores)
+        {
+            <li>@s.Name</li>
+        }
+    </ul>
+</div>
