@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using ScsOnlineShop.Shared.Dto;
+using System;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
@@ -9,7 +10,7 @@ namespace ScsOnlineShop.Wasm.Components
     public partial class AddStore
     {
         [Inject]
-        public HttpClient HttpClient { get; set; } = default!;
+        public RestService RestService { get; set; } = default!;
 
         [Parameter]
         public EventCallback<StoreDto> OnStoreAddedCallback { get; set; }
@@ -24,18 +25,18 @@ namespace ScsOnlineShop.Wasm.Components
             Busy = true;
             try
             {
-                var result = await HttpClient.PostAsJsonAsync("api/stores", NewStore);
-                if (!result.IsSuccessStatusCode)
+                try
                 {
-                    ErrorMessage = result.StatusCode == System.Net.HttpStatusCode.BadRequest
-                        ? await result.Content.ReadAsStringAsync()
-                        : "Fehler beim Senden der Daten.";
+                    var newStore = await RestService.SendAsync<StoreDto>(HttpMethod.Post, "stores", NewStore);
+                    // Das Eingabefeld nach erfolgter Eingabe wieder leeren.
+                    NewStore = new(guid: default, name: string.Empty);
+                    await OnStoreAddedCallback.InvokeAsync(newStore);
+                }
+                catch (ApplicationException e)
+                {
+                    ErrorMessage = e.Message;
                     return;
                 }
-                var newStore = await result.Content.ReadFromJsonAsync<StoreDto>();
-                await OnStoreAddedCallback.InvokeAsync(newStore);
-                // Das Eingabefeld nach erfolgter Eingabe wieder leeren.
-                NewStore = new(guid: default, name: string.Empty);
             }
             finally
             {

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ScsOnlineShop.Application.Infrastructure;
 using ScsOnlineShop.Shared.Dto;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace ScsOnlineShop.Api.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class OffersController : ControllerBase
