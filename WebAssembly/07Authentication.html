@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Authentication und Authorization&colon; Implementierung in der API</title>
+        <style>
+/* From extension vscode.markdown-math */
+@font-face{font-family:KaTeX_AMS;src:url(fonts/KaTeX_AMS-Regular.woff2) format("woff2"),url(fonts/KaTeX_AMS-Regular.woff) format("woff"),url(fonts/KaTeX_AMS-Regular.ttf) format("truetype");font-weight:400;font-style:normal}@font-face{font-family:KaTeX_Caligraphic;src:url(fonts/KaTeX_Caligraphic-Bold.woff2) format("woff2"),url(fonts/KaTeX_Caligraphic-Bold.woff) format("woff"),url(fonts/KaTeX_Caligraphic-Bold.ttf) format("truetype");font-weight:700;font-style:normal}@font-face{font-family:KaTeX_Caligraphic;src:url(fonts/KaTeX_Caligraphic-Regular.woff2) format("woff2"),url(fonts/KaTeX_Caligraphic-Regular.woff) format("woff"),url(fonts/KaTeX_Caligraphic-Regular.ttf) format("truetype");font-weight:400;font-style:normal}@font-face{font-family:KaTeX_Fraktur;src:url(fonts/KaTeX_Fraktur-Bold.woff2) format("woff2"),url(fonts/KaTeX_Fraktur-Bold.woff) format("woff"),url(fonts/KaTeX_Fraktur-Bold.ttf) format("truetype");font-weight:700;font-style:normal}@font-face{font-family:KaTeX_Fraktur;src:url(fonts/KaTeX_Fraktur-Regular.woff2) format("woff2"),url(fonts/KaTeX_Fraktur-Regular.woff) format("woff"),url(fonts/KaTeX_Fraktur-Regular.ttf) format("truetype");font-weight:400;font-style:normal}@font-face{font-family:KaTeX_Main;src:url(fonts/KaTeX_Main-Bold.woff2) format("woff2"),url(fonts/KaTeX_Main-Bold.woff) format("woff"),url(fonts/KaTeX_Main-Bold.ttf) format("truetype");font-weight:700;font-style:normal}@font-face{font-family:KaTeX_Main;src:url(fonts/KaTeX_Main-BoldItalic.woff2) format("woff2"),url(fonts/KaTeX_Main-BoldItalic.woff) format("woff"),url(fonts/KaTeX_Main-BoldItalic.ttf) format("truetype");font-weight:700;font-style:italic}@font-face{font-family:KaTeX_Main;src:url(fonts/KaTeX_Main-Italic.woff2) format("woff2"),url(fonts/KaTeX_Main-Italic.woff) format("woff"),url(fonts/KaTeX_Main-Italic.ttf) format("truetype");font-weight:400;font-style:italic}@font-face{font-family:KaTeX_Main;src:url(fonts/KaTeX_Main-Regular.woff2) format("woff2"),url(fonts/KaTeX_Main-Regular.woff) format("woff"),url(fonts/KaTeX_Main-Regular.ttf) format("truetype");font-weight:400;font-style:normal}@font-face{font-family:KaTeX_Math;src:url(fonts/KaTeX_Math-BoldItalic.woff2) format("woff2"),url(fonts/KaTeX_Math-BoldItalic.woff) format("woff"),url(fonts/KaTeX_Math-BoldItalic.ttf) format("truetype");font-weight:700;font-style:italic}@font-face{font-family:KaTeX_Math;src:url(fonts/KaTeX_Math-Italic.woff2) format("woff2"),url(fonts/KaTeX_Math-Italic.woff) format("woff"),url(fonts/KaTeX_Math-Italic.ttf) format("truetype");font-weight:400;font-style:italic}@font-face{font-family:"KaTeX_SansSerif";src:url(fonts/KaTeX_SansSerif-Bold.woff2) format("woff2"),url(fonts/KaTeX_SansSerif-Bold.woff) format("woff"),url(fonts/KaTeX_SansSerif-Bold.ttf) format("truetype");font-weight:700;font-style:normal}@font-face{font-family:"KaTeX_SansSerif";src:url(fonts/KaTeX_SansSerif-Italic.woff2) format("woff2"),url(fonts/KaTeX_SansSerif-Italic.woff) format("woff"),url(fonts/KaTeX_SansSerif-Italic.ttf) format("truetype");font-weight:400;font-style:italic}@font-face{font-family:"KaTeX_SansSerif";src:url(fonts/KaTeX_SansSerif-Regular.woff2) format("woff2"),url(fonts/KaTeX_SansSerif-Regular.woff) format("woff"),url(fonts/KaTeX_SansSerif-Regular.ttf) format("truetype");font-weight:400;font-style:normal}@font-face{font-family:KaTeX_Script;src:url(fonts/KaTeX_Script-Regular.woff2) format("woff2"),url(fonts/KaTeX_Script-Regular.woff) format("woff"),url(fonts/KaTeX_Script-Regular.ttf) format("truetype");font-weight:400;font-style:normal}@font-face{font-family:KaTeX_Size1;src:url(fonts/KaTeX_Size1-Regular.woff2) format("woff2"),url(fonts/KaTeX_Size1-Regular.woff) format("woff"),url(fonts/KaTeX_Size1-Regular.ttf) format("truetype");font-weight:400;font-style:normal}@font-face{font-family:KaTeX_Size2;src:url(fonts/KaTeX_Size2-Regular.woff2) format("woff2"),url(fonts/KaTeX_Size2-Regular.woff) format("woff"),url(fonts/KaTeX_Size2-Regular.ttf) format("truetype");font-weight:400;font-style:normal}@font-face{font-family:KaTeX_Size3;src:url(fonts/KaTeX_Size3-Regular.woff2) format("woff2"),url(fonts/KaTeX_Size3-Regular.woff) format("woff"),url(fonts/KaTeX_Size3-Regular.ttf) format("truetype");font-weight:400;font-style:normal}@font-face{font-family:KaTeX_Size4;src:url(fonts/KaTeX_Size4-Regular.woff2) format("woff2"),url(fonts/KaTeX_Size4-Regular.woff) format("woff"),url(fonts/KaTeX_Size4-Regular.ttf) format("truetype");font-weight:400;font-style:normal}@font-face{font-family:KaTeX_Typewriter;src:url(fonts/KaTeX_Typewriter-Regular.woff2) format("woff2"),url(fonts/KaTeX_Typewriter-Regular.woff) format("woff"),url(fonts/KaTeX_Typewriter-Regular.ttf) format("truetype");font-weight:400;font-style:normal}.katex{font:normal 1.21em KaTeX_Main,Times New Roman,serif;line-height:1.2;text-indent:0;text-rendering:auto;border-color:currentColor}.katex *{-ms-high-contrast-adjust:none!important}.katex .katex-version:after{content:"0.13.0"}.katex .katex-mathml{position:absolute;clip:rect(1px,1px,1px,1px);padding:0;border:0;height:1px;width:1px;overflow:hidden}.katex .katex-html>.newline{display:block}.katex .base{position:relative;white-space:nowrap;width:-webkit-min-content;width:-moz-min-content;width:min-content}.katex .base,.katex .strut{display:inline-block}.katex .textbf{font-weight:700}.katex .textit{font-style:italic}.katex .textrm{font-family:KaTeX_Main}.katex .textsf{font-family:KaTeX_SansSerif}.katex .texttt{font-family:KaTeX_Typewriter}.katex .mathnormal{font-family:KaTeX_Math;font-style:italic}.katex .mathit{font-family:KaTeX_Main;font-style:italic}.katex .mathrm{font-style:normal}.katex .mathbf{font-family:KaTeX_Main;font-weight:700}.katex .boldsymbol{font-family:KaTeX_Math;font-weight:700;font-style:italic}.katex .amsrm,.katex .mathbb,.katex .textbb{font-family:KaTeX_AMS}.katex .mathcal{font-family:KaTeX_Caligraphic}.katex .mathfrak,.katex .textfrak{font-family:KaTeX_Fraktur}.katex .mathtt{font-family:KaTeX_Typewriter}.katex .mathscr,.katex .textscr{font-family:KaTeX_Script}.katex .mathsf,.katex .textsf{font-family:KaTeX_SansSerif}.katex .mathboldsf,.katex .textboldsf{font-family:KaTeX_SansSerif;font-weight:700}.katex .mathitsf,.katex .textitsf{font-family:KaTeX_SansSerif;font-style:italic}.katex .mainrm{font-family:KaTeX_Main;font-style:normal}.katex .vlist-t{display:inline-table;table-layout:fixed;border-collapse:collapse}.katex .vlist-r{display:table-row}.katex .vlist{display:table-cell;vertical-align:bottom;position:relative}.katex .vlist>span{display:block;height:0;position:relative}.katex .vlist>span>span{display:inline-block}.katex .vlist>span>.pstrut{overflow:hidden;width:0}.katex .vlist-t2{margin-right:-2px}.katex .vlist-s{display:table-cell;vertical-align:bottom;font-size:1px;width:2px;min-width:2px}.katex .vbox{display:inline-flex;flex-direction:column;align-items:baseline}.katex .hbox{width:100%}.katex .hbox,.katex .thinbox{display:inline-flex;flex-direction:row}.katex .thinbox{width:0;max-width:0}.katex .msupsub{text-align:left}.katex .mfrac>span>span{text-align:center}.katex .mfrac .frac-line{display:inline-block;width:100%;border-bottom-style:solid}.katex .hdashline,.katex .hline,.katex .mfrac .frac-line,.katex .overline .overline-line,.katex .rule,.katex .underline .underline-line{min-height:1px}.katex .mspace{display:inline-block}.katex .clap,.katex .llap,.katex .rlap{width:0;position:relative}.katex .clap>.inner,.katex .llap>.inner,.katex .rlap>.inner{position:absolute}.katex .clap>.fix,.katex .llap>.fix,.katex .rlap>.fix{display:inline-block}.katex .llap>.inner{right:0}.katex .clap>.inner,.katex .rlap>.inner{left:0}.katex .clap>.inner>span{margin-left:-50%;margin-right:50%}.katex .rule{display:inline-block;border:0 solid;position:relative}.katex .hline,.katex .overline .overline-line,.katex .underline .underline-line{display:inline-block;width:100%;border-bottom-style:solid}.katex .hdashline{display:inline-block;width:100%;border-bottom-style:dashed}.katex .sqrt>.root{margin-left:.27777778em;margin-right:-.55555556em}.katex .fontsize-ensurer.reset-size1.size1,.katex .sizing.reset-size1.size1{font-size:1em}.katex .fontsize-ensurer.reset-size1.size2,.katex .sizing.reset-size1.size2{font-size:1.2em}.katex .fontsize-ensurer.reset-size1.size3,.katex .sizing.reset-size1.size3{font-size:1.4em}.katex .fontsize-ensurer.reset-size1.size4,.katex .sizing.reset-size1.size4{font-size:1.6em}.katex .fontsize-ensurer.reset-size1.size5,.katex .sizing.reset-size1.size5{font-size:1.8em}.katex .fontsize-ensurer.reset-size1.size6,.katex .sizing.reset-size1.size6{font-size:2em}.katex .fontsize-ensurer.reset-size1.size7,.katex .sizing.reset-size1.size7{font-size:2.4em}.katex .fontsize-ensurer.reset-size1.size8,.katex .sizing.reset-size1.size8{font-size:2.88em}.katex .fontsize-ensurer.reset-size1.size9,.katex .sizing.reset-size1.size9{font-size:3.456em}.katex .fontsize-ensurer.reset-size1.size10,.katex .sizing.reset-size1.size10{font-size:4.148em}.katex .fontsize-ensurer.reset-size1.size11,.katex .sizing.reset-size1.size11{font-size:4.976em}.katex .fontsize-ensurer.reset-size2.size1,.katex .sizing.reset-size2.size1{font-size:.83333333em}.katex .fontsize-ensurer.reset-size2.size2,.katex .sizing.reset-size2.size2{font-size:1em}.katex .fontsize-ensurer.reset-size2.size3,.katex .sizing.reset-size2.size3{font-size:1.16666667em}.katex .fontsize-ensurer.reset-size2.size4,.katex .sizing.reset-size2.size4{font-size:1.33333333em}.katex .fontsize-ensurer.reset-size2.size5,.katex .sizing.reset-size2.size5{font-size:1.5em}.katex .fontsize-ensurer.reset-size2.size6,.katex .sizing.reset-size2.size6{font-size:1.66666667em}.katex .fontsize-ensurer.reset-size2.size7,.katex .sizing.reset-size2.size7{font-size:2em}.katex .fontsize-ensurer.reset-size2.size8,.katex .sizing.reset-size2.size8{font-size:2.4em}.katex .fontsize-ensurer.reset-size2.size9,.katex .sizing.reset-size2.size9{font-size:2.88em}.katex .fontsize-ensurer.reset-size2.size10,.katex .sizing.reset-size2.size10{font-size:3.45666667em}.katex .fontsize-ensurer.reset-size2.size11,.katex .sizing.reset-size2.size11{font-size:4.14666667em}.katex .fontsize-ensurer.reset-size3.size1,.katex .sizing.reset-size3.size1{font-size:.71428571em}.katex .fontsize-ensurer.reset-size3.size2,.katex .sizing.reset-size3.size2{font-size:.85714286em}.katex .fontsize-ensurer.reset-size3.size3,.katex .sizing.reset-size3.size3{font-size:1em}.katex .fontsize-ensurer.reset-size3.size4,.katex .sizing.reset-size3.size4{font-size:1.14285714em}.katex .fontsize-ensurer.reset-size3.size5,.katex .sizing.reset-size3.size5{font-size:1.28571429em}.katex .fontsize-ensurer.reset-size3.size6,.katex .sizing.reset-size3.size6{font-size:1.42857143em}.katex .fontsize-ensurer.reset-size3.size7,.katex .sizing.reset-size3.size7{font-size:1.71428571em}.katex .fontsize-ensurer.reset-size3.size8,.katex .sizing.reset-size3.size8{font-size:2.05714286em}.katex .fontsize-ensurer.reset-size3.size9,.katex .sizing.reset-size3.size9{font-size:2.46857143em}.katex .fontsize-ensurer.reset-size3.size10,.katex .sizing.reset-size3.size10{font-size:2.96285714em}.katex .fontsize-ensurer.reset-size3.size11,.katex .sizing.reset-size3.size11{font-size:3.55428571em}.katex .fontsize-ensurer.reset-size4.size1,.katex .sizing.reset-size4.size1{font-size:.625em}.katex .fontsize-ensurer.reset-size4.size2,.katex .sizing.reset-size4.size2{font-size:.75em}.katex .fontsize-ensurer.reset-size4.size3,.katex .sizing.reset-size4.size3{font-size:.875em}.katex .fontsize-ensurer.reset-size4.size4,.katex .sizing.reset-size4.size4{font-size:1em}.katex .fontsize-ensurer.reset-size4.size5,.katex .sizing.reset-size4.size5{font-size:1.125em}.katex .fontsize-ensurer.reset-size4.size6,.katex .sizing.reset-size4.size6{font-size:1.25em}.katex .fontsize-ensurer.reset-size4.size7,.katex .sizing.reset-size4.size7{font-size:1.5em}.katex .fontsize-ensurer.reset-size4.size8,.katex .sizing.reset-size4.size8{font-size:1.8em}.katex .fontsize-ensurer.reset-size4.size9,.katex .sizing.reset-size4.size9{font-size:2.16em}.katex .fontsize-ensurer.reset-size4.size10,.katex .sizing.reset-size4.size10{font-size:2.5925em}.katex .fontsize-ensurer.reset-size4.size11,.katex .sizing.reset-size4.size11{font-size:3.11em}.katex .fontsize-ensurer.reset-size5.size1,.katex .sizing.reset-size5.size1{font-size:.55555556em}.katex .fontsize-ensurer.reset-size5.size2,.katex .sizing.reset-size5.size2{font-size:.66666667em}.katex .fontsize-ensurer.reset-size5.size3,.katex .sizing.reset-size5.size3{font-size:.77777778em}.katex .fontsize-ensurer.reset-size5.size4,.katex .sizing.reset-size5.size4{font-size:.88888889em}.katex .fontsize-ensurer.reset-size5.size5,.katex .sizing.reset-size5.size5{font-size:1em}.katex .fontsize-ensurer.reset-size5.size6,.katex .sizing.reset-size5.size6{font-size:1.11111111em}.katex .fontsize-ensurer.reset-size5.size7,.katex .sizing.reset-size5.size7{font-size:1.33333333em}.katex .fontsize-ensurer.reset-size5.size8,.katex .sizing.reset-size5.size8{font-size:1.6em}.katex .fontsize-ensurer.reset-size5.size9,.katex .sizing.reset-size5.size9{font-size:1.92em}.katex .fontsize-ensurer.reset-size5.size10,.katex .sizing.reset-size5.size10{font-size:2.30444444em}.katex .fontsize-ensurer.reset-size5.size11,.katex .sizing.reset-size5.size11{font-size:2.76444444em}.katex .fontsize-ensurer.reset-size6.size1,.katex .sizing.reset-size6.size1{font-size:.5em}.katex .fontsize-ensurer.reset-size6.size2,.katex .sizing.reset-size6.size2{font-size:.6em}.katex .fontsize-ensurer.reset-size6.size3,.katex .sizing.reset-size6.size3{font-size:.7em}.katex .fontsize-ensurer.reset-size6.size4,.katex .sizing.reset-size6.size4{font-size:.8em}.katex .fontsize-ensurer.reset-size6.size5,.katex .sizing.reset-size6.size5{font-size:.9em}.katex .fontsize-ensurer.reset-size6.size6,.katex .sizing.reset-size6.size6{font-size:1em}.katex .fontsize-ensurer.reset-size6.size7,.katex .sizing.reset-size6.size7{font-size:1.2em}.katex .fontsize-ensurer.reset-size6.size8,.katex .sizing.reset-size6.size8{font-size:1.44em}.katex .fontsize-ensurer.reset-size6.size9,.katex .sizing.reset-size6.size9{font-size:1.728em}.katex .fontsize-ensurer.reset-size6.size10,.katex .sizing.reset-size6.size10{font-size:2.074em}.katex .fontsize-ensurer.reset-size6.size11,.katex .sizing.reset-size6.size11{font-size:2.488em}.katex .fontsize-ensurer.reset-size7.size1,.katex .sizing.reset-size7.size1{font-size:.41666667em}.katex .fontsize-ensurer.reset-size7.size2,.katex .sizing.reset-size7.size2{font-size:.5em}.katex .fontsize-ensurer.reset-size7.size3,.katex .sizing.reset-size7.size3{font-size:.58333333em}.katex .fontsize-ensurer.reset-size7.size4,.katex .sizing.reset-size7.size4{font-size:.66666667em}.katex .fontsize-ensurer.reset-size7.size5,.katex .sizing.reset-size7.size5{font-size:.75em}.katex .fontsize-ensurer.reset-size7.size6,.katex .sizing.reset-size7.size6{font-size:.83333333em}.katex .fontsize-ensurer.reset-size7.size7,.katex .sizing.reset-size7.size7{font-size:1em}.katex .fontsize-ensurer.reset-size7.size8,.katex .sizing.reset-size7.size8{font-size:1.2em}.katex .fontsize-ensurer.reset-size7.size9,.katex .sizing.reset-size7.size9{font-size:1.44em}.katex .fontsize-ensurer.reset-size7.size10,.katex .sizing.reset-size7.size10{font-size:1.72833333em}.katex .fontsize-ensurer.reset-size7.size11,.katex .sizing.reset-size7.size11{font-size:2.07333333em}.katex .fontsize-ensurer.reset-size8.size1,.katex .sizing.reset-size8.size1{font-size:.34722222em}.katex .fontsize-ensurer.reset-size8.size2,.katex .sizing.reset-size8.size2{font-size:.41666667em}.katex .fontsize-ensurer.reset-size8.size3,.katex .sizing.reset-size8.size3{font-size:.48611111em}.katex .fontsize-ensurer.reset-size8.size4,.katex .sizing.reset-size8.size4{font-size:.55555556em}.katex .fontsize-ensurer.reset-size8.size5,.katex .sizing.reset-size8.size5{font-size:.625em}.katex .fontsize-ensurer.reset-size8.size6,.katex .sizing.reset-size8.size6{font-size:.69444444em}.katex .fontsize-ensurer.reset-size8.size7,.katex .sizing.reset-size8.size7{font-size:.83333333em}.katex .fontsize-ensurer.reset-size8.size8,.katex .sizing.reset-size8.size8{font-size:1em}.katex .fontsize-ensurer.reset-size8.size9,.katex .sizing.reset-size8.size9{font-size:1.2em}.katex .fontsize-ensurer.reset-size8.size10,.katex .sizing.reset-size8.size10{font-size:1.44027778em}.katex .fontsize-ensurer.reset-size8.size11,.katex .sizing.reset-size8.size11{font-size:1.72777778em}.katex .fontsize-ensurer.reset-size9.size1,.katex .sizing.reset-size9.size1{font-size:.28935185em}.katex .fontsize-ensurer.reset-size9.size2,.katex .sizing.reset-size9.size2{font-size:.34722222em}.katex .fontsize-ensurer.reset-size9.size3,.katex .sizing.reset-size9.size3{font-size:.40509259em}.katex .fontsize-ensurer.reset-size9.size4,.katex .sizing.reset-size9.size4{font-size:.46296296em}.katex .fontsize-ensurer.reset-size9.size5,.katex .sizing.reset-size9.size5{font-size:.52083333em}.katex .fontsize-ensurer.reset-size9.size6,.katex .sizing.reset-size9.size6{font-size:.5787037em}.katex .fontsize-ensurer.reset-size9.size7,.katex .sizing.reset-size9.size7{font-size:.69444444em}.katex .fontsize-ensurer.reset-size9.size8,.katex .sizing.reset-size9.size8{font-size:.83333333em}.katex .fontsize-ensurer.reset-size9.size9,.katex .sizing.reset-size9.size9{font-size:1em}.katex .fontsize-ensurer.reset-size9.size10,.katex .sizing.reset-size9.size10{font-size:1.20023148em}.katex .fontsize-ensurer.reset-size9.size11,.katex .sizing.reset-size9.size11{font-size:1.43981481em}.katex .fontsize-ensurer.reset-size10.size1,.katex .sizing.reset-size10.size1{font-size:.24108004em}.katex .fontsize-ensurer.reset-size10.size2,.katex .sizing.reset-size10.size2{font-size:.28929605em}.katex .fontsize-ensurer.reset-size10.size3,.katex .sizing.reset-size10.size3{font-size:.33751205em}.katex .fontsize-ensurer.reset-size10.size4,.katex .sizing.reset-size10.size4{font-size:.38572806em}.katex .fontsize-ensurer.reset-size10.size5,.katex .sizing.reset-size10.size5{font-size:.43394407em}.katex .fontsize-ensurer.reset-size10.size6,.katex .sizing.reset-size10.size6{font-size:.48216008em}.katex .fontsize-ensurer.reset-size10.size7,.katex .sizing.reset-size10.size7{font-size:.57859209em}.katex .fontsize-ensurer.reset-size10.size8,.katex .sizing.reset-size10.size8{font-size:.69431051em}.katex .fontsize-ensurer.reset-size10.size9,.katex .sizing.reset-size10.size9{font-size:.83317261em}.katex .fontsize-ensurer.reset-size10.size10,.katex .sizing.reset-size10.size10{font-size:1em}.katex .fontsize-ensurer.reset-size10.size11,.katex .sizing.reset-size10.size11{font-size:1.19961427em}.katex .fontsize-ensurer.reset-size11.size1,.katex .sizing.reset-size11.size1{font-size:.20096463em}.katex .fontsize-ensurer.reset-size11.size2,.katex .sizing.reset-size11.size2{font-size:.24115756em}.katex .fontsize-ensurer.reset-size11.size3,.katex .sizing.reset-size11.size3{font-size:.28135048em}.katex .fontsize-ensurer.reset-size11.size4,.katex .sizing.reset-size11.size4{font-size:.32154341em}.katex .fontsize-ensurer.reset-size11.size5,.katex .sizing.reset-size11.size5{font-size:.36173633em}.katex .fontsize-ensurer.reset-size11.size6,.katex .sizing.reset-size11.size6{font-size:.40192926em}.katex .fontsize-ensurer.reset-size11.size7,.katex .sizing.reset-size11.size7{font-size:.48231511em}.katex .fontsize-ensurer.reset-size11.size8,.katex .sizing.reset-size11.size8{font-size:.57877814em}.katex .fontsize-ensurer.reset-size11.size9,.katex .sizing.reset-size11.size9{font-size:.69453376em}.katex .fontsize-ensurer.reset-size11.size10,.katex .sizing.reset-size11.size10{font-size:.83360129em}.katex .fontsize-ensurer.reset-size11.size11,.katex .sizing.reset-size11.size11{font-size:1em}.katex .delimsizing.size1{font-family:KaTeX_Size1}.katex .delimsizing.size2{font-family:KaTeX_Size2}.katex .delimsizing.size3{font-family:KaTeX_Size3}.katex .delimsizing.size4{font-family:KaTeX_Size4}.katex .delimsizing.mult .delim-size1>span{font-family:KaTeX_Size1}.katex .delimsizing.mult .delim-size4>span{font-family:KaTeX_Size4}.katex .nulldelimiter{display:inline-block;width:.12em}.katex .delimcenter,.katex .op-symbol{position:relative}.katex .op-symbol.small-op{font-family:KaTeX_Size1}.katex .op-symbol.large-op{font-family:KaTeX_Size2}.katex .accent>.vlist-t,.katex .op-limits>.vlist-t{text-align:center}.katex .accent .accent-body{position:relative}.katex .accent .accent-body:not(.accent-full){width:0}.katex .overlay{display:block}.katex .mtable .vertical-separator{display:inline-block;min-width:1px}.katex .mtable .arraycolsep{display:inline-block}.katex .mtable .col-align-c>.vlist-t{text-align:center}.katex .mtable .col-align-l>.vlist-t{text-align:left}.katex .mtable .col-align-r>.vlist-t{text-align:right}.katex .svg-align{text-align:left}.katex svg{display:block;position:absolute;width:100%;height:inherit;fill:currentColor;stroke:currentColor;fill-rule:nonzero;fill-opacity:1;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1}.katex svg path{stroke:none}.katex img{border-style:none;min-width:0;min-height:0;max-width:none;max-height:none}.katex .stretchy{width:100%;display:block;position:relative;overflow:hidden}.katex .stretchy:after,.katex .stretchy:before{content:""}.katex .hide-tail{width:100%;position:relative;overflow:hidden}.katex .halfarrow-left{position:absolute;left:0;width:50.2%;overflow:hidden}.katex .halfarrow-right{position:absolute;right:0;width:50.2%;overflow:hidden}.katex .brace-left{position:absolute;left:0;width:25.1%;overflow:hidden}.katex .brace-center{position:absolute;left:25%;width:50%;overflow:hidden}.katex .brace-right{position:absolute;right:0;width:25.1%;overflow:hidden}.katex .x-arrow-pad{padding:0 .5em}.katex .cd-arrow-pad{padding:0 .55556em 0 .27778em}.katex .mover,.katex .munder,.katex .x-arrow{text-align:center}.katex .boxpad{padding:0 .3em}.katex .fbox,.katex .fcolorbox{box-sizing:border-box;border:.04em solid}.katex .cancel-pad{padding:0 .2em}.katex .cancel-lap{margin-left:-.2em;margin-right:-.2em}.katex .sout{border-bottom-style:solid;border-bottom-width:.08em}.katex .angl{box-sizing:border-content;border-top:.049em solid;border-right:.049em solid;margin-right:.03889em}.katex .anglpad{padding:0 .03889em}.katex .eqn-num:before{counter-increment:katexEqnNo;content:"(" counter(katexEqnNo) ")"}.katex .mml-eqn-num:before{counter-increment:mmlEqnNo;content:"(" counter(mmlEqnNo) ")"}.katex .mtr-glue{width:50%}.katex .cd-vert-arrow{display:inline-block;position:relative}.katex .cd-label-left{display:inline-block;position:absolute;right:calc(50% + .3em);text-align:left}.katex .cd-label-right{display:inline-block;position:absolute;left:calc(50% + .3em);text-align:right}.katex-display{display:block;margin:1em 0;text-align:center}.katex-display>.katex{display:block;text-align:center;white-space:nowrap}.katex-display>.katex>.katex-html{display:block;position:relative}.katex-display>.katex>.katex-html>.tag{position:absolute;right:0}.katex-display.leqno>.katex>.katex-html>.tag{left:0;right:auto}.katex-display.fleqn>.katex{text-align:left;padding-left:2em}body{counter-reset:katexEqnNo mmlEqnNo}
+
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.katex-error {
+	color: var(--vscode-editorError-foreground);
+}
+
+</style>
+        
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item { list-style-type: none; } .task-list-item-checkbox { margin-left: -20px; vertical-align: middle; }
+</style>
+        
+        
+        
+    </head>
+    <body class="vscode-body vscode-light">
+        <h1 id="authentication-und-authorization-implementierung-in-der-api">Authentication und Authorization: Implementierung in der API</h1>
+<blockquote>
+<p><strong>Hinweis:</strong> Dieses Kapitel setzt Voraus, dass die Grundlagen im
+Dokument <a href="../AuthenticationPrinciples">Authentication und Authorization</a> bekannt sind. Falls
+nicht, lies das Kapitel bitte vorher durch.</p>
+</blockquote>
+<p>Die nachfolgenden Punkte beziehen sich auf das Projekt <em>ScsOnlineShop.Api</em>.</p>
+<h2 id="generieren-eines-secrets">Generieren eines Secrets</h2>
+<p>Damit der Server die Authentizität eines JWT prüfen kann, muss zuerst ein Secret generiert
+werden. Dies kann z. B. auf <a href="https://generate.plus/en/base64">https://generate.plus/en/base64</a> erledigt werden. Soll das Secret
+1024 Bit lang sein, sind 128 Bytes zu generieren. Das Secret darf <em>nicht</em> als URL Safe Base64
+generiert werden, da die <em>FromBase64String()</em> Methode sonst eine Exception wirft.</p>
+<p>Nun wird das generierte Secret in die Datei <em>appsettings.json</em> im API Projekt eingefügt:</p>
+<pre><code class="language-javascript"><div>{
+  <span class="hljs-string">&quot;Secret&quot;</span>: <span class="hljs-string">&quot;/4l8fgdxHhEG/ND0si06s3MgUzN+aTLVDw0ekXpc3sp4hTFybGqf88OiFMgr9dGmLjF75leRPSE0GTITjEa0AI3b6ZD6qTh9oSEJmTezzmEEX+vEQbOV46REK3Ii14yHKAtTXbfdN8jmS3eeO4Fz8bV4pRMMrpbphrIIsQRDkH8=&quot;</span>,
+  <span class="hljs-string">&quot;Logging&quot;</span>: {
+    <span class="hljs-string">&quot;LogLevel&quot;</span>: {
+      <span class="hljs-string">&quot;Default&quot;</span>: <span class="hljs-string">&quot;Information&quot;</span>,
+      <span class="hljs-string">&quot;Microsoft&quot;</span>: <span class="hljs-string">&quot;Warning&quot;</span>,
+      <span class="hljs-string">&quot;Microsoft.Hosting.Lifetime&quot;</span>: <span class="hljs-string">&quot;Information&quot;</span>
+    }
+  },
+  <span class="hljs-string">&quot;AllowedHosts&quot;</span>: <span class="hljs-string">&quot;*&quot;</span>
+}
+</div></code></pre>
+<h2 id="nuget-pakete">NuGet Pakete</h2>
+<p>Zuerst wird im API Projekt 2 NuGet Pakete hinzugefügt. Dies kann durch Einfügen der PackageReference
+Elemente in die csproj Datei geschehen. Achtung: Verwende 5.* bei <a href="http://ASP.NET">ASP.NET</a> Core 5 Projekten.</p>
+<pre><code class="language-xml"><div><span class="hljs-tag">&lt;<span class="hljs-name">PackageReference</span> <span class="hljs-attr">Include</span>=<span class="hljs-string">&quot;System.IdentityModel.Tokens.Jwt&quot;</span> <span class="hljs-attr">Version</span>=<span class="hljs-string">&quot;6.*&quot;</span> /&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">PackageReference</span> <span class="hljs-attr">Include</span>=<span class="hljs-string">&quot;Microsoft.AspNetCore.Authentication.JwtBearer&quot;</span> <span class="hljs-attr">Version</span>=<span class="hljs-string">&quot;6.0.0&quot;</span> /&gt;</span>
+</div></code></pre>
+<h2 id="registrierung-des-authserivce-und-aktivieren-der-authentication">Registrierung des AuthSerivce und Aktivieren der Authentication</h2>
+<p>In der Datei <a href="ScsOnlineShop/ScsOnlineShop.Api/Services/AuthService.cs">AuthService.cs</a>
+ist das verwendete AuthService bereits fertig implementiert und muss nur mehr angepasst werden.
+Es hat zwei Parameter: Das Secret und ein Flag, ob der Server im Development Mode ausgeführt wird.</p>
+<p>Bevor es verwendet werden kann, muss zuerst die Serverkonfiguration vorbereitet werden:</p>
+<p>In der Klasse <em>Startup</em> werden dafür folgende Änderungen eingebaut:</p>
+<ul>
+<li><em>IWebHostEnvironment</em> wird über Dependency Injection zum Konstruktor hinzugefügt.</li>
+<li><em>services.AddAuthentication()</em> wird eingefügt und konfiguriert.</li>
+<li>Die Middleware wird mit <em>app.UseAuthentication()</em> und <em>app.UseAuthorization()</em> aktiviert.</li>
+</ul>
+<p><strong><a href="http://ASP.NET">ASP.NET</a> Core  5 (Startup.cs)</strong></p>
+<pre><code class="language-c#"><div><span class="hljs-keyword">using</span> Microsoft.AspNetCore.Builder;
+<span class="hljs-keyword">using</span> Microsoft.AspNetCore.Hosting;
+<span class="hljs-keyword">using</span> Microsoft.Extensions.Configuration;
+<span class="hljs-keyword">using</span> Microsoft.Extensions.DependencyInjection;
+<span class="hljs-keyword">using</span> Microsoft.Extensions.Hosting;
+<span class="hljs-keyword">using</span> Microsoft.IdentityModel.Tokens;
+<span class="hljs-keyword">using</span> Microsoft.AspNetCore.Authentication.JwtBearer; <span class="hljs-comment">// Nuget Microsoft.AspNetCore.Authentication.JwtBearer</span>
+<span class="hljs-comment">/* OTHER USINGS */</span>
+
+<span class="hljs-comment">// Wer auch den Namespace in sein Projekt kopiert, dem kann ich auch nicht mehr helfen...</span>
+<span class="hljs-keyword">namespace</span> <span class="hljs-title">ScsOnlineShop.Api.Services</span>  
+{
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Startup</span>
+    {
+        <span class="hljs-comment">// Add IWebHostEnvironment env</span>
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Startup</span>(<span class="hljs-params">IConfiguration configuration, IWebHostEnvironment env</span>)</span>
+        {
+            Configuration = configuration;
+            _env = env;
+        }
+
+        <span class="hljs-keyword">private</span> <span class="hljs-keyword">readonly</span> IWebHostEnvironment _env;
+        <span class="hljs-keyword">public</span> IConfiguration Configuration { <span class="hljs-keyword">get</span>; }
+
+        <span class="hljs-comment">// This method gets called by the runtime. Use this method to add services to the container.</span>
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ConfigureServices</span>(<span class="hljs-params">IServiceCollection services</span>)</span>
+        {
+            <span class="hljs-comment">// Reads the key from appsettings.json</span>
+            <span class="hljs-keyword">byte</span>[] key = Convert.FromBase64String(Configuration[<span class="hljs-string">&quot;Secret&quot;</span>]);
+            services.AddTransient&lt;AuthService&gt;(provider =&gt; <span class="hljs-keyword">new</span> AuthService(
+                Configuration[<span class="hljs-string">&quot;Secret&quot;</span>],
+                _env.IsDevelopment()));
+            
+            services.AddAuthentication(x =&gt;
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+                .AddJwtBearer(options =&gt;
+                {
+                    options.TokenValidationParameters = <span class="hljs-keyword">new</span> TokenValidationParameters
+                    {
+                        ValidateIssuerSigningKey = <span class="hljs-literal">true</span>,
+                        IssuerSigningKey = <span class="hljs-keyword">new</span> SymmetricSecurityKey(key),
+                        ValidateIssuer = <span class="hljs-literal">false</span>,
+                        ValidateAudience = <span class="hljs-literal">false</span>
+                    };
+                });
+
+            <span class="hljs-comment">// OTHER SERVICES ****************</span>
+            services.AddControllers();
+            <span class="hljs-comment">// ...</span>
+        }
+
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Configure</span>(<span class="hljs-params">IApplicationBuilder app, IWebHostEnvironment env</span>)</span>
+        {
+            <span class="hljs-keyword">if</span> (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+            app.UseBlazorFrameworkFiles();
+            app.UseStaticFiles();
+            app.UseRouting();
+            app.UseAuthentication();
+            app.UseAuthorization();
+            app.UseEndpoints(endpoints =&gt;
+            {
+                endpoints.MapControllers();
+                endpoints.MapFallbackToFile(<span class="hljs-string">&quot;index.html&quot;</span>);
+            });
+        }
+    }
+}
+</div></code></pre>
+<p><strong><a href="http://ASP.NET">ASP.NET</a> Core 6 (Program.cs)</strong></p>
+<pre><code class="language-c#"><div><span class="hljs-keyword">using</span> Microsoft.IdentityModel.Tokens;
+<span class="hljs-keyword">using</span> Microsoft.AspNetCore.Authentication.JwtBearer;
+<span class="hljs-comment">/* Other Usings */</span>
+
+<span class="hljs-keyword">var</span> builder = WebApplication.CreateBuilder(args);
+
+<span class="hljs-keyword">byte</span>[] key = Convert.FromBase64String(builder.Configuration[<span class="hljs-string">&quot;Secret&quot;</span>]);
+builder.Services.AddTransient&lt;AuthService&gt;(provider =&gt; <span class="hljs-keyword">new</span> AuthService(
+    Configuration[<span class="hljs-string">&quot;Secret&quot;</span>],
+    builder.HostEnvironment.IsDevelopment()));
+
+builder.Services.AddAuthentication(x =&gt;
+{
+    x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+.AddJwtBearer(options =&gt;
+{
+    options.TokenValidationParameters = <span class="hljs-keyword">new</span> TokenValidationParameters
+    {
+        ValidateIssuerSigningKey = <span class="hljs-literal">true</span>,
+        IssuerSigningKey = <span class="hljs-keyword">new</span> SymmetricSecurityKey(key),
+        ValidateIssuer = <span class="hljs-literal">false</span>,
+        ValidateAudience = <span class="hljs-literal">false</span>
+    };
+});
+
+<span class="hljs-comment">// OTHER SERVICES ****************</span>
+builder.Services.AddControllers();
+
+<span class="hljs-keyword">var</span> app = builder.Build();
+
+<span class="hljs-comment">// Configure the HTTP request pipeline.</span>
+<span class="hljs-keyword">if</span> (app.Environment.IsDevelopment())
+{
+    app.UseWebAssemblyDebugging();
+
+}
+app.UseStaticFiles();
+app.UseBlazorFrameworkFiles();
+app.UseHttpsRedirection();
+app.UseAuthentication();
+app.UseAuthorization();
+app.MapControllers();
+app.MapFallbackToFile(<span class="hljs-string">&quot;index.html&quot;</span>);
+app.Run();
+
+</div></code></pre>
+<h2 id="das-auth-service">Das Auth Service</h2>
+<p>Das Herzstück des Services <a href="ScsOnlineShop/ScsOnlineShop.Api/Services/AuthService.cs">AuthService.cs</a>
+ist die Methode TryLogin(). Sie generiert den Token, wenn die übermittelten Benutzerdaten
+richtig sind.</p>
+<blockquote>
+<p><strong>Hinweis:</strong> Die Methode TryLogin() muss angepasst werden. Die aktuelle Implementierung
+lässt jedes Passwort und jeden Benutzernamen im Development Mode zu. Im Release Mode lehnt
+sie alle Daten ab.</p>
+</blockquote>
+<pre><code class="language-c#"><div><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">AuthService</span>
+{
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">readonly</span> <span class="hljs-keyword">byte</span>[] _secret;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">readonly</span> <span class="hljs-keyword">bool</span> _isDevelopment;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">AuthService</span>(<span class="hljs-params"><span class="hljs-keyword">string</span> secret, <span class="hljs-keyword">bool</span> isDevelopment</span>)</span>
+    {
+        _secret = Convert.FromBase64String(secret);
+        _isDevelopment = isDevelopment;
+
+    }
+    <span class="hljs-keyword">public</span> (<span class="hljs-keyword">bool</span> success, UserDto? user) TryLogin(<span class="hljs-keyword">string</span> username, <span class="hljs-keyword">string</span> password)
+    {
+        <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Echte Passwortprüfung gegen die Datenbank, ... einfügen und je nach</span>
+        <span class="hljs-comment">//       Bedarf _isDevelopment prüfen, um jedes Passwort im Development Mode zu erlauben.</span>
+        <span class="hljs-keyword">if</span> (!_isDevelopment) { <span class="hljs-keyword">return</span> (<span class="hljs-literal">false</span>, <span class="hljs-literal">null</span>); }
+        <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Rolle entsprechend des Benutzers setzen.</span>
+        <span class="hljs-keyword">var</span> role = <span class="hljs-string">&quot;admin&quot;</span>;
+
+        JwtSecurityTokenHandler tokenHandler = <span class="hljs-keyword">new</span> JwtSecurityTokenHandler();
+        SecurityTokenDescriptor tokenDescriptor = <span class="hljs-keyword">new</span> SecurityTokenDescriptor
+        {
+            <span class="hljs-comment">// Payload für den JWT.</span>
+            Subject = <span class="hljs-keyword">new</span> ClaimsIdentity(<span class="hljs-keyword">new</span> Claim[]
+            {
+                <span class="hljs-comment">// Benutzername als Typ ClaimTypes.Name.</span>
+                <span class="hljs-keyword">new</span> Claim(ClaimTypes.Name, username),
+                <span class="hljs-comment">// Rolle des Benutzer als ClaimTypes.DefaultRoleClaimType setzen.</span>
+                <span class="hljs-comment">// ACHTUNG: Muss mit den Annotations der Routen in [Authorize(Roles = &quot;xxx&quot;)]</span>
+                <span class="hljs-comment">// übereinstimmen.</span>
+                <span class="hljs-keyword">new</span> Claim(ClaimsIdentity.DefaultRoleClaimType, role)
+            }),
+            Expires = DateTime.UtcNow.AddDays(<span class="hljs-number">1</span>),
+            SigningCredentials = <span class="hljs-keyword">new</span> SigningCredentials(
+                <span class="hljs-keyword">new</span> SymmetricSecurityKey(_secret),
+                SecurityAlgorithms.HmacSha256Signature)
+        };
+        SecurityToken token = tokenHandler.CreateToken(tokenDescriptor);
+        <span class="hljs-keyword">return</span> (<span class="hljs-literal">true</span>, <span class="hljs-keyword">new</span> UserDto(
+            Username: username, 
+            Role: role, 
+            Token: tokenHandler.WriteToken(token)));
+    }
+}
+
+</div></code></pre>
+<h2 id="controller-für-den-login-request">Controller für den Login Request</h2>
+<p>Im Verzeichnis <em>Controllers</em> wird eine Klasse <em>UserController</em> angelegt. Er ruft ein Service
+auf, welches das Passwort prüft. Im Erfolgsfall wird ein Userobjekt (bestehend aus Username,
+Rolle und Token) an den Server gesendet. Nun kann der Client an <em>/api/user/login</em> Benutzername
+und Passwort senden und bekommt ein Userobjekt zurück.</p>
+<pre><code class="language-c#"><div><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">UserController</span> : <span class="hljs-title">ControllerBase</span>
+{
+
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">readonly</span> AuthService _authService;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">UserController</span>(<span class="hljs-params">AuthService authService</span>)</span>
+    {
+        _authService = authService;
+    }
+
+    [<span class="hljs-meta">HttpPost(<span class="hljs-meta-string">&quot;login&quot;</span>)</span>]
+    <span class="hljs-function"><span class="hljs-keyword">public</span> IActionResult <span class="hljs-title">Login</span>(<span class="hljs-params">LoginDto login</span>)</span>
+    {
+        <span class="hljs-keyword">var</span> (success, user) = _authService.TryLogin(login.Username, login.Password);
+        <span class="hljs-keyword">if</span> (!success) { <span class="hljs-keyword">return</span> Unauthorized(); }
+        <span class="hljs-keyword">return</span> Ok(user);
+    }
+}
+</div></code></pre>
+<h2 id="absichern-anderer-controller">Absichern anderer Controller</h2>
+<p>Mit der Annotation <em>Authorize</em> kann nun jeder Controller abgesichert werden. Dadurch werden
+Requests ohne Token oder mit ungültigem Token mit HTTP 401 (unauthorized) quittiert.</p>
+<pre><code class="language-c#"><div>[<span class="hljs-meta">Authorize</span>]
+[<span class="hljs-meta">Route(<span class="hljs-meta-string">&quot;api/[controller]&quot;</span>)</span>]
+[<span class="hljs-meta">ApiController</span>]
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">StoresController</span> : <span class="hljs-title">ControllerBase</span>
+{
+    <span class="hljs-comment">// ...</span>
+}
+</div></code></pre>
+
+    </body>
+    </html>
