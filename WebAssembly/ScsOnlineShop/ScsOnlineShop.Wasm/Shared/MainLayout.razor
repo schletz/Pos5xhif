@@ -1,17 +1,28 @@
+@inject RestService RestService
 @inherits LayoutComponentBase
 
 <div class="page">
-    <div class="sidebar">
-        <NavMenu />
-    </div>
-
-    <div class="main">
-        <div class="top-row px-4">
-            <a href="http://blazor.net" target="_blank" class="ml-md-auto">About</a>
+    @if (RestService.IsAuthenticated)
+    {
+        <div class="sidebar">
+            <NavMenu />
         </div>
 
-        <div class="content px-4">
-            @Body
+        <div class="main">
+            <div class="top-row px-4">
+                Angemeldet als Benutzer @RestService.CurrentUser?.Username
+                <a href="http://blazor.net" target="_blank" class="ml-md-auto">About</a>
+            </div>
+
+            <div class="content px-4">
+                @Body
+            </div>
         </div>
-    </div>
+    }
+    else
+    {
+        <div class="main">
+            <ScsOnlineShop.Wasm.Pages.Login />
+        </div>
+    }
 </div>

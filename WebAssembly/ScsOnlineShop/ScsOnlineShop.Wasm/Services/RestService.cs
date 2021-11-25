@@ -4,7 +4,7 @@ using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace ScsOnlineShop.Wasm
+namespace ScsOnlineShop.Wasm.Services
 {
     public class RestService
     {
@@ -21,7 +21,7 @@ namespace ScsOnlineShop.Wasm
         /// Login stattgefunden hat.
         /// </summary>
         public UserDto? CurrentUser => _currentUser;
-
+        public bool IsAuthenticated => _currentUser is not null;
         /// <summary>
         /// Konstruktor. Legt die Http Einstellungen fest.
         /// </summary>
@@ -36,14 +36,31 @@ namespace ScsOnlineShop.Wasm
         /// </summary>
         /// <param name="user">Benutzer, der angemeldet werden soll.</param>
         /// <returns>Userobjekt mit Token wenn erfolgreich, null bei ungültigen Daten.</returns>
-        public async Task<bool> TryLoginAsync(LoginDto login)
+        public async Task<(bool success, string? message)> TryLoginAsync(LoginDto login)
         {
-            UserDto? user = await SendAsync<UserDto>(HttpMethod.Post, "User/Login", login);
-            _currentUser = user;
-            if (user is null) { return false; }
+            string jsonContent = JsonSerializer.Serialize(login);
+            StringContent request = new StringContent(
+                jsonContent, System.Text.Encoding.UTF8, "application/json"
+            );
+            var response = await _client.PostAsync("user/login", request);
+            if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+            {
+                return (false, "Benutzername oder Passwort falsch.");
+            }
+            if (!response.IsSuccessStatusCode)
+            {
+                return (false, "Fehler beim Senden der Logindaten.");
+            }
+            string result = await response.Content.ReadAsStringAsync();
+            var user = JsonSerializer.Deserialize<UserDto>(result, _jsonOptions);
+            if (user is null)
+            {
+                return (false, "Der Server sendete keine gültigen Authentifizierungsdaten.");
+            }
             _client.DefaultRequestHeaders.Authorization =
                 new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", user.Token);
-            return true;
+            _currentUser = user;
+            return (true, null);
         }
 
         /// <summary>

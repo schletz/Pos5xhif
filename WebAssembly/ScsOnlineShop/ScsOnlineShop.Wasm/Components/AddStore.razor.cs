@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using ScsOnlineShop.Shared.Dto;
+using ScsOnlineShop.Wasm.Services;
 using System;
 using System.Net.Http;
 using System.Net.Http.Json;

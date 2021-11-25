@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace ScsOnlineShop.Api.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class StoresController : ControllerBase

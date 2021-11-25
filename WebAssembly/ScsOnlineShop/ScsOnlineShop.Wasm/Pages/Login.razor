@@ -1,6 +1,42 @@
 ﻿@* https://github.com/cornflourblue/blazor-webassembly-basic-authentication-example *@
-<h3>Login</h3>
+<div class="d-sm-table" id="loginform" style="border-spacing: 0px 10px">
+    <EditForm Model=LoginDto OnValidSubmit="HandleValidSubmit">
+        <DataAnnotationsValidator />
 
-@code {
+        <div>
+            <h3>Login</h3>
+        </div>
 
-}
+        <div class="d-sm-table-row">
+            <div class="d-sm-table-cell"><span class="me-3 fw-bold">Benutzername</span></div>
+            <div class="d-sm-table-cell">
+                <InputText class="form-control" @bind-Value="LoginDto.Username" />
+                <small><ValidationMessage For="@(() => LoginDto.Username)" /></small>
+            </div>
+        </div>
+        <div class="d-sm-table-row">
+            <div class="d-sm-table-cell"><span class="me-3 fw-bold">Passwort</span></div>
+            <div class="d-sm-table-cell">
+                <InputText class="form-control" type="password" @bind-Value="LoginDto.Password" />
+                <small><ValidationMessage For="@(() => LoginDto.Password)" /></small>
+            </div>
+        </div>
+
+        <div class="d-sm-table-row">
+            <div class="d-sm-table-cell"></div>
+            <div class="d-sm-table-cell"><small>Hinweis: Im Development Mode ist jeder User und jedes Passwort mit mindestens 2 Stellen gültig.</small></div>
+            
+        </div>
+        @if (!string.IsNullOrEmpty(Message))
+        {
+            <div class="mt-3">
+                <span class="text-danger fw-bold">@Message</span>
+            </div>
+        }
+
+
+        <div class="mt-3">
+            <button class="btn btn-primary">Login</button>
+        </div>
+    </EditForm>
+</div>

@@ -1,0 +1,7 @@
+﻿#loginform {
+    padding:2em;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid hsl(205, 100%, 50%);
+}
