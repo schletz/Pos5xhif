@@ -2,9 +2,9 @@
 
 ## Unterschied WebAssembly - "klassisches" Login
 
-In einer klassischen Webapplikation (serverseitig gerendertes HTML) werden cookies
+In einer klassischen Webapplikation (serverseitig gerendertes HTML) werden Cookies
 verwendet, um den Authentifizierungsstatus am Client zu speichern. Dieses Cookie
-wird bei jedem Request übertragen.
+wird bei jedem Request vom Browser automatisch im Header übertragen.
 
 Auch die fetch API in Javascript überträgt das Cookie, deswegen gilt diese
 Grafik auch für AJAX Requests.
@@ -14,8 +14,8 @@ Grafik auch für AJAX Requests.
 https://www.plantuml.com/plantuml/uml/ZO_BJiCm44Nt-OgxGMg5dA2ogtWK40L4KQCc_G1JJy723sIF1VmzJWgBHbrqPy-TSpLd5ba6JjOKDqPl2E8Aj_vrYeVx5bMHdn1vr6TJh4ZfG1i6UrJ6lsbtlI9EmQs3kJoPpBLJz8tHOzlME3-RZ0zrzjXVS274BbbqmqYQgQDV5fZxO9EHOLXHBvl_3epo1kjF6RZQvdMX9Cinh6Qi8mKdBI4vXLh6-EK35sLPucaBcVWTosVax_2CXXXttdzemkc-x35ccTd1mzhUgEdi3c7sfyd9CV2Cd4hM_080
 </sup>
 
-Unsere Webassembly App ist jedoch einer Client/Server Applikation. Sie kann zwar
-über den HttpClient auch Cookies speichern, das Verfahren mit einem JWT ist jedoch
+Unsere Webassembly App ist jedoch eine Client/Server Applikation. Sie kann zwar
+über den *HttpClient* auch Cookies speichern, das Verfahren mit einem JWT ist jedoch
 einfacher zu implementieren.
 
 ![](login_jwt.svg)
@@ -25,7 +25,7 @@ https://www.plantuml.com/plantuml/uml/NO-zJiCm54RtFCMdJ22Hf6ACgggjX2WWaQeD3-0cDw
 
 Der Client (die Webassembly) muss also bei jedem Request einen Header mit dem
 Wert *Authorization: Bearer <token>* mitschicken. Zum Glück kann der HTTP
-Client diese Header automatisch generieren, wenn nach erfolgreichem Login Das
+Client diesen Header automatisch generieren, wenn nach erfolgreichem Login das
 Property *HttpClient.DefaultRequestHeaders.Authorization* gesetzt wurde.
 
 Genau das passiert in der Methode *TryLogin* im *RestService*:
