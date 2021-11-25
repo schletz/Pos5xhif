@@ -7,6 +7,9 @@
 - [Controller anlegen](03Controller.md)
 - [Erste Komponenten](04Components.md)
 - [Komponenten kommunizieren miteinander: Parameter](05Paramters.md)
+- [Ein RestService für die Webassembly](06RestService.md)
+- [Authentication: API absichern](07AuthenticationApi.md)
+- [Authentication: WASM Implementierung](08AuthenticationWasm.md)
 
 
 Im Ordner *ScsOnlineShop* befindet sich eine vollständige Implementierung einer WASM Applikation.

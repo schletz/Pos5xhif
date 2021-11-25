@@ -32,7 +32,7 @@ Nun wird das generierte Secret in die Datei *appsettings.json* im API Projekt ei
 ## NuGet Pakete
 
 Zuerst werden im API Projekt 2 NuGet Pakete hinzugefügt. Dies kann durch Einfügen der *PackageReference*
-Elemente in der *.csproj* Projektdatei geschehen. Achtung: Verwende 5.* bei ASP.NET Core 5 Projekten.
+Elemente in der *.csproj* Projektdatei geschehen. *Achtung: Verwende Version 5.* bei ASP.NET Core 5 Projekten.*
 
 ```xml
 <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.*" />
