@@ -1,8 +1,7 @@
 ﻿@page "/offers"
-@if (Loading)
-{
-    <div class="spinner"></div>
-}
+
+<Spinner Visible="@Loading" />
+
 <label>
     Produktfilter:
     <input type="text" @bind="ProductFilter" @bind:event="oninput" />

@@ -1,3 +1,3 @@
-﻿th {
-    width: 10em;
+﻿tr.active {
+    background-color: linen;
 }

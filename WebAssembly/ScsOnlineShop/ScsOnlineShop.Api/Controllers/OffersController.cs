@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ScsOnlineShop.Application.Infrastructure;
+using ScsOnlineShop.Application.Model;
 using ScsOnlineShop.Shared.Dto;
 using System;
 using System.Collections.Generic;
@@ -46,5 +47,27 @@ namespace ScsOnlineShop.Api.Controllers
             if (offer is null) { return NotFound(); }
             return Ok(_mapper.Map<OfferDto>(offer));
         }
+
+        [HttpPut]
+        public IActionResult UpdateOffer(OfferDtoBase offerDto)
+        {
+            var offer = _db.Offers.FirstOrDefault(o => o.Guid == offerDto.Guid);
+            if (offer is null) { return NotFound(); }
+            offer.Price = offerDto.Price;
+            offer.LastUpdate = DateTime.UtcNow;
+            _db.SaveChanges();
+            return Ok(_mapper.Map<OfferDto>(offer));
+        }
+
+        [HttpDelete("{guid}")]
+        public IActionResult DeleteOffer(Guid guid)
+        {
+            var offer = _db.Offers.FirstOrDefault(o => o.Guid == guid);
+            if (offer is null) { return NotFound(); }
+            _db.Offers.Remove(offer);
+            _db.SaveChanges();
+            return NoContent();
+        }
+
     }
 }

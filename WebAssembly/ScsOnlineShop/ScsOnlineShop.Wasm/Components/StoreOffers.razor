@@ -1,7 +1,4 @@
-﻿@if (Loading)
-{
-    <div class="spinner"></div>
-}
+﻿<Spinner Visible="@Loading" />
 
 <table class="table table-sm">
     <thead>
@@ -10,17 +7,32 @@
             <th>EAN</th>
             <th>Produkt</th>
             <th>Preis</th>
+            <th>Aktionen</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var o in OfferDtos.OrderBy(o => o.Product.ProductCategory.Name))
         {
-               <tr>
-                   <td>@o.Product.ProductCategory.Name</td>
-                   <td>@o.Product.Ean</td>
-                   <td>@o.Product.Name</td>
-                   <td>@o.Price</td>
-               </tr>
+            <tr class="@(EditOffer == o ? "active" : "")">
+                <td style="width:70em">@o.Product.ProductCategory.Name</td>
+                <td style="width:50em">@o.Product.Ean</td>
+                <td style="width:200em">@o.Product.Name</td>
+                <td style="width:50em">
+                    @if (EditOffer == o)
+                    {
+                        <input type="number" style="width:7em" @bind="@o.Price" />
+                        <span style="cursor:pointer;" @onclick="SaveOffer"><i class="fas fa-check"></i></span>
+                    }
+                    else
+                    {
+                        @o.Price
+                    }
+                </td>
+                <td style="width:50em">
+                    <span style="cursor:pointer;" @onclick="@(()=>EditOffer = o)"><i class="fas fa-pen"></i></span>
+                    <span style="cursor:pointer;" @onclick="@(()=>DeleteOffer(o))"><i class="ms-2 far fa-trash-alt"></i></span>
+                </td>
+            </tr>
         }
     </tbody>
 </table>

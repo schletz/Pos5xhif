@@ -50,7 +50,7 @@ namespace ScsOnlineShop.Application.Infrastructure
                         f.Random.Int(100000, 999999),
                         f.Commerce.ProductName(),
                         f.Random.ListItem(productCategories)))
-                .Generate(1000)
+                .Generate(200)
                 .GroupBy(p => p.Name).Select(g => g.First())
                 .ToList();
             Products.AddRange(products);

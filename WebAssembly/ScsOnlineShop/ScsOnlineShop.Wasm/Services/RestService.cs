@@ -73,7 +73,6 @@ namespace ScsOnlineShop.Wasm.Services
             _client.DefaultRequestHeaders.Authorization = null;
         }
 
-
         public Task<T?> SendAsync<T>(HttpMethod method, string actionUrl) => SendAsync<T>(method, actionUrl, "", null);
         public Task<T?> SendAsync<T>(HttpMethod method, string actionUrl, object requestData) => SendAsync<T>(method, actionUrl, "", requestData);
         public Task<T?> SendAsync<T>(HttpMethod method, string actionUrl, string idParam) => SendAsync<T>(method, actionUrl, idParam, null);
@@ -86,7 +85,7 @@ namespace ScsOnlineShop.Wasm.Services
         /// <param name="idParam">Adresse, die in {baseUrl}/{actionUrl}/{idParam} ersetzt wird.</param>
         /// <param name="requestData">Daten, die als JSON Request Body bzw. als Parameter bei GET Requests gesendet werden.</param>
         /// <returns></returns>
-        public async Task<T?> SendAsync<T>(HttpMethod method, string actionUrl, string idParam, object? requestData)
+        private async Task<T?> SendAsync<T>(HttpMethod method, string actionUrl, string idParam, object? requestData)
         {
             string url = $"{actionUrl}/{idParam}";
 
@@ -126,9 +125,9 @@ namespace ScsOnlineShop.Wasm.Services
                 {
                     return JsonSerializer.Deserialize<T>(result, _jsonOptions);
                 }
-                catch (Exception e)
+                catch
                 {
-                    throw new ApplicationException($"Cannot parse result at {url}", e);
+                    return default;
                 }
             }
             catch (Exception e)
@@ -136,5 +135,8 @@ namespace ScsOnlineShop.Wasm.Services
                 throw new ApplicationException($"Request not successful at {url}.", e);
             }
         }
+
+
+
     }
 }

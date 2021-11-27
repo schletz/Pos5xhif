@@ -12,7 +12,7 @@ namespace ScsOnlineShop.Wasm.Components
     public partial class StoreOffers
     {
         private Guid _loadedStore;
-        private IReadOnlyList<OfferDto> _offerDtos = new List<OfferDto>();
+        private List<OfferDto> _offerDtos = new List<OfferDto>();
 
         [Inject]
         public RestService RestService { get; set; } = default!;
@@ -23,6 +23,7 @@ namespace ScsOnlineShop.Wasm.Components
 
         public IEnumerable<OfferDto> OfferDtos => _offerDtos.Where(o =>
             string.IsNullOrEmpty(ProductFilter) || o.Product.Name.ToLower().Contains(ProductFilter.Trim().ToLower()));
+        public OfferDto? EditOffer { get; set; }
         public bool Loading { get; private set; }
         protected override async Task OnParametersSetAsync()
         {
@@ -39,6 +40,34 @@ namespace ScsOnlineShop.Wasm.Components
             {
                 Loading = false;
                 _loadedStore = StoreGuid;
+            }
+        }
+
+        public async Task DeleteOffer(OfferDto offer)
+        {
+            Loading = true;
+            try
+            {
+                await RestService.SendAsync<object>(HttpMethod.Delete, $"offers/{offer.Guid}");
+                _offerDtos.Remove(offer);
+            }
+            finally
+            {
+                Loading = false;
+            }
+        }
+        public async Task SaveOffer()
+        {
+            if (EditOffer is null) { return; }
+            Loading = true;
+            try
+            {
+                await RestService.SendAsync<object>(HttpMethod.Put, $"offers", EditOffer);
+                EditOffer = null;
+            }
+            finally
+            {
+                Loading = false;
             }
         }
     }
