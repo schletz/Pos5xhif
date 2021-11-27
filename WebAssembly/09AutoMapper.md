@@ -59,12 +59,12 @@ Aus Performancegründen ist ein "Live Mapping" ohne Profil nicht mehr möglich. 
 Mappingklasse kann nämlich Automapper vorab die entsprechenden Delegates für die Mappings
 generieren und muss nicht bei jedem Mappingvorgang über Reflection die Klasse durchsuchen.
 
-## Map und ProjektTo
+## Map und ProjectTo
 
 Nachfolgend ist der StoresController abgebildet, der nun Automapper verwendet. Durch
 Dependency Injection wird der Mapper über das IMapper Interface nutzbar gemacht. Danach können
 2 Methoden aufgerufen werden:
-- **ProjektTo\<TDest\>()** projiziert eine Collection auf eine Collection des Zieltyps. Das ist für
+- **ProjectTo\<TDest\>()** projiziert eine Collection auf eine Collection des Zieltyps. Das ist für
   Datenbankabfragen nützlich.
 - **Map\<TDest\>** bildet eine Instanz anhand der Mappingprofiles auf den Zieltyp ab.
   
