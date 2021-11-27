@@ -18,4 +18,8 @@
   <ItemGroup>
     <ProjectReference Include="..\ScsOnlineShop.Shared\ScsOnlineShop.Shared.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Services\" />
+  </ItemGroup>
 </Project>
