@@ -36,6 +36,14 @@ namespace ScsOnlineShop.Api.Controllers
         public IActionResult GetAllStores() =>
             Ok(_mapper.ProjectTo<StoreDto>(_db.Stores));
 
+        [HttpGet("{guid}/offers")]
+        public IActionResult GetOffersFromStore(Guid guid)
+        {
+            var store = _db.Stores.FirstOrDefault(s => s.Guid == guid);
+            if (store is null) { return NotFound(); }
+            return Ok(_mapper.ProjectTo<OfferDto>(_db.Offers.Where(o => o.StoreId == store.Id)));
+        }
+
         [HttpPost]
         public IActionResult AddStore([FromBody] StoreDto storeDto)
         {

@@ -1,5 +1,21 @@
-﻿<h3>Offers</h3>
-
-@code {
-
+﻿@page "/offers"
+@if (Loading)
+{
+    <div class="spinner"></div>
 }
+
+<ul class="nav nav-tabs">
+    @foreach (var s in StoreDtos.OrderBy(s => s.Name))
+    {
+        var cssClass = $"nav-link {(s == ActiveStore ? "active" : "")}";
+
+        <li class="nav-item">
+            <a class="@cssClass" href="javascript:void(0)" @onclick="@(args => ActiveStore = s)">@s.Name</a>
+        </li>
+    }
+</ul>
+@if (ActiveStore is not null)
+{
+    <StoreOffers StoreGuid="@ActiveStore.Guid"></StoreOffers>
+}
+

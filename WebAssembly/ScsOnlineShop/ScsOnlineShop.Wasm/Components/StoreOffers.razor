@@ -1,0 +1,26 @@
+﻿@if (Loading)
+{
+    <div class="spinner"></div>
+}
+
+<table class="table table-sm">
+    <thead>
+        <tr>
+            <th>Kategorie</th>
+            <th>EAN</th>
+            <th>Produkt</th>
+            <th>Preis</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var o in OfferDtos.OrderBy(o => o.Product.ProductCategory.Name))
+        {
+               <tr>
+                   <td>@o.Product.ProductCategory.Name</td>
+                   <td>@o.Product.Ean</td>
+                   <td>@o.Product.Name</td>
+                   <td>@o.Price</td>
+               </tr>
+        }
+    </tbody>
+</table>

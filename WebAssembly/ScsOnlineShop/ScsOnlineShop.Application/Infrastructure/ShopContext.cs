@@ -21,6 +21,7 @@ namespace ScsOnlineShop.Application.Infrastructure
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Offer>().Property(o => o.Price).HasPrecision(9, 4);
+            modelBuilder.Entity<Offer>().HasIndex(o => new { o.StoreId, o.ProductEan }).IsUnique();
             modelBuilder.Entity<Customer>().OwnsOne(c => c.Address);
             modelBuilder.Entity<Store>().HasIndex(s => s.Name).IsUnique(true);
 
@@ -47,9 +48,9 @@ namespace ScsOnlineShop.Application.Infrastructure
             var products = new Faker<Product>("de").CustomInstantiator(f =>
                     new Product(
                         f.Random.Int(100000, 999999),
-                        f.Commerce.Product(),
+                        f.Commerce.ProductName(),
                         f.Random.ListItem(productCategories)))
-                .Generate(24)
+                .Generate(100)
                 .GroupBy(p => p.Name).Select(g => g.First())
                 .ToList();
             Products.AddRange(products);
@@ -66,7 +67,9 @@ namespace ScsOnlineShop.Application.Infrastructure
 
             var offers = new Faker<Offer>("de")
                 .CustomInstantiator(f => new Offer(f.Random.ListItem(products), f.Random.ListItem(stores), Math.Round(f.Random.Decimal(100, 999), 2)))
-                .Generate(80);
+                .Generate(80)
+                .GroupBy(o => new { o.StoreId, o.ProductEan }).Select(p => p.First())
+                .ToList();
             Offers.AddRange(offers);
             SaveChanges();
 

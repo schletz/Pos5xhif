@@ -5,7 +5,6 @@ namespace ScsOnlineShop.Shared.Dto
 {
     public class ProductCategoryDto
     {
-        [JsonConstructor]
         public ProductCategoryDto(string name, Guid guid)
         {
             Name = name;
