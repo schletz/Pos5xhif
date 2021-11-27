@@ -83,8 +83,15 @@ Optionen <em>Nullable</em> und <em>TreatWarningsAsErrors</em>.</p>
 <p>Konfiguriere die Datei <em>Program.cs</em> im API Projekt so, dass sie - wenn kein Controller
 als Endpoint für eine Adresse vorhanden ist - die Datei <em>index.html</em> ausliefert:</p>
 <p>** Program.cs **</p>
-<pre><code class="language-c#"><div><span class="hljs-keyword">using</span> ExamManager.Application.Infrastructure;
+<pre><code class="language-c#"><div><span class="hljs-keyword">using</span> Microsoft.AspNetCore.Authentication.JwtBearer;
+<span class="hljs-keyword">using</span> Microsoft.AspNetCore.Builder;
 <span class="hljs-keyword">using</span> Microsoft.EntityFrameworkCore;
+<span class="hljs-keyword">using</span> Microsoft.Extensions.DependencyInjection;
+<span class="hljs-keyword">using</span> Microsoft.Extensions.Hosting;
+<span class="hljs-keyword">using</span> Microsoft.IdentityModel.Tokens;
+<span class="hljs-keyword">using</span> ScsOnlineShop.Api.Services;
+<span class="hljs-keyword">using</span> ScsOnlineShop.Application.Infrastructure;
+<span class="hljs-keyword">using</span> System;
 
 <span class="hljs-keyword">var</span> builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
@@ -103,18 +110,18 @@ app.Run();
 <p>Soll auch eine Datenbank verwendet werden, kann diese in als Service gleich registriert
 werden:</p>
 <pre><code class="language-c#"><div><span class="hljs-keyword">var</span> opt = <span class="hljs-keyword">new</span> DbContextOptionsBuilder()
-    .UseSqlite(<span class="hljs-string">&quot;Data Source=Exams.db&quot;</span>)
+    .UseSqlite(<span class="hljs-string">&quot;Data Source=Shop.db&quot;</span>)
     .Options;
-<span class="hljs-keyword">using</span> (<span class="hljs-keyword">var</span> db = <span class="hljs-keyword">new</span> ExamContext(opt))
+<span class="hljs-keyword">using</span> (<span class="hljs-keyword">var</span> db = <span class="hljs-keyword">new</span> ShopContext(opt))
 {
     db.Database.EnsureDeleted();
     db.Database.EnsureCreated();
     db.Seed();
 }
-
-builder.Services.AddDbContext&lt;ExamContext&gt;(opt =&gt;
+builder.Services.AddDbContext&lt;ShopContext&gt;(opt =&gt;
     opt.UseSqlite(<span class="hljs-string">&quot;Data Source=Shop.db&quot;</span>)
         .UseLazyLoadingProxies());
+        
 </div></code></pre>
 
     </body>

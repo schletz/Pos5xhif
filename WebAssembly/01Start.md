@@ -54,8 +54,15 @@ als Endpoint für eine Adresse vorhanden ist - die Datei *index.html* ausliefert
 
 ** Program.cs **
 ```c#
-using ExamManager.Application.Infrastructure;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
+using ScsOnlineShop.Api.Services;
+using ScsOnlineShop.Application.Infrastructure;
+using System;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
@@ -77,16 +84,16 @@ werden:
 
 ```c#
 var opt = new DbContextOptionsBuilder()
-    .UseSqlite("Data Source=Exams.db")
+    .UseSqlite("Data Source=Shop.db")
     .Options;
-using (var db = new ExamContext(opt))
+using (var db = new ShopContext(opt))
 {
     db.Database.EnsureDeleted();
     db.Database.EnsureCreated();
     db.Seed();
 }
-
-builder.Services.AddDbContext<ExamContext>(opt =>
+builder.Services.AddDbContext<ShopContext>(opt =>
     opt.UseSqlite("Data Source=Shop.db")
         .UseLazyLoadingProxies());
+        
 ```
