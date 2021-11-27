@@ -9,6 +9,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
+using AutoMapper;
 
 namespace ScsOnlineShop.Api.Controllers
 {
@@ -18,10 +19,12 @@ namespace ScsOnlineShop.Api.Controllers
     public class StoresController : ControllerBase
     {
         private readonly ShopContext _db;
+        private readonly IMapper _mapper;
 
-        public StoresController(ShopContext db)
+        public StoresController(ShopContext db, IMapper mapper)
         {
             _db = db;
+            _mapper = mapper;
         }
 
         /// <summary>
@@ -31,12 +34,12 @@ namespace ScsOnlineShop.Api.Controllers
         /// </summary>
         [HttpGet]
         public IActionResult GetAllStores() =>
-            Ok(_db.Stores.Select(s => new StoreDto(s.Guid, s.Name)));
+            Ok(_mapper.ProjectTo<StoreDto>(_db.Stores));
 
         [HttpPost]
         public IActionResult AddStore([FromBody] StoreDto storeDto)
         {
-            var store = new Store(name: storeDto.Name);
+            var store = _mapper.Map<Store>(storeDto);
             try
             {
                 _db.Stores.Add(store);
@@ -46,7 +49,7 @@ namespace ScsOnlineShop.Api.Controllers
             {
                 return BadRequest("Fehler beim Einfügen des Stores.");
             }
-            return Ok(new StoreDto(guid: store.Guid, name: store.Name));
+            return Ok(_mapper.Map<StoreDto>(store));
         }
 
         [HttpPut]

@@ -6,6 +6,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using ScsOnlineShop.Api.Services;
 using ScsOnlineShop.Application.Infrastructure;
+using ScsOnlineShop.Application.Mappings;
 using System;
 
 var opt = new DbContextOptionsBuilder()
@@ -44,6 +45,7 @@ builder.Services.AddControllers();
 builder.Services.AddDbContext<ShopContext>(opt =>
     opt.UseSqlite("Data Source=Shop.db")
         .UseLazyLoadingProxies());
+builder.Services.AddAutoMapper(typeof(ShopMappingProfile));
 
 var app = builder.Build();
 // Liefert das verknüpfte Wasm Projekt als Webassembly aus.

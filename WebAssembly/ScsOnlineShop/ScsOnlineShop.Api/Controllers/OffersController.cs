@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ScsOnlineShop.Application.Infrastructure;
@@ -10,16 +11,19 @@ using System.Threading.Tasks;
 
 namespace ScsOnlineShop.Api.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class OffersController : ControllerBase
     {
         private readonly ShopContext _db;
+        private readonly IMapper _mapper;
 
-        public OffersController(ShopContext db)
+
+        public OffersController(ShopContext db, IMapper mapper)
         {
             _db = db;
+            _mapper = mapper;
         }
 
         /// <summary>
@@ -30,12 +34,7 @@ namespace ScsOnlineShop.Api.Controllers
         /// </summary>
         [HttpGet]
         public IActionResult Get() =>
-            Ok(_db.Offers
-                .Select(o => new OfferDto(o.Guid, o.Price,
-                    new ProductDto(
-                        o.Product.Ean, o.Product.Name,
-                        new ProductCategoryDto(o.Product.ProductCategory.Name, o.Product.ProductCategory.Guid)),
-                    new StoreDto(o.Store.Guid, o.Store.Name))));
+            Ok(_mapper.ProjectTo<OfferDto>(_db.Offers));
 
         /// <summary>
         /// GET /api/offers/(GUID)
@@ -45,11 +44,7 @@ namespace ScsOnlineShop.Api.Controllers
         {
             var offer = _db.Offers.FirstOrDefault(o => o.Guid == guid);
             if (offer is null) { return NotFound(); }
-            return Ok(new OfferDto(offer.Guid, offer.Price,
-                    new ProductDto(
-                        offer.Product.Ean, offer.Product.Name,
-                        new ProductCategoryDto(offer.Product.ProductCategory.Name, offer.Product.ProductCategory.Guid)),
-                    new StoreDto(offer.Store.Guid, offer.Store.Name)));
+            return Ok(_mapper.Map<OfferDto>(offer));
         }
     }
 }
