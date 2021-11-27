@@ -63,7 +63,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using ScsOnlineShop.Api.Services;
-using ScsOnlineShop.Application.Infrastructure;
 using System;
 /* Other Usings */
 
