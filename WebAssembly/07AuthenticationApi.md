@@ -56,8 +56,15 @@ In der Klasse *Startup* werden dafür folgende Änderungen eingebaut:
 
 **ASP.NET Core 6 (Program.cs)**
 ```c#
-using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
+using ScsOnlineShop.Api.Services;
+using ScsOnlineShop.Application.Infrastructure;
+using System;
 /* Other Usings */
 
 var builder = WebApplication.CreateBuilder(args);

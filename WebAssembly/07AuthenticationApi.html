@@ -79,8 +79,15 @@ Es hat zwei Parameter: Das Secret und ein Flag, ob der Server im Development Mod
 <li>Die Middleware wird mit <em>app.UseAuthentication()</em> und <em>app.UseAuthorization()</em> aktiviert.</li>
 </ul>
 <p><strong><a href="http://ASP.NET">ASP.NET</a> Core 6 (Program.cs)</strong></p>
-<pre><code class="language-c#"><div><span class="hljs-keyword">using</span> Microsoft.IdentityModel.Tokens;
-<span class="hljs-keyword">using</span> Microsoft.AspNetCore.Authentication.JwtBearer;
+<pre><code class="language-c#"><div><span class="hljs-keyword">using</span> Microsoft.AspNetCore.Authentication.JwtBearer;
+<span class="hljs-keyword">using</span> Microsoft.AspNetCore.Builder;
+<span class="hljs-keyword">using</span> Microsoft.EntityFrameworkCore;
+<span class="hljs-keyword">using</span> Microsoft.Extensions.DependencyInjection;
+<span class="hljs-keyword">using</span> Microsoft.Extensions.Hosting;
+<span class="hljs-keyword">using</span> Microsoft.IdentityModel.Tokens;
+<span class="hljs-keyword">using</span> ScsOnlineShop.Api.Services;
+<span class="hljs-keyword">using</span> ScsOnlineShop.Application.Infrastructure;
+<span class="hljs-keyword">using</span> System;
 <span class="hljs-comment">/* Other Usings */</span>
 
 <span class="hljs-keyword">var</span> builder = WebApplication.CreateBuilder(args);
