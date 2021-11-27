@@ -50,7 +50,7 @@ namespace ScsOnlineShop.Application.Infrastructure
                         f.Random.Int(100000, 999999),
                         f.Commerce.ProductName(),
                         f.Random.ListItem(productCategories)))
-                .Generate(100)
+                .Generate(1000)
                 .GroupBy(p => p.Name).Select(g => g.First())
                 .ToList();
             Products.AddRange(products);
@@ -67,7 +67,7 @@ namespace ScsOnlineShop.Application.Infrastructure
 
             var offers = new Faker<Offer>("de")
                 .CustomInstantiator(f => new Offer(f.Random.ListItem(products), f.Random.ListItem(stores), Math.Round(f.Random.Decimal(100, 999), 2)))
-                .Generate(80)
+                .Generate(800)
                 .GroupBy(o => new { o.StoreId, o.ProductEan }).Select(p => p.First())
                 .ToList();
             Offers.AddRange(offers);

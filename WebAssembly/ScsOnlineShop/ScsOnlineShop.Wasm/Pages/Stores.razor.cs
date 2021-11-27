@@ -14,10 +14,8 @@ namespace ScsOnlineShop.Wasm.Pages
         [Inject]
         public RestService RestService { get; set; } = default!;
         public List<StoreDto> StoreList { get; private set; } = new();
-
         protected override async Task OnInitializedAsync()
         {
-            // using System.Net.Http.Json;
             StoreList = await RestService
                 .SendAsync<List<StoreDto>>(HttpMethod.Get, "stores") ?? new();
         }

@@ -3,9 +3,17 @@
 {
     <div class="spinner"></div>
 }
+<label>
+    Produktfilter:
+    <input type="text" @bind="ProductFilter" @bind:event="oninput" />
+    @if (!string.IsNullOrEmpty(ProductFilter))
+    {
+        <span style="cursor:pointer;" @onclick="@(() => ProductFilter = string.Empty)"><i class=" ms-2 far fa-trash-alt"></i></span>
 
-<ul class="nav nav-tabs">
-    @foreach (var s in StoreDtos.OrderBy(s => s.Name))
+    }
+</label>
+<ul class=" nav nav-tabs">
+    @foreach (var s in StoreDtos)
     {
         var cssClass = $"nav-link {(s == ActiveStore ? "active" : "")}";
 
@@ -16,6 +24,6 @@
 </ul>
 @if (ActiveStore is not null)
 {
-    <StoreOffers StoreGuid="@ActiveStore.Guid"></StoreOffers>
+    <StoreOffers StoreGuid="@ActiveStore.Guid" ProductFilter="@ProductFilter"></StoreOffers>
 }
 
