@@ -10,7 +10,7 @@
 - [Ein RestService für die Webassembly](06RestService.md)
 - [Authentication: API absichern](07AuthenticationApi.md)
 - [Authentication: WASM Implementierung](08AuthenticationWasm.md)
-
+- [Verwenden von AutoMapper](09AutoMapper.md)
 
 Im Ordner *ScsOnlineShop* befindet sich eine vollständige Implementierung einer WASM Applikation.
 Die Themenstellung wurde aus einem Maturabeispiel entnommen. Das Klassenmodell ist im *Application*
