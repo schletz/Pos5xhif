@@ -30,7 +30,7 @@ public partial class Stores
 Gerade in Hinblick auf Authentifizierung, wo ein Token mit den Anfragen mitgesendet werden
 muss, möchten wir nun ein eigenes Service schreiben.
 
-Das RestService ist bereits fertig in der Datei [](ScsOnlineShop/ScsOnlineShop.Wasm/Services/RestService.cs)
+Das RestService ist bereits fertig in der Datei [RestService.cs](ScsOnlineShop/ScsOnlineShop.Wasm/Services/RestService.cs)
 implementiert. Die wichtigste Methode ist *SendAsync*, die einfach Abfragen an die API sendet:
 
 ```c#
