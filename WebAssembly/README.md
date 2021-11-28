@@ -1,5 +1,19 @@
 # Blazor Webassemblies
 
+## Starten des Projektes
+
+Die Solution in [ScsOnlineShop/ScsOnlineShop.sln](ScsOnlineShop/ScsOnlineShop.sln) kann in
+Visual Studio geöffnet und ausgeführt werden. In der Konsole kann mit *dotnet run* das API
+Projekt gestartet werden:
+
+```text
+cd ScsOnlineShop\ScsOnlineShop.Api
+dotnet run
+```
+
+Es öffnet sich der Browser und die WASM wird geladen. Im Debug Modus ist jedes Login mit
+mindestens 2 Buchstaben gültig.
+
 ## Inhalt
 
 - [Start](10Start.md)
