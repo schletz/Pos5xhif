@@ -50,7 +50,7 @@ namespace ScsOnlineShop.Wasm.Components
         public async Task DeleteOffer(OfferDto offer)
         {
             OfferToDelete = offer;
-            var result = await DeleteConfirmDialog.Show();
+            var result = await DeleteConfirmDialog.ShowConfirmation();
             if (!result) { return; }
             Loading = true;
             try

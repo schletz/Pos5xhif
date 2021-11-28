@@ -48,6 +48,12 @@ builder.Services.AddDbContext<ShopContext>(opt =>
 builder.Services.AddAutoMapper(typeof(ShopMappingProfile));
 
 var app = builder.Build();
+// IMPORTANT: UseWebAssemblyDebugging has to be the first middleware!
+if (app.Environment.IsDevelopment())
+{
+    app.UseWebAssemblyDebugging();
+}
+
 // Liefert das verknüpfte Wasm Projekt als Webassembly aus.
 // NUGET: Microsoft.AspNetCore.Components.WebAssembly.Server
 app.UseBlazorFrameworkFiles();

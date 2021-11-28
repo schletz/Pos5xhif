@@ -2,15 +2,16 @@
 
 ## Inhalt
 
-- [Start](01Start.md)
-- [DTO Klassen](02Dtos.md)
-- [Controller anlegen](03Controller.md)
-- [Erste Komponenten](04Components.md)
-- [Komponenten kommunizieren miteinander: Parameter](05Paramters.md)
-- [Ein RestService für die Webassembly](06RestService.md)
-- [Authentication: API absichern](07AuthenticationApi.md)
-- [Authentication: WASM Implementierung](08AuthenticationWasm.md)
-- [Verwenden von AutoMapper](09AutoMapper.md)
+- [Start](10Start.md)
+- [DTO Klassen](20Dtos.md)
+- [Verwenden von AutoMapper](21AutoMapper.md)
+- [Controller anlegen](30Controller.md)
+- [Erste Komponenten](40Components.md)
+- [Komponenten kommunizieren miteinander: Parameter](41Paramters.md)
+- [Render Fragments und ref: Die Modal Komponente](42RenderFragments.md)
+- [Ein RestService für die Webassembly](50RestService.md)
+- [Authentication: API absichern](60AuthenticationApi.md)
+- [Authentication: WASM Implementierung](61AuthenticationWasm.md)
 
 Im Ordner *ScsOnlineShop* befindet sich eine vollständige Implementierung einer WASM Applikation. Die Demo simuliert ein Shopping Center, in dem mehrere Stores Produkte
 anbieten können. Kunden können dann nach Produkten suchen und im jeweiligen Store

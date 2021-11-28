@@ -1,4 +1,4 @@
-﻿@if (_Show)
+﻿@if (Show)
 {
     <div class="modal" style="display: block" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
@@ -12,23 +12,24 @@
                 <div class="modal-body">
                     @ChildContent
                     <div>
-                    <button type="button" class="btn btn-primary"
-                        @onclick="@(async ()=>{
-                            _Show = false;
-                            await OnOkClick.InvokeAsync();
+                        <button type="button" class="btn btn-primary"
+                            @onclick="@(()=>{
+                            Show = false;
                             _taskCompletionSource?.TrySetResult(true);
                         })">
-                        OK
-                    </button>
-                    <button type="button" class="btn btn-secondary"
-                        data-bs-dismiss="modal"
-                        @onclick="@(async ()=>{
-                            _Show = false;
-                            await OnCancelClick.InvokeAsync();
+                            OK
+                        </button>
+                        @if (ShowCancel)
+                        {
+                            <button type="button" class="ms-2 btn btn-secondary"
+                            data-bs-dismiss="modal"
+                            @onclick="@(()=>{
+                            Show = false;
                             _taskCompletionSource?.TrySetResult(false);
                         })">
-                        Cancel
-                    </button>
+                                Cancel
+                            </button>
+                        }
                     </div>
                 </div>
             </div>
@@ -41,20 +42,23 @@
 
 @code {
     private TaskCompletionSource<bool>? _taskCompletionSource;
-    private bool _Show { get; set; }
+    private bool Show { get; set; }
+    private bool ShowCancel { get; set; }
 
-    public Task<bool> Show()
-    {
-        _taskCompletionSource = new();
-        _Show = true;
-        return _taskCompletionSource.Task;
-    }
     [Parameter]
     public string Title { get; set; } = string.Empty;
     [Parameter]
-    public EventCallback OnOkClick { get; set; }
-    [Parameter]
-    public EventCallback OnCancelClick { get; set; }
-    [Parameter]
     public RenderFragment ChildContent { get; set; } = default!;
+
+    public Task<bool> ShowConfirmation()
+    {
+        ShowCancel = true;
+        return ShowDialog();
+    }
+    public Task<bool> ShowDialog()
+    {
+        _taskCompletionSource = new();
+        Show = true;
+        return _taskCompletionSource.Task;
+    }
 }

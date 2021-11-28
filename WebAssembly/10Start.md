@@ -68,6 +68,11 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 
 var app = builder.Build();
+// WICHTIG: Muss die erste Middleware in der Request Pipeline sein.
+if (app.Environment.IsDevelopment())
+{
+    app.UseWebAssemblyDebugging();
+}
 // Liefert das verknüpfte Wasm Projekt als Webassembly aus.
 // NUGET: Microsoft.AspNetCore.Components.WebAssembly.Server
 app.UseBlazorFrameworkFiles();
@@ -95,5 +100,30 @@ using (var db = new ShopContext(opt))
 builder.Services.AddDbContext<ShopContext>(opt =>
     opt.UseSqlite("Data Source=Shop.db")
         .UseLazyLoadingProxies());
-        
 ```
+
+### Konfigurieren von launchSettings.json
+
+Damit das Debugging der Webassembly funktioniert, muss die Datei *Properties/launchSettings.json*
+im API Projekt mit der inspectUrl versehen werden. Ersetze am Besten den Inhalt der Datei durch
+den folgenden Inhalt:
+
+```javsscript
+{
+  "profiles": {
+    "Api": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "launchBrowser": true,
+      "inspectUri": "{wsProtocol}://{url.hostname}:{url.port}/_framework/debug/ws-proxy?browser={browserInspectUri}",
+      "applicationUrl": "https://localhost:7120;http://localhost:5161",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}
+```
+
+Die Datei *Properties/launchSettings.json* im WASM Projekt kann gelöscht werden, damit keine
+Verwirrung entsteht, welche Datei verwendet wird.
