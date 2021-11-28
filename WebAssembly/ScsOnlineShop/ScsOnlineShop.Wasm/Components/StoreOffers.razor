@@ -1,5 +1,9 @@
 ﻿<Spinner Visible="@Loading" />
 
+<ModalDialog @ref="DeleteConfirmDialog">
+    <p>Soll das Angebot <em>@OfferToDelete?.ProductEan (@OfferToDelete?.Product.Name)</em> gelöscht werden?</p>
+</ModalDialog>
+
 <table class="table table-sm">
     <thead>
         <tr>

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using ScsOnlineShop.Shared.Dto;
 using ScsOnlineShop.Wasm.Services;
+using ScsOnlineShop.Wasm.Shared;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +25,10 @@ namespace ScsOnlineShop.Wasm.Components
         public IEnumerable<OfferDto> OfferDtos => _offerDtos.Where(o =>
             string.IsNullOrEmpty(ProductFilter) || o.Product.Name.ToLower().Contains(ProductFilter.Trim().ToLower()));
         public OfferDto? EditOffer { get; set; }
+        public OfferDto? OfferToDelete { get; set; }
         public bool Loading { get; private set; }
+        public ModalDialog DeleteConfirmDialog { get; set; } = default!;
+
         protected override async Task OnParametersSetAsync()
         {
             // Prevent loading from server if product filter changes.
@@ -45,6 +49,9 @@ namespace ScsOnlineShop.Wasm.Components
 
         public async Task DeleteOffer(OfferDto offer)
         {
+            OfferToDelete = offer;
+            var result = await DeleteConfirmDialog.Show();
+            if (!result) { return; }
             Loading = true;
             try
             {
@@ -54,6 +61,7 @@ namespace ScsOnlineShop.Wasm.Components
             finally
             {
                 Loading = false;
+                OfferToDelete = null;
             }
         }
         public async Task SaveOffer()

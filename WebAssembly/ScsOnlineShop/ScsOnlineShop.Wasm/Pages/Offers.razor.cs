@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using ScsOnlineShop.Shared.Dto;
 using ScsOnlineShop.Wasm.Services;
+using ScsOnlineShop.Wasm.Shared;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -16,6 +17,8 @@ namespace ScsOnlineShop.Wasm.Pages
         public StoreDto? ActiveStore { get; set; }
         public bool Loading { get; private set; }
         public string ProductFilter { get; set; } = string.Empty;
+
+
         protected override async Task OnInitializedAsync()
         {
             Loading = true;

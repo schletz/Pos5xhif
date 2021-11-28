@@ -1,0 +1,60 @@
+﻿@if (_Show)
+{
+    <div class="modal" style="display: block" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                @if (!string.IsNullOrEmpty(Title))
+                {
+                    <div class="modal-header">
+                        <h5 class="modal-title">@Title</h5>
+                    </div>
+                }
+                <div class="modal-body">
+                    @ChildContent
+                    <div>
+                    <button type="button" class="btn btn-primary"
+                        @onclick="@(async ()=>{
+                            _Show = false;
+                            await OnOkClick.InvokeAsync();
+                            _taskCompletionSource?.TrySetResult(true);
+                        })">
+                        OK
+                    </button>
+                    <button type="button" class="btn btn-secondary"
+                        data-bs-dismiss="modal"
+                        @onclick="@(async ()=>{
+                            _Show = false;
+                            await OnCancelClick.InvokeAsync();
+                            _taskCompletionSource?.TrySetResult(false);
+                        })">
+                        Cancel
+                    </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+
+
+@code {
+    private TaskCompletionSource<bool>? _taskCompletionSource;
+    private bool _Show { get; set; }
+
+    public Task<bool> Show()
+    {
+        _taskCompletionSource = new();
+        _Show = true;
+        return _taskCompletionSource.Task;
+    }
+    [Parameter]
+    public string Title { get; set; } = string.Empty;
+    [Parameter]
+    public EventCallback OnOkClick { get; set; }
+    [Parameter]
+    public EventCallback OnCancelClick { get; set; }
+    [Parameter]
+    public RenderFragment ChildContent { get; set; } = default!;
+}
