@@ -11,8 +11,8 @@ cd ScsOnlineShop\ScsOnlineShop.Api
 dotnet run
 ```
 
-Es öffnet sich der Browser und die WASM wird geladen. Im Debug Modus ist jedes Login mit
-mindestens 2 Buchstaben gültig.
+Im Browser kann nun unter der URL *https://localhost:7120* die Applikation erreicht werden.
+Im Debug Modus ist jedes Login mit mindestens 2 Buchstaben gültig.
 
 ## Inhalt
 
