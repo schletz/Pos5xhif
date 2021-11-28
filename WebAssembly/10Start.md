@@ -52,7 +52,7 @@ Optionen *Nullable* und *TreatWarningsAsErrors*.
 Konfiguriere die Datei *Program.cs* im API Projekt so, dass sie - wenn kein Controller
 als Endpoint für eine Adresse vorhanden ist - die Datei *index.html* ausliefert:
 
-** Program.cs **
+**Program.cs**
 ```c#
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
