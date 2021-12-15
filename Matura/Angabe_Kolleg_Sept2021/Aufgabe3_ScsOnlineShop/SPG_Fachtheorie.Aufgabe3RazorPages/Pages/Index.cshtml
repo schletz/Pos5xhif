@@ -23,6 +23,17 @@
         </tr>
     </table>
 </div>
+<div class="mb-3">
+    <h5>
+        Wähle einen Store aus:
+    </h5>
+    <form method="post">
+        <select asp-for="SelectedStoreItem" 
+            class="form-control" 
+            asp-items="Model.StoreItems"></select>
+        <button class="btn btn-primary">Login</button>
+    </form>
+</div>
 <div>
     <h1 class="h5">Daten der Tabelle Store</h1>
     <p>Diese Tabelle dient zum Testen des Datenbankzugriffes.</p>
