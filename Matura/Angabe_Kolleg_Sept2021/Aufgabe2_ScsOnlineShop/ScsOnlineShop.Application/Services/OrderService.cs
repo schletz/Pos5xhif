@@ -17,26 +17,64 @@ namespace ScsOnlineShop.Application.Services
         {
             _db = db;
         }
+        public bool AddToShoppingCart(int customerId, int offerId, int qantity)
+        {
+            var customer = _db.Customers.FirstOrDefault(c => c.Id == customerId);
+            if (customer is null) { return false; }
+            var offer = _db.Offers.FirstOrDefault(o => o.Id == offerId);
+            if (offer is null) { return false; }
+            var existingItem = _db.ShoppingCarts.FirstOrDefault(s => s.OfferId == offerId);
+            if (existingItem is not null)
+            {
+                existingItem.Quantity += qantity;
+                existingItem.DateAdded = DateTime.UtcNow;
+                _db.SaveChanges();
+                return true;
+            }
+            var sc = new ShoppingCart(
+                customer: customer,
+                offer: offer,
+                quantity: qantity,
+                dateAdded: DateTime.UtcNow);
+            _db.ShoppingCarts.Add(sc);
+            _db.SaveChanges();
+            return true;
+        }
+        public void RemoveFromShoppingCart(int customerId, int offerId)
+        {
+            var item = _db.ShoppingCarts.FirstOrDefault(
+                s => s.CustomerId == customerId && s.OfferId == offerId);
+            if (item is null) { return; }
+            _db.ShoppingCarts.Remove(item);
+            _db.SaveChanges();
+        }
 
         public bool Checkout(int customerId)
         {
-            var customer = _db.Customers
-                .FirstOrDefault(c => c.Id == customerId);
-
+            var customer = _db.Customers.FirstOrDefault(c => c.Id == customerId);
             if (customer is null) { return false; }
-            if (!customer.ShoppingCarts.Any()) { return false; }
+
+            var items = _db.ShoppingCarts.Where(s => s.CustomerId == customerId)
+                .Include(s => s.Offer) // JOIN, da wir nach dem Offer.StoreId gruppieren.
+                .ToList();
+            if (!items.Any()) { return false; }
             var stores = _db.Stores.ToDictionary(s => s.Id, s => s);
 
-            foreach (var g in customer.ShoppingCarts.GroupBy(s => s.Offer.StoreId))
+            foreach (var storeItems in items.GroupBy(i => i.Offer.StoreId))
             {
-                var order = new Order(DateTime.Now, stores[g.Key], customer);
+                var order = new Order(
+                    orderDate: DateTime.UtcNow,
+                    store: stores[storeItems.Key],
+                    customer: customer);
                 _db.Orders.Add(order);
-                _db.SaveChanges();
-                foreach (var item in g)
+                // Iteriere über alle Elemente der Gruppe
+                foreach (var item in storeItems)
                 {
                     var orderItem = new OrderItem(
-                        item.Quantity, item.Offer.Product,
-                        item.Offer.Price, order);
+                        quantity: item.Quantity,
+                        product: item.Offer.Product,
+                        price: item.Offer.Price,
+                        order: order);
                     _db.OrderItems.Add(orderItem);
                 }
             }
