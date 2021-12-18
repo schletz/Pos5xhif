@@ -86,26 +86,33 @@ export default {
         });
     },
     getJson(url) {
-        return new Promise((resolve, reject) => {
-            fetch(this.getUrl(url), {
-                headers: this.getHeader(),
-            })
-                .then(response => response.json())
-                .then(data => resolve(data))
-                .catch(err => reject(err));
-        });
+        return this.sendRequest(url, 'GET');
     },
     postJson(url, data) {
+        return this.sendRequest(url, 'POST', data);
+    },
+    sendRequest(url, method, data) {
         return new Promise((resolve, reject) => {
-            fetch(this.getUrl(url), {
-                method: 'POST',
-                headers: this.getHeader(),
-                body: JSON.stringify(data)
-            })
-                .then(response => response.json())
-                .then(data => resolve(data))
-                .catch(err => reject(err));
+            const fetchParams = {
+                method: method,
+                headers: this.getHeader()
+            }
+            if (method != 'GET' && data !== undefined) { fetchParams.body = JSON.stringify(data); }
+            fetch(this.getUrl(url), fetchParams)
+                .then(response => {
+                    if (response.ok) {
+                        response.json().then(data => resolve(data));
+                        return;
+                    }
+                    if (response.status == 400) {
+                        response.json().then(data => { reject({ status: response.status, data: data }); })
+                        return;
+                    }
+                    reject({ status: response.status });
+                })
+                .catch(() => reject({ status: 0 }));             // Server nicht erreichbar
         });
+
     }
 }
 ```
