@@ -89,7 +89,6 @@ export default {
         return new Promise((resolve, reject) => {
             fetch(this.getUrl(url), {
                 headers: this.getHeader(),
-                mode: 'cors'
             })
                 .then(response => response.json())
                 .then(data => resolve(data))
@@ -100,7 +99,6 @@ export default {
         return new Promise((resolve, reject) => {
             fetch(this.getUrl(url), {
                 method: 'POST',
-                mode: 'cors',
                 headers: this.getHeader(),
                 body: JSON.stringify(data)
             })
