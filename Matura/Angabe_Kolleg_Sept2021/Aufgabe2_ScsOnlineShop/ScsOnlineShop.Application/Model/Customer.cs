@@ -31,14 +31,5 @@ namespace ScsOnlineShop.Application.Model
             ShoppingCarts.Add(shoppingCart);
             return true;
         }
-
-        public void RemoveFromShoppingCart(Offer offer)
-        {
-            var offersInCart = ShoppingCarts.Where(s => s.OfferId == offer.Id).ToList();
-            foreach (var o in offersInCart)
-            {
-                ShoppingCarts.Remove(o);
-            }
-        }
     }
 }

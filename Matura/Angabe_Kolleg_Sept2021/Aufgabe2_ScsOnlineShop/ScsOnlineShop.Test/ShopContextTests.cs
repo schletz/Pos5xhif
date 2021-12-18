@@ -21,7 +21,6 @@ namespace ScsOnlineShop.Test
             using var db = new ShopContext(opt);
             db.Database.EnsureDeleted();
             db.Database.EnsureCreated();
-            db.Seed();
         }
     }
 }

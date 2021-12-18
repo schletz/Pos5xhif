@@ -26,6 +26,12 @@ namespace ScsOnlineShop.Test
                 db.Products.Add(product);
                 var offer = new Offer(product: product, store: store, 20000);
                 db.Offers.Add(offer);
+
+                var productDbi = new Product(ean: 1002, "DBI Note", productCategory: category);
+                db.Products.Add(productDbi);
+                var offerDbi = new Offer(product: productDbi, store: store, 15000);
+                db.Offers.Add(offerDbi);
+                
                 var customer = new Customer(
                     firstname: "Max",
                     lastname: "Mustermann",
