@@ -59,20 +59,22 @@ mit folgendem Inhalt erstellt:
 ```javascript
 import conf from "../config.js"
 
-export default {
-    getUrl(url) {
-        return `${conf.apiUrl}${url.startsWith("/") ? "" : "/"}${url}`;
-    },
-    getHeader() {
-        const header = {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-        }
-        if (this.token !== undefined) {
-            header['Authorization'] = `Bearer ${this.token}`;
-        }
-        return header;
-    },
+function getUrl(url) {
+    return `${conf.apiUrl}${url.startsWith("/") ? "" : "/"}${url}`;
+}
+
+function getHeader(token) {
+    const header = {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+    }
+    if (token !== undefined) {
+        header['Authorization'] = `Bearer ${token}`;
+    }
+    return header;
+}
+
+class RestService {
     login(username, password) {
         return new Promise((resolve, reject) => {
             this.postJson("api/user/login", { username: username, password: password })
@@ -84,37 +86,44 @@ export default {
                 })
                 .catch(err => reject(err));
         });
-    },
+    }
+    get isAuthenticated() {
+        return this.token !== undefined;
+    }
     getJson(url) {
         return this.sendRequest(url, 'GET');
-    },
+    }
     postJson(url, data) {
         return this.sendRequest(url, 'POST', data);
-    },
+    }
     sendRequest(url, method, data) {
         return new Promise((resolve, reject) => {
             const fetchParams = {
                 method: method,
-                headers: this.getHeader()
+                headers: getHeader(this.token)
             }
             if (method != 'GET' && data !== undefined) { fetchParams.body = JSON.stringify(data); }
-            fetch(this.getUrl(url), fetchParams)
+            fetch(getUrl(url), fetchParams)
                 .then(response => {
                     if (response.ok) {
-                        response.json().then(data => resolve(data));
+                        response.json()
+                            .then(data => resolve(data))
+                            .catch(() => resolve({}));    // HTTP 201 no content
                         return;
                     }
                     if (response.status == 400) {
-                        response.json().then(data => { reject({ status: response.status, data: data }); })
+                        response.json()
+                            .then(data => { reject({ status: response.status, data: data }); })
                         return;
                     }
                     reject({ status: response.status });
                 })
                 .catch(() => reject({ status: 0 }));             // Server nicht erreichbar
         });
-
     }
 }
+
+export default new RestService();
 ```
 
 ### Nutzen in einer React Komponente
