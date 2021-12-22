@@ -24,15 +24,26 @@
     </table>
 </div>
 <div class="mb-3">
-    <h5>
-        Wähle einen Store aus:
-    </h5>
-    <form method="post">
-        <select asp-for="SelectedStoreItem" 
-            class="form-control" 
-            asp-items="Model.StoreItems"></select>
-        <button class="btn btn-primary">Login</button>
-    </form>
+    @if (Model.CurrentStore is not null)
+    {
+        <h5>Angemeldet mit der StoreId @Model.CurrentStore</h5>
+        <form method="post" asp-page-handler="logout">
+            <button class="btn btn-primary">Logout</button>
+        </form>
+
+    }
+    else
+    {
+        <h5>
+            Wähle einen Store aus:
+        </h5>
+        <form method="post">
+            <select asp-for="SelectedStoreItem"
+                class="form-control"
+                asp-items="Model.StoreItems"></select>
+            <button class="btn btn-primary">Login</button>
+        </form>
+    }
 </div>
 <div>
     <h1 class="h5">Daten der Tabelle Store</h1>

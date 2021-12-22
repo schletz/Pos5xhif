@@ -35,6 +35,12 @@ namespace SPG_Fachtheorie.Aufgabe3RazorPages.Services
             return true;
         }
 
+        public Task Logout()
+        {
+            if(_httpContextAccessor.HttpContext is null) { return Task.CompletedTask; }
+            return _httpContextAccessor.HttpContext.SignOutAsync();
+        }
+
         public int? CurrentStoreId => int.TryParse(_httpContextAccessor.HttpContext?.User.Identity?.Name, out var storeId)
             ? storeId : null;
 
