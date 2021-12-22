@@ -1,0 +1,13 @@
+﻿@page "{productId}"
+@model SPG_Fachtheorie.Aufgabe3RazorPages.Pages.Product.EditModel
+@{
+}
+<h5>Produkt editieren</h5>
+<form method="post">
+    <label>Produktname: <input asp-for="Product.Name" class="form-control" /></label>
+    <label>Kategorie
+            <select asp-for="Product.ProductCategoryId"
+            asp-items="Model.CategoryItems" class="form-control"></select>
+    </label>
+    <button type="submit" class="btn-primary btn">Senden</button>
+</form>

@@ -1,0 +1,25 @@
+﻿@page
+@model SPG_Fachtheorie.Aufgabe3RazorPages.Pages.Category.IndexModel
+<table class="table table-sm">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Anz der Produkte</th>
+            <th>Link</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var p in Model.ProductCategories)
+        {
+            <tr>
+                <td>@p.Name</td>
+                <td>@p.Products.Count()</td>
+                <td>
+                    <a asp-page="/Category/Details"
+                   asp-route-categoryId="@p.Id">Zu den Produkten</a>
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>

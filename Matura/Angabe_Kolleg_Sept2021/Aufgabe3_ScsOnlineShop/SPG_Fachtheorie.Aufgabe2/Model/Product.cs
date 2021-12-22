@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SPG_Fachtheorie.Aufgabe2.Model
@@ -11,5 +12,6 @@ namespace SPG_Fachtheorie.Aufgabe2.Model
         public string Name { get; set; }
         public int ProductCategoryId { get; set; }
         public ProductCategory ProductCategory { get; set; }
+        public List<Offer> Offers { get; } = new();
     }
 }

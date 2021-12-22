@@ -1,0 +1,13 @@
+﻿@page "{productId}"
+@model SPG_Fachtheorie.Aufgabe3RazorPages.Pages.Product.DetailsModel
+<h5>Details zum Produkt @Model.Product.Ean</h5>
+<p><strong>EAN: </strong>@Model.Product.Ean</p>
+<p><strong>Name: </strong>@Model.Product.Name</p>
+<p><strong>Kategorie: </strong>@Model.Product.ProductCategory.Name</p>
+<h6>Akttionen</h6>
+<ul>
+    <li><a asp-page="/Product/Edit" asp-route-productId="@Model.Product.Ean">Produkt editieren</a></li>
+    <li><a asp-page="/Product/Delete" asp-route-productId="@Model.Product.Ean">Produkt löschen</a></li>
+    <li><a asp-page="/Product/Add">Produkt hinzufügen</a></li>
+    <li><a asp-page="/Offer/Upsert" asp-route-productId="@Model.Product.Ean">Angebot des angemeldeten Stores bearbeiten</a></li>
+</ul>
