@@ -65,6 +65,18 @@ using ScsOnlineShop.Application.Infrastructure;
 using System;
 
 var builder = WebApplication.CreateBuilder(args);
+// CORS: Im Development Mode sollen auch andere URLs auf die API zugreifen können.
+if (builder.Environment.IsDevelopment())
+{
+    builder.Services.AddCors(options =>
+    {
+        options.AddDefaultPolicy(
+            builder =>
+            {
+                builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+            });
+    });
+}
 builder.Services.AddControllers();
 
 var app = builder.Build();
@@ -72,6 +84,8 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseWebAssemblyDebugging();
+    // Im Development Mode wird CORS aktiviert.
+    app.UseCors();
 }
 // Liefert das verknüpfte Wasm Projekt als Webassembly aus.
 // NUGET: Microsoft.AspNetCore.Components.WebAssembly.Server
