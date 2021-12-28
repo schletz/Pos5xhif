@@ -12,6 +12,7 @@ namespace SPG_Fachtheorie.Aufgabe3RazorPages.Services
         }
         public async Task<bool> TryLogin(int storeId)
         {
+            if (_httpContextAccessor.HttpContext is null) { return false; }
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.Name, storeId.ToString()),
@@ -20,7 +21,7 @@ namespace SPG_Fachtheorie.Aufgabe3RazorPages.Services
                 claims,
                 Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationDefaults.AuthenticationScheme);
 
-            var authProperties = new Microsoft.AspNetCore.Authentication.AuthenticationProperties
+            var authProperties = new AuthenticationProperties
             {
                 //AllowRefresh = true,
                 ExpiresUtc = DateTimeOffset.UtcNow.AddHours(3),
@@ -33,5 +34,15 @@ namespace SPG_Fachtheorie.Aufgabe3RazorPages.Services
                 authProperties);
             return true;
         }
+
+        public Task Logout()
+        {
+            if(_httpContextAccessor.HttpContext is null) { return Task.CompletedTask; }
+            return _httpContextAccessor.HttpContext.SignOutAsync();
+        }
+
+        public int? CurrentStoreId => int.TryParse(_httpContextAccessor.HttpContext?.User.Identity?.Name, out var storeId)
+            ? storeId : null;
+
     }
 }

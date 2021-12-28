@@ -1,0 +1,32 @@
+﻿@page "{categoryId}"
+@model SPG_Fachtheorie.Aufgabe3RazorPages.Pages.Category.DetailsModel
+@if (Model.CurrentStoreId is null)
+{
+    <p>Du bist nicht angemeldet!</p>
+}
+else
+{
+    <table class="table table-sm">
+        <thead>
+            <tr>
+                <th>EAN</th>
+                <th>Name</th>
+                <th>Preis</th>
+                <th>Produktdetails</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var p in Model.Products)
+            {
+                <tr>
+                    <td>@p.Ean</td>
+                    <td>@p.Name</td>
+                    <td>@(p.Offers.FirstOrDefault(o=>o.StoreId == Model.CurrentStoreId)?.Price.ToString() ?? "(kein Angebot)")</td>
+                    <td><a asp-page="/Product/Details" asp-route-productId="@p.Ean">Zu den Details</a></td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+}
+

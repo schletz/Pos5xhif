@@ -22,6 +22,7 @@ namespace SPG_Fachtheorie.Aufgabe3RazorPages.Pages
             _authService = authService;
         }
 
+        public int? CurrentStore => _authService.CurrentStoreId;
         public List<Store> Stores { get; set; } = new();
         public List<SelectListItem> StoreItems { get; set; } = new();
         [BindProperty]
@@ -35,6 +36,12 @@ namespace SPG_Fachtheorie.Aufgabe3RazorPages.Pages
                 Value = s.Id.ToString()
             })
             .ToList();
+        }
+
+        public async Task<IActionResult> OnPostLogout()
+        {
+            await _authService.Logout();
+            return RedirectToPage();
         }
 
         public async Task<IActionResult> OnPost()
