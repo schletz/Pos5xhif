@@ -87,6 +87,12 @@ if (app.Environment.IsDevelopment())
     // Im Development Mode wird CORS aktiviert.
     app.UseCors();
 }
+
+// Auch auf einem deutschen Windows englische Kommazeichen (.) verwenden.
+// In POST Requests (Formulardaten) muss auch der Punkt als Komma vom Browser
+// gesendet werden.
+app.UseRequestLocalization(System.Globalization.CultureInfo.InvariantCulture.ToString());
+
 // Liefert das verknüpfte Wasm Projekt als Webassembly aus.
 // NUGET: Microsoft.AspNetCore.Components.WebAssembly.Server
 app.UseBlazorFrameworkFiles();

@@ -41,6 +41,18 @@ builder.Services.AddAuthentication(x =>
     };
 });
 
+if (builder.Environment.IsDevelopment())
+{
+    builder.Services.AddCors(options =>
+    {
+        options.AddDefaultPolicy(
+            builder =>
+            {
+                builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+            });
+    });
+}
+
 builder.Services.AddControllers();
 builder.Services.AddDbContext<ShopContext>(opt =>
     opt.UseSqlite("Data Source=Shop.db")
@@ -52,7 +64,13 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseWebAssemblyDebugging();
+    app.UseCors();
 }
+
+// Auch auf einem deutschen Windows englische Kommazeichen (.) verwenden.
+// In POST Requests (Formulardaten) muss auch der Punkt als Komma vom Browser
+// gesendet werden.
+app.UseRequestLocalization(System.Globalization.CultureInfo.InvariantCulture.ToString());
 
 // Liefert das verknüpfte Wasm Projekt als Webassembly aus.
 // NUGET: Microsoft.AspNetCore.Components.WebAssembly.Server
