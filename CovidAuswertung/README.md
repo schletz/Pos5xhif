@@ -53,7 +53,7 @@ Die Datei *timeline-faelle-bundeslaender.csv* hat folgenden Aufbau
 ## Übung
 
 Visualisiere die Daten zur Impfung auf https://www.data.gv.at/katalog/dataset/276ffd1e-efdd-42e2-b6c9-04fb5fa2b7ea
-(direktlink zum CSV auf https://info.gesundheitsministerium.gv.at/data/COVID19_vaccination_doses_timeline.csv)
+(Direktlink zum CSV auf https://info.gesundheitsministerium.gv.at/data/COVID19_vaccination_doses_timeline.csv)
 
 Zeichne die Linien für die erste, zweite und dritte Dosis pro Bundesland. Hinweis: Mit *groupBy*
 können die Daten pro Bundesland aufsummiert werden.
