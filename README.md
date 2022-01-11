@@ -1,4 +1,4 @@
-# POS im IV. Jahrgang / 6. Semester Kolleg der HTL Spengergasse
+# POS im V. Jahrgang / 6. Semester Kolleg der HTL Spengergasse
 
 ## Synchronisieren des Repositories in einen Ordner
 
