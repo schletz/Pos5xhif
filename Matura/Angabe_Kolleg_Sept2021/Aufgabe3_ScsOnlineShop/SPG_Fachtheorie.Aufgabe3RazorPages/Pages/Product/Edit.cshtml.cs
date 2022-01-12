@@ -41,7 +41,7 @@ namespace SPG_Fachtheorie.Aufgabe3RazorPages.Pages.Product
             dbProduct.Name = Product.Name;
             dbProduct.ProductCategoryId = Product.ProductCategoryId;
             _db.SaveChanges();
-            return Page();
+            return RedirectToPage("/Product/Details", new { ProductId = productId });
         }
     }
 }

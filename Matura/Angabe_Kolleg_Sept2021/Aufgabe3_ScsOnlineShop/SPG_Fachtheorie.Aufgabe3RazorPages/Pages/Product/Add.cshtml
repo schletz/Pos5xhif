@@ -1,4 +1,20 @@
 ﻿@page
 @model SPG_Fachtheorie.Aufgabe3RazorPages.Pages.Product.AddModel
-@{
-}
+<h5>Produkt add</h5>
+<form method="post">
+    <label>EAN: <input asp-for="Product.Ean" class="form-control" /></label>
+    <span asp-validation-for="Product.Ean" class="text-danger"></span>
+
+    <label>Produktname: <input asp-for="Product.Name" class="form-control" /></label>
+    <span asp-validation-for="Product.Name" class="text-danger"></span>
+    
+    
+    <label>Kategorie
+            <select asp-for="Product.ProductCategoryId"
+            asp-items="Model.CategoryItems" class="form-control"></select>
+    </label>
+    <button type="submit" class="btn-primary btn">Senden</button>
+</form>
+<div class="text-danger" asp-validation-summary=All>
+
+</div>

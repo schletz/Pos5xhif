@@ -1,4 +1,17 @@
-﻿@page
+﻿@page "{productId}"
 @model SPG_Fachtheorie.Aufgabe3RazorPages.Pages.Product.DeleteModel
+
+<h3>Produkt löschen</h3>
+<p>Möchtest du das Produkt @Model.Product.Name wirklich löschen?</p>
 @{
+    var count = Model.Product.Offers.Count();
 }
+@if (count > 0)
+{
+    <p class="text-danger">Es gibt @count Angebote zu diesem Produkt!</p>
+}
+
+<form method="post">
+    <button type="submit" class="btn btn-info" asp-page-handler="Cancel">Cancel</button>
+    <button type="submit" class="btn btn-danger" asp-page-handler="Confirm">OK</button>
+</form>

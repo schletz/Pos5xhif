@@ -1,4 +1,9 @@
-﻿@page
+﻿@page "{productId}"
+
 @model SPG_Fachtheorie.Aufgabe3RazorPages.Pages.Offer.UpsertModel
-@{
-}
+<h5>Angebot Nr. @Model.Offer.Id</h5>
+<ul>
+    <li>Preis: @Model.Offer.Price</li>
+    <li>Produktname: @Model.Offer.Product.Name</li>
+</ul>
+<p>TODO: Für den Preis ein Input Feld erzeugen und den neuen Preis in die DB schreiben.</p>
