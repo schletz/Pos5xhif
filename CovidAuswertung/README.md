@@ -60,9 +60,5 @@ können die Daten pro Bundesland aufsummiert werden.
 
 ## Cheat Sheet
 
-Auf [](https://pandas.pydata.org/Pandas_Cheat_Sheet.pdf) gibt es ein Cheat Sheet über die Funktionen
-des Data Frame Objektes.
-
-![](Pandas_Cheat_Sheet_Page_1.png)
-![](Pandas_Cheat_Sheet_Page_2.png)
-<sup>Quelle: https://pandas.pydata.org/Pandas_Cheat_Sheet.pdf</sup>
+Auf [pandas.pydata.org](https://pandas.pydata.org/Pandas_Cheat_Sheet.pdf) gibt es ein Cheat Sheet
+über die Funktionen des Data Frame Objektes.
