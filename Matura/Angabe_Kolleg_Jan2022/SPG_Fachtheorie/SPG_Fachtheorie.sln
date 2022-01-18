@@ -1,0 +1,52 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SPG_Fachtheorie.Aufgabe1", "SPG_Fachtheorie.Aufgabe1\SPG_Fachtheorie.Aufgabe1.csproj", "{5BFBC28F-E055-4324-B325-CA6E666E6356}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SPG_Fachtheorie.Aufgabe1.Test", "SPG_Fachtheorie.Aufgabe1.Test\SPG_Fachtheorie.Aufgabe1.Test.csproj", "{C61A48E2-B25E-4411-BE8C-B4A0A9C82F2A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SPG_Fachtheorie.Aufgabe2", "SPG_Fachtheorie.Aufgabe2\SPG_Fachtheorie.Aufgabe2.csproj", "{D5375606-5B3C-484F-A6F3-970E7A07848B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SPG_Fachtheorie.Aufgabe2.Test", "SPG_Fachtheorie.Aufgabe2.Test\SPG_Fachtheorie.Aufgabe2.Test.csproj", "{8677B43F-5BD8-4E86-8582-D9DBCB6B58F3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SPG_Fachtheorie.Aufgabe3Mvc", "SPG_Fachtheorie.Aufgabe3Mvc\SPG_Fachtheorie.Aufgabe3Mvc.csproj", "{A0E8ECC4-EA33-4216-9990-F1C2AB68998F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SPG_Fachtheorie.Aufgabe3RazorPages", "SPG_Fachtheorie.Aufgabe3RazorPages\SPG_Fachtheorie.Aufgabe3RazorPages.csproj", "{9964A57B-8737-437B-9FEA-869F1CFFDEAC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5BFBC28F-E055-4324-B325-CA6E666E6356}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5BFBC28F-E055-4324-B325-CA6E666E6356}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5BFBC28F-E055-4324-B325-CA6E666E6356}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5BFBC28F-E055-4324-B325-CA6E666E6356}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C61A48E2-B25E-4411-BE8C-B4A0A9C82F2A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C61A48E2-B25E-4411-BE8C-B4A0A9C82F2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C61A48E2-B25E-4411-BE8C-B4A0A9C82F2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C61A48E2-B25E-4411-BE8C-B4A0A9C82F2A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5375606-5B3C-484F-A6F3-970E7A07848B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5375606-5B3C-484F-A6F3-970E7A07848B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5375606-5B3C-484F-A6F3-970E7A07848B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5375606-5B3C-484F-A6F3-970E7A07848B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8677B43F-5BD8-4E86-8582-D9DBCB6B58F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8677B43F-5BD8-4E86-8582-D9DBCB6B58F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8677B43F-5BD8-4E86-8582-D9DBCB6B58F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8677B43F-5BD8-4E86-8582-D9DBCB6B58F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0E8ECC4-EA33-4216-9990-F1C2AB68998F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0E8ECC4-EA33-4216-9990-F1C2AB68998F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0E8ECC4-EA33-4216-9990-F1C2AB68998F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0E8ECC4-EA33-4216-9990-F1C2AB68998F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9964A57B-8737-437B-9FEA-869F1CFFDEAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9964A57B-8737-437B-9FEA-869F1CFFDEAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9964A57B-8737-437B-9FEA-869F1CFFDEAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9964A57B-8737-437B-9FEA-869F1CFFDEAC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

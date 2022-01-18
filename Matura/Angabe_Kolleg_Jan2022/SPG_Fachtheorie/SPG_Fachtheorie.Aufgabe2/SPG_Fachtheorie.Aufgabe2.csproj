@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="Bogus" Version="34.*" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.*" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="6.*" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.*" />
+	</ItemGroup>
+
+</Project>
