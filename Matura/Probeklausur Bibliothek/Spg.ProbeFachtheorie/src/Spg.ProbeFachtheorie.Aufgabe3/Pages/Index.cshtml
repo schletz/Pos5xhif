@@ -1,0 +1,23 @@
+﻿@page
+@model Spg.ProbeFachtheorie.Aufgabe3.Pages.IndexModel
+@{
+}
+<h3>Willkommen</h3>
+@if (!string.IsNullOrEmpty(Model.CurrentUser))
+{
+    <p><strong>Aktuell angemeldeter User: @Model.CurrentUser</strong></p>
+}
+
+@if (!string.IsNullOrEmpty(Model.Message))
+{
+    <p>@Model.Message</p>
+}
+
+<p>Wählen Sie einen User aus, mit dem gearbeitet werden soll.</p>
+<form method="post">
+    <select asp-for="UserEmail" asp-items="Model.Users" class="form-control">
+        <option value="">Wähle einen User</option>
+    </select>
+    <button type="submit" class="btn btn-primary">Login</button>
+    <button type="submit" class="btn btn-primary" asp-page-handler="Logout">Logout</button>
+</form>
