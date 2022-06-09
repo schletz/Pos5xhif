@@ -1,0 +1,55 @@
+﻿@using SPG_Fachtheorie.Aufgabe2.Model
+@model List<Student>
+<div>
+    <h1 class="h3">Klausurprüfung aus Fachtheorie</h1>
+    <p>Bitte füllen Sie diese Daten in der Datei <em>SPG_Fachtheorie.Aufgabe3RazorPages/Pages/Index.cshtml</em> am Beginn Ihrer Arbeit aus.</p>
+    <table class="table table-sm mb-5 border border-primary">
+        <tr>
+            <th style="width:10em">Maturaaccount</th>
+            <td style="width:30em">(Bitte ausfüllen)</td>
+        </tr>
+        <tr>
+            <th>Vorname</th>
+            <td>(Bitte ausfüllen)</td>
+        </tr>
+        <tr>
+            <th>Zuname</th>
+            <td>(Bitte ausfüllen)</td>
+        </tr>
+        <tr>
+            <th>Klasse</th>
+            <td>(Bitte ausfüllen)</td>
+        </tr>
+    </table>
+</div>
+<div>
+    <h1 class="h5">Daten der Tabelle Student</h1>
+    <p>Diese Tabelle dient zum Testen des Datenbankzugriffes.</p>
+</div>
+<table class="table table-sm">
+    <thead>
+        <tr>
+            <th>Nr</th>
+            <th>GUID</th>
+            <th>Vorname</th>
+            <th>Nachname</th>
+            <th>Klasse</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            int i = 0;
+        }
+        @foreach (var s in Model)
+        {
+            <tr>
+                <td>@(++i)</td>
+                <td>@s.Id</td>
+                <td>@s.Firstname</td>
+                <td>@s.Lastname</td>
+                <td>@s.Class.Name</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
