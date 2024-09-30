@@ -1,0 +1,5 @@
+@startuml
+title Theoriefrage 2
+
+class Hello
+@enduml

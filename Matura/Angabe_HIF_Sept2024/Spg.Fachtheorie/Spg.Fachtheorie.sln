@@ -1,0 +1,78 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34322.80
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spg.Fachtheorie.Aufgabe1", "src\Spg.Fachtheorie.Aufgabe1\Spg.Fachtheorie.Aufgabe1.csproj", "{8FBB7E81-A1F2-4E2A-8A6A-24A2D8B14757}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spg.Fachtheorie.Aufgabe2", "src\Spg.Fachtheorie.Aufgabe2\Spg.Fachtheorie.Aufgabe2.csproj", "{6CF36C7C-D0FB-441B-B7AF-C6C90DCB98D4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spg.Fachtheorie.Aufgabe3.API", "src\Spg.Fachtheorie.Aufgabe3.API\Spg.Fachtheorie.Aufgabe3.API.csproj", "{254C46B1-0446-451C-98B6-92AD760F18A2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spg.Fachtheorie.Aufgabe1.Test", "test\Spg.Fachtheorie.Aufgabe1.Test\Spg.Fachtheorie.Aufgabe1.Test.csproj", "{78273E66-D4E9-49E9-BA57-253A60E1089C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{43F5DC23-64D0-4D16-BF7C-4A15A81A4ED1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{ACB61D2F-6C39-4B42-B32E-EAB127EE8426}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spg.Fachtheorie.Aufgabe2.Test", "test\Spg.Fachtheorie.Aufgabe2.Test\Spg.Fachtheorie.Aufgabe2.Test.csproj", "{526192AB-04D6-480B-9F94-99D316C6CAA2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spg.Fachtheorie.Aufgabe3.API.Test", "test\Spg.Fachtheorie.Aufgabe3.API.Test\Spg.Fachtheorie.Aufgabe3.API.Test.csproj", "{79C1064C-91C8-404D-AAA3-855651E4ABF4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{324FFA4D-569A-44F2-926B-90E39A27AE6A}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+		theoriefrage1.md = theoriefrage1.md
+		theoriefrage1.puml = theoriefrage1.puml
+		theoriefrage2.md = theoriefrage2.md
+		theoriefrage2.puml = theoriefrage2.puml
+		theoriefrage3.md = theoriefrage3.md
+		theoriefrage3.puml = theoriefrage3.puml
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8FBB7E81-A1F2-4E2A-8A6A-24A2D8B14757}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8FBB7E81-A1F2-4E2A-8A6A-24A2D8B14757}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8FBB7E81-A1F2-4E2A-8A6A-24A2D8B14757}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8FBB7E81-A1F2-4E2A-8A6A-24A2D8B14757}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6CF36C7C-D0FB-441B-B7AF-C6C90DCB98D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6CF36C7C-D0FB-441B-B7AF-C6C90DCB98D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6CF36C7C-D0FB-441B-B7AF-C6C90DCB98D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6CF36C7C-D0FB-441B-B7AF-C6C90DCB98D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{254C46B1-0446-451C-98B6-92AD760F18A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{254C46B1-0446-451C-98B6-92AD760F18A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{254C46B1-0446-451C-98B6-92AD760F18A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{254C46B1-0446-451C-98B6-92AD760F18A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78273E66-D4E9-49E9-BA57-253A60E1089C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78273E66-D4E9-49E9-BA57-253A60E1089C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78273E66-D4E9-49E9-BA57-253A60E1089C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78273E66-D4E9-49E9-BA57-253A60E1089C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{526192AB-04D6-480B-9F94-99D316C6CAA2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{526192AB-04D6-480B-9F94-99D316C6CAA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{526192AB-04D6-480B-9F94-99D316C6CAA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{526192AB-04D6-480B-9F94-99D316C6CAA2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{79C1064C-91C8-404D-AAA3-855651E4ABF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79C1064C-91C8-404D-AAA3-855651E4ABF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79C1064C-91C8-404D-AAA3-855651E4ABF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79C1064C-91C8-404D-AAA3-855651E4ABF4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8FBB7E81-A1F2-4E2A-8A6A-24A2D8B14757} = {43F5DC23-64D0-4D16-BF7C-4A15A81A4ED1}
+		{6CF36C7C-D0FB-441B-B7AF-C6C90DCB98D4} = {43F5DC23-64D0-4D16-BF7C-4A15A81A4ED1}
+		{254C46B1-0446-451C-98B6-92AD760F18A2} = {43F5DC23-64D0-4D16-BF7C-4A15A81A4ED1}
+		{78273E66-D4E9-49E9-BA57-253A60E1089C} = {ACB61D2F-6C39-4B42-B32E-EAB127EE8426}
+		{526192AB-04D6-480B-9F94-99D316C6CAA2} = {ACB61D2F-6C39-4B42-B32E-EAB127EE8426}
+		{79C1064C-91C8-404D-AAA3-855651E4ABF4} = {ACB61D2F-6C39-4B42-B32E-EAB127EE8426}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3BFB9D5B-93DD-420A-AB25-368D349D1488}
+	EndGlobalSection
+EndGlobal
