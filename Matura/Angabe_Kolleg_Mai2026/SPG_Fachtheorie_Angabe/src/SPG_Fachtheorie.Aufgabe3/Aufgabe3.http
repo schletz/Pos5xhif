@@ -1,0 +1,46 @@
+@hostname = localhost
+@port = 5080
+@host = http://{{hostname}}:{{port}}
+
+# ==================================================================
+# AUFGABE 3: REST(ful) API - Manuelle Test-Requests
+# ==================================================================
+
+### Kriterium (1+4 Pkt): GET /inventoryItems liefert HTTP 200 & korrekte Daten bei withReservations=false
+# Erwartung: Ein Array von InventoryItemWithReservationsDto, bei dem das Feld 'reservations' leer [] ist.
+GET {{host}}/inventoryItems?withReservations=false
+Accept: application/json
+
+### Kriterium (4 Pkt): GET /inventoryItems liefert die korrekten Daten bei withReservations=true
+# Erwartung: Ein Array von InventoryItemWithReservationsDto, das (manchmal) befüllte 'reservations' Arrays enthält.
+GET {{host}}/inventoryItems?withReservations=true
+Accept: application/json
+
+
+### Kriterium (1+3 Pkt): GET /inventoryItems/{category} liefert HTTP 200 & korrekte Daten
+# Erwartung: Eine Liste von InventoryItemDto, die nur Gegenstände der Kategorie "Notebooks" enthält.
+# Weitere zum Testen: "Adapters", "Cables"
+GET {{host}}/inventoryItems/Notebooks
+Accept: application/json
+
+
+### Kriterium (1+3 Pkt): PATCH /inventoryItems/available/{id} liefert HTTP 204 im Erfolgsfall
+# Erwartung: Status 204 No Content. (Prüfung der DB-Änderung kann über SQLite Viewer erfolgen,
+# da IsAvailable in den DTOs der Angabe nicht zurückgegeben wird).
+# Wir testen mit ID 1 (existiert laut Seed-Daten/Dump sicher).
+PATCH {{host}}/inventoryItems/available/1
+Content-Type: application/json
+
+{
+  "isAvailable": false
+}
+
+
+### Kriterium (2 Pkt): PATCH /inventoryItems/available/{id} liefert 404, wenn die ID nicht gefunden wurde
+# Erwartung: Status 404 Not Found mit RFC-9457 Problem Detail Body.
+# Wir testen mit ID 9999 (existiert sicher nicht).
+PATCH {{host}}/inventoryItems/available/9999
+Content-Type: application/json
+{
+  "isAvailable": true
+}
