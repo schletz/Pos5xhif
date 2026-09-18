@@ -1,4 +1,4 @@
-# Coding interview for C# (junior to intermittent)
+# Coding interview for C# (junior to intermediate)
 
 ## Preparation
 
